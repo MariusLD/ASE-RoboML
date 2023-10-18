@@ -8,9 +8,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Function">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" upperBound="-1"
         eType="#//Instruction" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="return" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Parameters" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"
-        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="return" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true" eSuperTypes="#//Instruction"/>
@@ -18,7 +18,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="angle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DirectionCommand" eSuperTypes="#//Command">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="distance" eType="#//Distance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distance" lowerBound="1"
+        eType="#//Distance"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SpeedCommand" eSuperTypes="#//Command">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
@@ -42,6 +43,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//SecondaryExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpr" eSuperTypes="#//ArithmetiqueExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="call" eType="#//Call"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecondaryExp" eSuperTypes="#//ArithmetiqueExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" upperBound="-1"
@@ -51,28 +53,29 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeclarationVariable" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressionbase" eType="#//ExpressionBase"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Block" abstract="true" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" upperBound="-1"
         eType="#//Instruction" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//Block"/>
-  <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//Block"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LOOP" eSuperTypes="#//Block"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IF" eSuperTypes="#//Block"/>
   <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="#//Call"/>
   <eClassifiers xsi:type="ecore:EClass" name="CallFunction" eSuperTypes="#//Call"/>
   <eClassifiers xsi:type="ecore:EClass" name="Call" abstract="true" eSuperTypes="#//ExpressionBase"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionBase" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Affectation" eSuperTypes="#//ExpressionBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="callvariable" eType="#//CallVariable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionbase" upperBound="-1"
-        eType="#//ExpressionBase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionbase" lowerBound="1"
+        upperBound="-1" eType="#//ExpressionBase" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpr" eSuperTypes="#//BooleanExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="call" eType="#//Call"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecondaryExp" eSuperTypes="#//BooleanExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//BooleanExp"/>
@@ -83,4 +86,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//SecondaryExp.1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//SecondaryExp.1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="#//SecondaryExp.1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ELSE" eSuperTypes="#//Block"/>
 </ecore:EPackage>

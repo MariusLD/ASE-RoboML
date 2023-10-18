@@ -39,7 +39,7 @@ public interface Function extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link robot.Type}.
+	 * The list contents are of type {@link robot.TypeClass}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
@@ -47,19 +47,19 @@ public interface Function extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Type> getParameters();
+	EList<TypeClass> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Return</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return</em>' containment reference.
-	 * @see #setReturn(Type)
+	 * @see #setReturn(TypeClass)
 	 * @see robot.RobotPackage#getFunction_Return()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Type getReturn();
+	TypeClass getReturn();
 
 	/**
 	 * Sets the value of the '{@link robot.Function#getReturn <em>Return</em>}' containment reference.
@@ -69,6 +69,6 @@ public interface Function extends EObject {
 	 * @see #getReturn()
 	 * @generated
 	 */
-	void setReturn(Type value);
+	void setReturn(TypeClass value);
 
 } // Function

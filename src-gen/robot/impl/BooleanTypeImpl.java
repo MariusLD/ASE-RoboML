@@ -8,49 +8,49 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import robot.Distance;
+import robot.BooleanType;
 import robot.RobotPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Distance</b></em>'.
+ * An implementation of the model object '<em><b>Boolean Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robot.impl.DistanceImpl#getDistance <em>Distance</em>}</li>
+ *   <li>{@link robot.impl.BooleanTypeImpl#isValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class DistanceImpl extends TypeClassImpl implements Distance {
+public class BooleanTypeImpl extends TypeClassImpl implements BooleanType {
 	/**
-	 * The default value of the '{@link #getDistance() <em>Distance</em>}' attribute.
+	 * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDistance()
+	 * @see #isValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double DISTANCE_EDEFAULT = 0.0;
+	protected static final boolean VALUE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getDistance() <em>Distance</em>}' attribute.
+	 * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDistance()
+	 * @see #isValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected double distance = DISTANCE_EDEFAULT;
+	protected boolean value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DistanceImpl() {
+	protected BooleanTypeImpl() {
 		super();
 	}
 
@@ -61,7 +61,7 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return RobotPackage.Literals.DISTANCE;
+		return RobotPackage.Literals.BOOLEAN_TYPE;
 	}
 
 	/**
@@ -70,8 +70,8 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	 * @generated
 	 */
 	@Override
-	public double getDistance() {
-		return distance;
+	public boolean isValue() {
+		return value;
 	}
 
 	/**
@@ -80,12 +80,11 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	 * @generated
 	 */
 	@Override
-	public void setDistance(double newDistance) {
-		double oldDistance = distance;
-		distance = newDistance;
+	public void setValue(boolean newValue) {
+		boolean oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.DISTANCE__DISTANCE, oldDistance,
-					distance));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.BOOLEAN_TYPE__VALUE, oldValue, value));
 	}
 
 	/**
@@ -96,8 +95,8 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotPackage.DISTANCE__DISTANCE:
-			return getDistance();
+		case RobotPackage.BOOLEAN_TYPE__VALUE:
+			return isValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,8 +109,8 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotPackage.DISTANCE__DISTANCE:
-			setDistance((Double) newValue);
+		case RobotPackage.BOOLEAN_TYPE__VALUE:
+			setValue((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +124,8 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotPackage.DISTANCE__DISTANCE:
-			setDistance(DISTANCE_EDEFAULT);
+		case RobotPackage.BOOLEAN_TYPE__VALUE:
+			setValue(VALUE_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +139,8 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotPackage.DISTANCE__DISTANCE:
-			return distance != DISTANCE_EDEFAULT;
+		case RobotPackage.BOOLEAN_TYPE__VALUE:
+			return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -157,10 +156,10 @@ public abstract class DistanceImpl extends TypeClassImpl implements Distance {
 			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (distance: ");
-		result.append(distance);
+		result.append(" (value: ");
+		result.append(value);
 		result.append(')');
 		return result.toString();
 	}
 
-} //DistanceImpl
+} //BooleanTypeImpl

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import robot.DeclarationVariable;
 import robot.ExpressionBase;
 import robot.RobotPackage;
-import robot.Type;
+import robot.TypeClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type;
+	protected TypeClass type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,7 +119,7 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * @generated
 	 */
 	@Override
-	public Type getType() {
+	public TypeClass getType() {
 		return type;
 	}
 
@@ -128,8 +128,8 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
-		Type oldType = type;
+	public NotificationChain basicSetType(TypeClass newType, NotificationChain msgs) {
+		TypeClass oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -148,7 +148,7 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * @generated
 	 */
 	@Override
-	public void setType(Type newType) {
+	public void setType(TypeClass newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -266,7 +266,7 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 			setExpressionbase((ExpressionBase) newValue);
 			return;
 		case RobotPackage.DECLARATION_VARIABLE__TYPE:
-			setType((Type) newValue);
+			setType((TypeClass) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -287,7 +287,7 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 			setExpressionbase((ExpressionBase) null);
 			return;
 		case RobotPackage.DECLARATION_VARIABLE__TYPE:
-			setType((Type) null);
+			setType((TypeClass) null);
 			return;
 		}
 		super.eUnset(featureID);

@@ -317,32 +317,32 @@ public interface RobotPackage extends EPackage {
 	int SPEED_COMMAND_OPERATION_COUNT = COMMAND_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robot.impl.TypeImpl <em>Type</em>}' class.
+	 * The meta object id for the '{@link robot.impl.TypeClassImpl <em>Type Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robot.impl.TypeImpl
-	 * @see robot.impl.RobotPackageImpl#getType()
+	 * @see robot.impl.TypeClassImpl
+	 * @see robot.impl.RobotPackageImpl#getTypeClass()
 	 * @generated
 	 */
-	int TYPE = 7;
+	int TYPE_CLASS = 7;
 
 	/**
-	 * The number of structural features of the '<em>Type</em>' class.
+	 * The number of structural features of the '<em>Type Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = 0;
+	int TYPE_CLASS_FEATURE_COUNT = 0;
 
 	/**
-	 * The number of operations of the '<em>Type</em>' class.
+	 * The number of operations of the '<em>Type Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_OPERATION_COUNT = 0;
+	int TYPE_CLASS_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link robot.impl.DistanceImpl <em>Distance</em>}' class.
@@ -361,7 +361,7 @@ public interface RobotPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DISTANCE__DISTANCE = TYPE_FEATURE_COUNT + 0;
+	int DISTANCE__DISTANCE = TYPE_CLASS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Distance</em>' class.
@@ -370,7 +370,7 @@ public interface RobotPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DISTANCE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int DISTANCE_FEATURE_COUNT = TYPE_CLASS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Distance</em>' class.
@@ -379,7 +379,7 @@ public interface RobotPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DISTANCE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+	int DISTANCE_OPERATION_COUNT = TYPE_CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robot.impl.CMImpl <em>CM</em>}' class.
@@ -1527,14 +1527,14 @@ public interface RobotPackage extends EPackage {
 	int EQUALS_OPERATION_COUNT = SECONDARY_EXP_BOOL_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robot.impl.BooleanImpl <em>Boolean</em>}' class.
+	 * The meta object id for the '{@link robot.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robot.impl.BooleanImpl
-	 * @see robot.impl.RobotPackageImpl#getBoolean()
+	 * @see robot.impl.BooleanTypeImpl
+	 * @see robot.impl.RobotPackageImpl#getBooleanType()
 	 * @generated
 	 */
-	int BOOLEAN = 38;
+	int BOOLEAN_TYPE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1543,35 +1543,35 @@ public interface RobotPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN__VALUE = TYPE_FEATURE_COUNT + 0;
+	int BOOLEAN_TYPE__VALUE = TYPE_CLASS_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Boolean</em>' class.
+	 * The number of structural features of the '<em>Boolean Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int BOOLEAN_TYPE_FEATURE_COUNT = TYPE_CLASS_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Boolean</em>' class.
+	 * The number of operations of the '<em>Boolean Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+	int BOOLEAN_TYPE_OPERATION_COUNT = TYPE_CLASS_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robot.impl.NumberImpl <em>Number</em>}' class.
+	 * The meta object id for the '{@link robot.impl.NumberTypeImpl <em>Number Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robot.impl.NumberImpl
-	 * @see robot.impl.RobotPackageImpl#getNumber()
+	 * @see robot.impl.NumberTypeImpl
+	 * @see robot.impl.RobotPackageImpl#getNumberType()
 	 * @generated
 	 */
-	int NUMBER = 39;
+	int NUMBER_TYPE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1580,25 +1580,25 @@ public interface RobotPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER__VALUE = TYPE_FEATURE_COUNT + 0;
+	int NUMBER_TYPE__VALUE = TYPE_CLASS_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Number</em>' class.
+	 * The number of structural features of the '<em>Number Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int NUMBER_TYPE_FEATURE_COUNT = TYPE_CLASS_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Number</em>' class.
+	 * The number of operations of the '<em>Number Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+	int NUMBER_TYPE_OPERATION_COUNT = TYPE_CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robot.impl.ELSEImpl <em>ELSE</em>}' class.
@@ -1804,14 +1804,14 @@ public interface RobotPackage extends EPackage {
 	EAttribute getSpeedCommand_Speed();
 
 	/**
-	 * Returns the meta object for class '{@link robot.Type <em>Type</em>}'.
+	 * Returns the meta object for class '{@link robot.TypeClass <em>Type Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type</em>'.
-	 * @see robot.Type
+	 * @return the meta object for class '<em>Type Class</em>'.
+	 * @see robot.TypeClass
 	 * @generated
 	 */
-	EClass getType();
+	EClass getTypeClass();
 
 	/**
 	 * Returns the meta object for class '{@link robot.Distance <em>Distance</em>}'.
@@ -2290,46 +2290,46 @@ public interface RobotPackage extends EPackage {
 	EClass getEquals();
 
 	/**
-	 * Returns the meta object for class '{@link robot.Boolean <em>Boolean</em>}'.
+	 * Returns the meta object for class '{@link robot.BooleanType <em>Boolean Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Boolean</em>'.
-	 * @see robot.Boolean
+	 * @return the meta object for class '<em>Boolean Type</em>'.
+	 * @see robot.BooleanType
 	 * @generated
 	 */
-	EClass getBoolean();
+	EClass getBooleanType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link robot.Boolean#isValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link robot.BooleanType#isValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see robot.Boolean#isValue()
-	 * @see #getBoolean()
+	 * @see robot.BooleanType#isValue()
+	 * @see #getBooleanType()
 	 * @generated
 	 */
-	EAttribute getBoolean_Value();
+	EAttribute getBooleanType_Value();
 
 	/**
-	 * Returns the meta object for class '{@link robot.Number <em>Number</em>}'.
+	 * Returns the meta object for class '{@link robot.NumberType <em>Number Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Number</em>'.
-	 * @see robot.Number
+	 * @return the meta object for class '<em>Number Type</em>'.
+	 * @see robot.NumberType
 	 * @generated
 	 */
-	EClass getNumber();
+	EClass getNumberType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link robot.Number#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link robot.NumberType#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see robot.Number#getValue()
-	 * @see #getNumber()
+	 * @see robot.NumberType#getValue()
+	 * @see #getNumberType()
 	 * @generated
 	 */
-	EAttribute getNumber_Value();
+	EAttribute getNumberType_Value();
 
 	/**
 	 * Returns the meta object for class '{@link robot.ELSE <em>ELSE</em>}'.
@@ -2501,14 +2501,14 @@ public interface RobotPackage extends EPackage {
 		EAttribute SPEED_COMMAND__SPEED = eINSTANCE.getSpeedCommand_Speed();
 
 		/**
-		 * The meta object literal for the '{@link robot.impl.TypeImpl <em>Type</em>}' class.
+		 * The meta object literal for the '{@link robot.impl.TypeClassImpl <em>Type Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robot.impl.TypeImpl
-		 * @see robot.impl.RobotPackageImpl#getType()
+		 * @see robot.impl.TypeClassImpl
+		 * @see robot.impl.RobotPackageImpl#getTypeClass()
 		 * @generated
 		 */
-		EClass TYPE = eINSTANCE.getType();
+		EClass TYPE_CLASS = eINSTANCE.getTypeClass();
 
 		/**
 		 * The meta object literal for the '{@link robot.impl.DistanceImpl <em>Distance</em>}' class.
@@ -2939,14 +2939,14 @@ public interface RobotPackage extends EPackage {
 		EClass EQUALS = eINSTANCE.getEquals();
 
 		/**
-		 * The meta object literal for the '{@link robot.impl.BooleanImpl <em>Boolean</em>}' class.
+		 * The meta object literal for the '{@link robot.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robot.impl.BooleanImpl
-		 * @see robot.impl.RobotPackageImpl#getBoolean()
+		 * @see robot.impl.BooleanTypeImpl
+		 * @see robot.impl.RobotPackageImpl#getBooleanType()
 		 * @generated
 		 */
-		EClass BOOLEAN = eINSTANCE.getBoolean();
+		EClass BOOLEAN_TYPE = eINSTANCE.getBooleanType();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -2954,17 +2954,17 @@ public interface RobotPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BOOLEAN__VALUE = eINSTANCE.getBoolean_Value();
+		EAttribute BOOLEAN_TYPE__VALUE = eINSTANCE.getBooleanType_Value();
 
 		/**
-		 * The meta object literal for the '{@link robot.impl.NumberImpl <em>Number</em>}' class.
+		 * The meta object literal for the '{@link robot.impl.NumberTypeImpl <em>Number Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robot.impl.NumberImpl
-		 * @see robot.impl.RobotPackageImpl#getNumber()
+		 * @see robot.impl.NumberTypeImpl
+		 * @see robot.impl.RobotPackageImpl#getNumberType()
 		 * @generated
 		 */
-		EClass NUMBER = eINSTANCE.getNumber();
+		EClass NUMBER_TYPE = eINSTANCE.getNumberType();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -2972,7 +2972,7 @@ public interface RobotPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NUMBER__VALUE = eINSTANCE.getNumber_Value();
+		EAttribute NUMBER_TYPE__VALUE = eINSTANCE.getNumberType_Value();
 
 		/**
 		 * The meta object literal for the '{@link robot.impl.ELSEImpl <em>ELSE</em>}' class.

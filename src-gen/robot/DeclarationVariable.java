@@ -48,12 +48,12 @@ public interface DeclarationVariable extends Instruction {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(Type)
+	 * @see #setType(TypeClass)
 	 * @see robot.RobotPackage#getDeclarationVariable_Type()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Type getType();
+	TypeClass getType();
 
 	/**
 	 * Sets the value of the '{@link robot.DeclarationVariable#getType <em>Type</em>}' containment reference.
@@ -63,7 +63,7 @@ public interface DeclarationVariable extends Instruction {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setType(TypeClass value);
 
 	/**
 	 * Returns the value of the '<em><b>Expressionbase</b></em>' containment reference.

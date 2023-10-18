@@ -47,12 +47,12 @@ public interface PrimaryExprBool extends BooleanExp {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(Type)
+	 * @see #setType(TypeClass)
 	 * @see robot.RobotPackage#getPrimaryExprBool_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Type getType();
+	TypeClass getType();
 
 	/**
 	 * Sets the value of the '{@link robot.PrimaryExprBool#getType <em>Type</em>}' containment reference.
@@ -62,6 +62,6 @@ public interface PrimaryExprBool extends BooleanExp {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setType(TypeClass value);
 
 } // PrimaryExprBool

@@ -301,22 +301,22 @@ public interface RobotFactory extends EFactory {
 	Equals createEquals();
 
 	/**
-	 * Returns a new object of class '<em>Boolean</em>'.
+	 * Returns a new object of class '<em>Boolean Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean</em>'.
+	 * @return a new object of class '<em>Boolean Type</em>'.
 	 * @generated
 	 */
-	Boolean createBoolean();
+	BooleanType createBooleanType();
 
 	/**
-	 * Returns a new object of class '<em>Number</em>'.
+	 * Returns a new object of class '<em>Number Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Number</em>'.
+	 * @return a new object of class '<em>Number Type</em>'.
 	 * @generated
 	 */
-	Number createNumber();
+	NumberType createNumberType();
 
 	/**
 	 * Returns a new object of class '<em>ELSE</em>'.

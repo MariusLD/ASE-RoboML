@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import robot.Call;
 import robot.PrimaryExprBool;
 import robot.RobotPackage;
-import robot.Type;
+import robot.TypeClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public class PrimaryExprBoolImpl extends BooleanExpImpl implements PrimaryExprBo
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type;
+	protected TypeClass type;
 
 	/**
 	 * The cached value of the '{@link #getCall() <em>Call</em>}' containment reference.
@@ -127,7 +127,7 @@ public class PrimaryExprBoolImpl extends BooleanExpImpl implements PrimaryExprBo
 	 * @generated
 	 */
 	@Override
-	public Type getType() {
+	public TypeClass getType() {
 		return type;
 	}
 
@@ -136,8 +136,8 @@ public class PrimaryExprBoolImpl extends BooleanExpImpl implements PrimaryExprBo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
-		Type oldType = type;
+	public NotificationChain basicSetType(TypeClass newType, NotificationChain msgs) {
+		TypeClass oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -156,7 +156,7 @@ public class PrimaryExprBoolImpl extends BooleanExpImpl implements PrimaryExprBo
 	 * @generated
 	 */
 	@Override
-	public void setType(Type newType) {
+	public void setType(TypeClass newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -214,7 +214,7 @@ public class PrimaryExprBoolImpl extends BooleanExpImpl implements PrimaryExprBo
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case RobotPackage.PRIMARY_EXPR_BOOL__TYPE:
-			setType((Type) newValue);
+			setType((TypeClass) newValue);
 			return;
 		case RobotPackage.PRIMARY_EXPR_BOOL__CALL:
 			setCall((Call) newValue);
@@ -232,7 +232,7 @@ public class PrimaryExprBoolImpl extends BooleanExpImpl implements PrimaryExprBo
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case RobotPackage.PRIMARY_EXPR_BOOL__TYPE:
-			setType((Type) null);
+			setType((TypeClass) null);
 			return;
 		case RobotPackage.PRIMARY_EXPR_BOOL__CALL:
 			setCall((Call) null);

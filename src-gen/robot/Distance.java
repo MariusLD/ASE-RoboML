@@ -18,7 +18,7 @@ package robot;
  * @model abstract="true"
  * @generated
  */
-public interface Distance extends Type {
+public interface Distance extends TypeClass {
 	/**
 	 * Returns the value of the '<em><b>Distance</b></em>' attribute.
 	 * <!-- begin-user-doc -->

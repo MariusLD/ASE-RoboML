@@ -15,6 +15,7 @@ import robot.And;
 import robot.ArithmetiqueExp;
 import robot.Block;
 import robot.BooleanExp;
+import robot.BooleanType;
 import robot.Call;
 import robot.CallFunction;
 import robot.CallVariable;
@@ -33,6 +34,7 @@ import robot.Instruction;
 import robot.Minus;
 import robot.Mult;
 import robot.Not;
+import robot.NumberType;
 import robot.Or;
 import robot.Plus;
 import robot.PrimaryExprAri;
@@ -46,7 +48,7 @@ import robot.SecondaryExpAri;
 import robot.SecondaryExpBool;
 import robot.SpeedCommand;
 import robot.TimeSensorCommand;
-import robot.Type;
+import robot.TypeClass;
 import robot.mm;
 
 /**
@@ -110,7 +112,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeEClass = null;
+	private EClass typeClassEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -327,14 +329,14 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass booleanEClass = null;
+	private EClass booleanTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass numberEClass = null;
+	private EClass numberTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -560,8 +562,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getType() {
-		return typeEClass;
+	public EClass getTypeClass() {
+		return typeClassEClass;
 	}
 
 	/**
@@ -1030,8 +1032,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getBoolean() {
-		return booleanEClass;
+	public EClass getBooleanType() {
+		return booleanTypeEClass;
 	}
 
 	/**
@@ -1040,8 +1042,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBoolean_Value() {
-		return (EAttribute) booleanEClass.getEStructuralFeatures().get(0);
+	public EAttribute getBooleanType_Value() {
+		return (EAttribute) booleanTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1050,8 +1052,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getNumber() {
-		return numberEClass;
+	public EClass getNumberType() {
+		return numberTypeEClass;
 	}
 
 	/**
@@ -1060,8 +1062,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getNumber_Value() {
-		return (EAttribute) numberEClass.getEStructuralFeatures().get(0);
+	public EAttribute getNumberType_Value() {
+		return (EAttribute) numberTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1135,7 +1137,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		speedCommandEClass = createEClass(SPEED_COMMAND);
 		createEAttribute(speedCommandEClass, SPEED_COMMAND__SPEED);
 
-		typeEClass = createEClass(TYPE);
+		typeClassEClass = createEClass(TYPE_CLASS);
 
 		distanceEClass = createEClass(DISTANCE);
 		createEAttribute(distanceEClass, DISTANCE__DISTANCE);
@@ -1213,11 +1215,11 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 
 		equalsEClass = createEClass(EQUALS);
 
-		booleanEClass = createEClass(BOOLEAN);
-		createEAttribute(booleanEClass, BOOLEAN__VALUE);
+		booleanTypeEClass = createEClass(BOOLEAN_TYPE);
+		createEAttribute(booleanTypeEClass, BOOLEAN_TYPE__VALUE);
 
-		numberEClass = createEClass(NUMBER);
-		createEAttribute(numberEClass, NUMBER__VALUE);
+		numberTypeEClass = createEClass(NUMBER_TYPE);
+		createEAttribute(numberTypeEClass, NUMBER_TYPE__VALUE);
 
 		elseEClass = createEClass(ELSE);
 
@@ -1258,7 +1260,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		rotateCommandEClass.getESuperTypes().add(this.getCommand());
 		directionCommandEClass.getESuperTypes().add(this.getCommand());
 		speedCommandEClass.getESuperTypes().add(this.getCommand());
-		distanceEClass.getESuperTypes().add(this.getType());
+		distanceEClass.getESuperTypes().add(this.getTypeClass());
 		cmEClass.getESuperTypes().add(this.getDistance());
 		mmEClass.getESuperTypes().add(this.getDistance());
 		readSensorCommandEClass.getESuperTypes().add(this.getCommand());
@@ -1288,8 +1290,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		orEClass.getESuperTypes().add(this.getSecondaryExpBool());
 		notEClass.getESuperTypes().add(this.getSecondaryExpBool());
 		equalsEClass.getESuperTypes().add(this.getSecondaryExpBool());
-		booleanEClass.getESuperTypes().add(this.getType());
-		numberEClass.getESuperTypes().add(this.getType());
+		booleanTypeEClass.getESuperTypes().add(this.getTypeClass());
+		numberTypeEClass.getESuperTypes().add(this.getTypeClass());
 		elseEClass.getESuperTypes().add(this.getBlock());
 
 		// Initialize classes, features, and operations; add parameters
@@ -1303,12 +1305,12 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		initEReference(getFunction_Instruction(), this.getInstruction(), null, "instruction", null, 0, -1,
 				Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_Parameters(), this.getType(), null, "parameters", null, 0, -1, Function.class,
+		initEReference(getFunction_Parameters(), this.getTypeClass(), null, "parameters", null, 0, -1, Function.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_Return(), this.getType(), null, "return", null, 0, 1, Function.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEReference(getFunction_Return(), this.getTypeClass(), null, "return", null, 0, 1, Function.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1331,7 +1333,8 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		initEAttribute(getSpeedCommand_Speed(), ecorePackage.getEDouble(), "speed", null, 0, 1, SpeedCommand.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(typeClassEClass, TypeClass.class, "TypeClass", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(distanceEClass, Distance.class, "Distance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDistance_Distance(), ecorePackage.getEDouble(), "distance", null, 0, 1, Distance.class,
@@ -1369,7 +1372,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 
 		initEClass(primaryExprAriEClass, PrimaryExprAri.class, "PrimaryExprAri", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimaryExprAri_Type(), this.getType(), null, "type", null, 0, 1, PrimaryExprAri.class,
+		initEReference(getPrimaryExprAri_Type(), this.getTypeClass(), null, "type", null, 0, 1, PrimaryExprAri.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrimaryExprAri_Call(), this.getCall(), null, "call", null, 0, 1, PrimaryExprAri.class,
@@ -1393,7 +1396,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		initEReference(getDeclarationVariable_Expressionbase(), this.getExpressionBase(), null, "expressionbase", null,
 				0, 1, DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeclarationVariable_Type(), this.getType(), null, "type", null, 1, 1,
+		initEReference(getDeclarationVariable_Type(), this.getTypeClass(), null, "type", null, 1, 1,
 				DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1431,7 +1434,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 
 		initEClass(primaryExprBoolEClass, PrimaryExprBool.class, "PrimaryExprBool", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimaryExprBool_Type(), this.getType(), null, "type", null, 0, 1, PrimaryExprBool.class,
+		initEReference(getPrimaryExprBool_Type(), this.getTypeClass(), null, "type", null, 0, 1, PrimaryExprBool.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrimaryExprBool_Call(), this.getCall(), null, "call", null, 0, 1, PrimaryExprBool.class,
@@ -1455,14 +1458,14 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 
 		initEClass(equalsEClass, Equals.class, "Equals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(booleanEClass, robot.Boolean.class, "Boolean", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(booleanTypeEClass, BooleanType.class, "BooleanType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBoolean_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, robot.Boolean.class,
+		initEAttribute(getBooleanType_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BooleanType.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(numberEClass, robot.Number.class, "Number", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(numberTypeEClass, NumberType.class, "NumberType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNumber_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, robot.Number.class,
+		initEAttribute(getNumberType_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, NumberType.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elseEClass, robot.ELSE.class, "ELSE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

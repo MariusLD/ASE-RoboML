@@ -30,23 +30,13 @@ import robot.RobotPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robot.impl.AffectationImpl#getCallvariable <em>Callvariable</em>}</li>
  *   <li>{@link robot.impl.AffectationImpl#getExpressionbase <em>Expressionbase</em>}</li>
+ *   <li>{@link robot.impl.AffectationImpl#getCallvariable <em>Callvariable</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
-	/**
-	 * The cached value of the '{@link #getCallvariable() <em>Callvariable</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCallvariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected CallVariable callvariable;
-
 	/**
 	 * The cached value of the '{@link #getExpressionbase() <em>Expressionbase</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -56,6 +46,16 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	 * @ordered
 	 */
 	protected EList<ExpressionBase> expressionbase;
+
+	/**
+	 * The cached value of the '{@link #getCallvariable() <em>Callvariable</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCallvariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected CallVariable callvariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,15 +83,6 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	 */
 	@Override
 	public CallVariable getCallvariable() {
-		if (callvariable != null && callvariable.eIsProxy()) {
-			InternalEObject oldCallvariable = (InternalEObject) callvariable;
-			callvariable = (CallVariable) eResolveProxy(oldCallvariable);
-			if (callvariable != oldCallvariable) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RobotPackage.AFFECTATION__CALLVARIABLE,
-							oldCallvariable, callvariable));
-			}
-		}
 		return callvariable;
 	}
 
@@ -100,8 +91,18 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallVariable basicGetCallvariable() {
-		return callvariable;
+	public NotificationChain basicSetCallvariable(CallVariable newCallvariable, NotificationChain msgs) {
+		CallVariable oldCallvariable = callvariable;
+		callvariable = newCallvariable;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.AFFECTATION__CALLVARIABLE, oldCallvariable, newCallvariable);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -111,11 +112,20 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	 */
 	@Override
 	public void setCallvariable(CallVariable newCallvariable) {
-		CallVariable oldCallvariable = callvariable;
-		callvariable = newCallvariable;
-		if (eNotificationRequired())
+		if (newCallvariable != callvariable) {
+			NotificationChain msgs = null;
+			if (callvariable != null)
+				msgs = ((InternalEObject) callvariable).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.AFFECTATION__CALLVARIABLE, null, msgs);
+			if (newCallvariable != null)
+				msgs = ((InternalEObject) newCallvariable).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.AFFECTATION__CALLVARIABLE, null, msgs);
+			msgs = basicSetCallvariable(newCallvariable, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.AFFECTATION__CALLVARIABLE,
-					oldCallvariable, callvariable));
+					newCallvariable, newCallvariable));
 	}
 
 	/**
@@ -142,6 +152,8 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 		switch (featureID) {
 		case RobotPackage.AFFECTATION__EXPRESSIONBASE:
 			return ((InternalEList<?>) getExpressionbase()).basicRemove(otherEnd, msgs);
+		case RobotPackage.AFFECTATION__CALLVARIABLE:
+			return basicSetCallvariable(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -154,12 +166,10 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotPackage.AFFECTATION__CALLVARIABLE:
-			if (resolve)
-				return getCallvariable();
-			return basicGetCallvariable();
 		case RobotPackage.AFFECTATION__EXPRESSIONBASE:
 			return getExpressionbase();
+		case RobotPackage.AFFECTATION__CALLVARIABLE:
+			return getCallvariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -173,12 +183,12 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotPackage.AFFECTATION__CALLVARIABLE:
-			setCallvariable((CallVariable) newValue);
-			return;
 		case RobotPackage.AFFECTATION__EXPRESSIONBASE:
 			getExpressionbase().clear();
 			getExpressionbase().addAll((Collection<? extends ExpressionBase>) newValue);
+			return;
+		case RobotPackage.AFFECTATION__CALLVARIABLE:
+			setCallvariable((CallVariable) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -192,11 +202,11 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotPackage.AFFECTATION__CALLVARIABLE:
-			setCallvariable((CallVariable) null);
-			return;
 		case RobotPackage.AFFECTATION__EXPRESSIONBASE:
 			getExpressionbase().clear();
+			return;
+		case RobotPackage.AFFECTATION__CALLVARIABLE:
+			setCallvariable((CallVariable) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -210,10 +220,10 @@ public class AffectationImpl extends ExpressionBaseImpl implements Affectation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotPackage.AFFECTATION__CALLVARIABLE:
-			return callvariable != null;
 		case RobotPackage.AFFECTATION__EXPRESSIONBASE:
 			return expressionbase != null && !expressionbase.isEmpty();
+		case RobotPackage.AFFECTATION__CALLVARIABLE:
+			return callvariable != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -30,7 +30,7 @@ import robot.SecondaryExpAri;
  * </p>
  * <ul>
  *   <li>{@link robot.impl.SecondaryExpAriImpl#getRight <em>Right</em>}</li>
- *   <li>{@link robot.impl.SecondaryExpAriImpl#getArithmetiqueexp <em>Arithmetiqueexp</em>}</li>
+ *   <li>{@link robot.impl.SecondaryExpAriImpl#getLeft <em>Left</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,14 +47,14 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 	protected EList<ArithmetiqueExp> right;
 
 	/**
-	 * The cached value of the '{@link #getArithmetiqueexp() <em>Arithmetiqueexp</em>}' reference.
+	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getArithmetiqueexp()
+	 * @see #getLeft()
 	 * @generated
 	 * @ordered
 	 */
-	protected ArithmetiqueExp arithmetiqueexp;
+	protected ArithmetiqueExp left;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,17 +95,8 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 	 * @generated
 	 */
 	@Override
-	public ArithmetiqueExp getArithmetiqueexp() {
-		if (arithmetiqueexp != null && arithmetiqueexp.eIsProxy()) {
-			InternalEObject oldArithmetiqueexp = (InternalEObject) arithmetiqueexp;
-			arithmetiqueexp = (ArithmetiqueExp) eResolveProxy(oldArithmetiqueexp);
-			if (arithmetiqueexp != oldArithmetiqueexp) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							RobotPackage.SECONDARY_EXP_ARI__ARITHMETIQUEEXP, oldArithmetiqueexp, arithmetiqueexp));
-			}
-		}
-		return arithmetiqueexp;
+	public ArithmetiqueExp getLeft() {
+		return left;
 	}
 
 	/**
@@ -113,8 +104,18 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArithmetiqueExp basicGetArithmetiqueexp() {
-		return arithmetiqueexp;
+	public NotificationChain basicSetLeft(ArithmetiqueExp newLeft, NotificationChain msgs) {
+		ArithmetiqueExp oldLeft = left;
+		left = newLeft;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.SECONDARY_EXP_ARI__LEFT, oldLeft, newLeft);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -123,12 +124,21 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 	 * @generated
 	 */
 	@Override
-	public void setArithmetiqueexp(ArithmetiqueExp newArithmetiqueexp) {
-		ArithmetiqueExp oldArithmetiqueexp = arithmetiqueexp;
-		arithmetiqueexp = newArithmetiqueexp;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.SECONDARY_EXP_ARI__ARITHMETIQUEEXP,
-					oldArithmetiqueexp, arithmetiqueexp));
+	public void setLeft(ArithmetiqueExp newLeft) {
+		if (newLeft != left) {
+			NotificationChain msgs = null;
+			if (left != null)
+				msgs = ((InternalEObject) left).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.SECONDARY_EXP_ARI__LEFT, null, msgs);
+			if (newLeft != null)
+				msgs = ((InternalEObject) newLeft).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.SECONDARY_EXP_ARI__LEFT, null, msgs);
+			msgs = basicSetLeft(newLeft, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.SECONDARY_EXP_ARI__LEFT, newLeft,
+					newLeft));
 	}
 
 	/**
@@ -141,6 +151,8 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 		switch (featureID) {
 		case RobotPackage.SECONDARY_EXP_ARI__RIGHT:
 			return ((InternalEList<?>) getRight()).basicRemove(otherEnd, msgs);
+		case RobotPackage.SECONDARY_EXP_ARI__LEFT:
+			return basicSetLeft(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -155,10 +167,8 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 		switch (featureID) {
 		case RobotPackage.SECONDARY_EXP_ARI__RIGHT:
 			return getRight();
-		case RobotPackage.SECONDARY_EXP_ARI__ARITHMETIQUEEXP:
-			if (resolve)
-				return getArithmetiqueexp();
-			return basicGetArithmetiqueexp();
+		case RobotPackage.SECONDARY_EXP_ARI__LEFT:
+			return getLeft();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -176,8 +186,8 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 			getRight().clear();
 			getRight().addAll((Collection<? extends ArithmetiqueExp>) newValue);
 			return;
-		case RobotPackage.SECONDARY_EXP_ARI__ARITHMETIQUEEXP:
-			setArithmetiqueexp((ArithmetiqueExp) newValue);
+		case RobotPackage.SECONDARY_EXP_ARI__LEFT:
+			setLeft((ArithmetiqueExp) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -194,8 +204,8 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 		case RobotPackage.SECONDARY_EXP_ARI__RIGHT:
 			getRight().clear();
 			return;
-		case RobotPackage.SECONDARY_EXP_ARI__ARITHMETIQUEEXP:
-			setArithmetiqueexp((ArithmetiqueExp) null);
+		case RobotPackage.SECONDARY_EXP_ARI__LEFT:
+			setLeft((ArithmetiqueExp) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -211,8 +221,8 @@ public class SecondaryExpAriImpl extends ArithmetiqueExpImpl implements Secondar
 		switch (featureID) {
 		case RobotPackage.SECONDARY_EXP_ARI__RIGHT:
 			return right != null && !right.isEmpty();
-		case RobotPackage.SECONDARY_EXP_ARI__ARITHMETIQUEEXP:
-			return arithmetiqueexp != null;
+		case RobotPackage.SECONDARY_EXP_ARI__LEFT:
+			return left != null;
 		}
 		return super.eIsSet(featureID);
 	}

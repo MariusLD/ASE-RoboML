@@ -123,7 +123,7 @@ public interface RobotPackage extends EPackage {
 	int FUNCTION__PARAMETERS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Return</b></em>' reference.
+	 * The feature id for the '<em><b>Return</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -253,7 +253,7 @@ public interface RobotPackage extends EPackage {
 	int DIRECTION_COMMAND = 5;
 
 	/**
-	 * The feature id for the '<em><b>Distance</b></em>' reference.
+	 * The feature id for the '<em><b>Distance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -671,13 +671,13 @@ public interface RobotPackage extends EPackage {
 	int SECONDARY_EXP_ARI__RIGHT = ARITHMETIQUE_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Arithmetiqueexp</b></em>' reference.
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_EXP_ARI__ARITHMETIQUEEXP = ARITHMETIQUE_EXP_FEATURE_COUNT + 1;
+	int SECONDARY_EXP_ARI__LEFT = ARITHMETIQUE_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Secondary Exp Ari</em>' class.
@@ -717,13 +717,13 @@ public interface RobotPackage extends EPackage {
 	int PLUS__RIGHT = SECONDARY_EXP_ARI__RIGHT;
 
 	/**
-	 * The feature id for the '<em><b>Arithmetiqueexp</b></em>' reference.
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLUS__ARITHMETIQUEEXP = SECONDARY_EXP_ARI__ARITHMETIQUEEXP;
+	int PLUS__LEFT = SECONDARY_EXP_ARI__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Plus</em>' class.
@@ -763,13 +763,13 @@ public interface RobotPackage extends EPackage {
 	int MINUS__RIGHT = SECONDARY_EXP_ARI__RIGHT;
 
 	/**
-	 * The feature id for the '<em><b>Arithmetiqueexp</b></em>' reference.
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MINUS__ARITHMETIQUEEXP = SECONDARY_EXP_ARI__ARITHMETIQUEEXP;
+	int MINUS__LEFT = SECONDARY_EXP_ARI__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Minus</em>' class.
@@ -809,13 +809,13 @@ public interface RobotPackage extends EPackage {
 	int MULT__RIGHT = SECONDARY_EXP_ARI__RIGHT;
 
 	/**
-	 * The feature id for the '<em><b>Arithmetiqueexp</b></em>' reference.
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MULT__ARITHMETIQUEEXP = SECONDARY_EXP_ARI__ARITHMETIQUEEXP;
+	int MULT__LEFT = SECONDARY_EXP_ARI__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Mult</em>' class.
@@ -855,13 +855,13 @@ public interface RobotPackage extends EPackage {
 	int DIV__RIGHT = SECONDARY_EXP_ARI__RIGHT;
 
 	/**
-	 * The feature id for the '<em><b>Arithmetiqueexp</b></em>' reference.
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIV__ARITHMETIQUEEXP = SECONDARY_EXP_ARI__ARITHMETIQUEEXP;
+	int DIV__LEFT = SECONDARY_EXP_ARI__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Div</em>' class.
@@ -892,22 +892,22 @@ public interface RobotPackage extends EPackage {
 	int PRIMARY_EXPR_ARI = 21;
 
 	/**
-	 * The feature id for the '<em><b>Call</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMARY_EXPR_ARI__CALL = ARITHMETIQUE_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMARY_EXPR_ARI__TYPE = ARITHMETIQUE_EXP_FEATURE_COUNT + 1;
+	int PRIMARY_EXPR_ARI__TYPE = ARITHMETIQUE_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Call</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMARY_EXPR_ARI__CALL = ARITHMETIQUE_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Primary Expr Ari</em>' class.
@@ -947,22 +947,22 @@ public interface RobotPackage extends EPackage {
 	int DECLARATION_VARIABLE__NOM = INSTRUCTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Expressionbase</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_VARIABLE__TYPE = INSTRUCTION_FEATURE_COUNT + 1;
+	int DECLARATION_VARIABLE__EXPRESSIONBASE = INSTRUCTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Expressionbase</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_VARIABLE__EXPRESSIONBASE = INSTRUCTION_FEATURE_COUNT + 2;
+	int DECLARATION_VARIABLE__TYPE = INSTRUCTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Declaration Variable</em>' class.
@@ -1215,22 +1215,22 @@ public interface RobotPackage extends EPackage {
 	int AFFECTATION = 31;
 
 	/**
-	 * The feature id for the '<em><b>Callvariable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AFFECTATION__CALLVARIABLE = EXPRESSION_BASE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Expressionbase</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AFFECTATION__EXPRESSIONBASE = EXPRESSION_BASE_FEATURE_COUNT + 1;
+	int AFFECTATION__EXPRESSIONBASE = EXPRESSION_BASE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Callvariable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AFFECTATION__CALLVARIABLE = EXPRESSION_BASE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Affectation</em>' class.
@@ -1261,22 +1261,22 @@ public interface RobotPackage extends EPackage {
 	int PRIMARY_EXPR_BOOL = 32;
 
 	/**
-	 * The feature id for the '<em><b>Call</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMARY_EXPR_BOOL__CALL = BOOLEAN_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMARY_EXPR_BOOL__TYPE = BOOLEAN_EXP_FEATURE_COUNT + 1;
+	int PRIMARY_EXPR_BOOL__TYPE = BOOLEAN_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Call</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMARY_EXPR_BOOL__CALL = BOOLEAN_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Primary Expr Bool</em>' class.
@@ -1307,22 +1307,22 @@ public interface RobotPackage extends EPackage {
 	int SECONDARY_EXP_BOOL = 33;
 
 	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SECONDARY_EXP_BOOL__LEFT = BOOLEAN_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_EXP_BOOL__RIGHT = BOOLEAN_EXP_FEATURE_COUNT + 1;
+	int SECONDARY_EXP_BOOL__RIGHT = BOOLEAN_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_EXP_BOOL__LEFT = BOOLEAN_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Secondary Exp Bool</em>' class.
@@ -1353,15 +1353,6 @@ public interface RobotPackage extends EPackage {
 	int AND = 34;
 
 	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AND__LEFT = SECONDARY_EXP_BOOL__LEFT;
-
-	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1369,6 +1360,15 @@ public interface RobotPackage extends EPackage {
 	 * @ordered
 	 */
 	int AND__RIGHT = SECONDARY_EXP_BOOL__RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND__LEFT = SECONDARY_EXP_BOOL__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>And</em>' class.
@@ -1399,15 +1399,6 @@ public interface RobotPackage extends EPackage {
 	int OR = 35;
 
 	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OR__LEFT = SECONDARY_EXP_BOOL__LEFT;
-
-	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1415,6 +1406,15 @@ public interface RobotPackage extends EPackage {
 	 * @ordered
 	 */
 	int OR__RIGHT = SECONDARY_EXP_BOOL__RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR__LEFT = SECONDARY_EXP_BOOL__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Or</em>' class.
@@ -1445,15 +1445,6 @@ public interface RobotPackage extends EPackage {
 	int NOT = 36;
 
 	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT__LEFT = SECONDARY_EXP_BOOL__LEFT;
-
-	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1461,6 +1452,15 @@ public interface RobotPackage extends EPackage {
 	 * @ordered
 	 */
 	int NOT__RIGHT = SECONDARY_EXP_BOOL__RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT__LEFT = SECONDARY_EXP_BOOL__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Not</em>' class.
@@ -1491,15 +1491,6 @@ public interface RobotPackage extends EPackage {
 	int EQUALS = 37;
 
 	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EQUALS__LEFT = SECONDARY_EXP_BOOL__LEFT;
-
-	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1507,6 +1498,15 @@ public interface RobotPackage extends EPackage {
 	 * @ordered
 	 */
 	int EQUALS__RIGHT = SECONDARY_EXP_BOOL__RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUALS__LEFT = SECONDARY_EXP_BOOL__LEFT;
 
 	/**
 	 * The number of structural features of the '<em>Equals</em>' class.
@@ -1710,10 +1710,10 @@ public interface RobotPackage extends EPackage {
 	EReference getFunction_Parameters();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.Function#getReturn <em>Return</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.Function#getReturn <em>Return</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Return</em>'.
+	 * @return the meta object for the containment reference '<em>Return</em>'.
 	 * @see robot.Function#getReturn()
 	 * @see #getFunction()
 	 * @generated
@@ -1772,10 +1772,10 @@ public interface RobotPackage extends EPackage {
 	EClass getDirectionCommand();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.DirectionCommand#getDistance <em>Distance</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.DirectionCommand#getDistance <em>Distance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Distance</em>'.
+	 * @return the meta object for the containment reference '<em>Distance</em>'.
 	 * @see robot.DirectionCommand#getDistance()
 	 * @see #getDirectionCommand()
 	 * @generated
@@ -1965,10 +1965,10 @@ public interface RobotPackage extends EPackage {
 	EClass getPrimaryExprAri();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.PrimaryExprAri#getCall <em>Call</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.PrimaryExprAri#getCall <em>Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Call</em>'.
+	 * @return the meta object for the containment reference '<em>Call</em>'.
 	 * @see robot.PrimaryExprAri#getCall()
 	 * @see #getPrimaryExprAri()
 	 * @generated
@@ -2008,15 +2008,15 @@ public interface RobotPackage extends EPackage {
 	EReference getSecondaryExpAri_Right();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.SecondaryExpAri#getArithmetiqueexp <em>Arithmetiqueexp</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.SecondaryExpAri#getLeft <em>Left</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Arithmetiqueexp</em>'.
-	 * @see robot.SecondaryExpAri#getArithmetiqueexp()
+	 * @return the meta object for the containment reference '<em>Left</em>'.
+	 * @see robot.SecondaryExpAri#getLeft()
 	 * @see #getSecondaryExpAri()
 	 * @generated
 	 */
-	EReference getSecondaryExpAri_Arithmetiqueexp();
+	EReference getSecondaryExpAri_Left();
 
 	/**
 	 * Returns the meta object for class '{@link robot.DeclarationVariable <em>Declaration Variable</em>}'.
@@ -2040,10 +2040,10 @@ public interface RobotPackage extends EPackage {
 	EAttribute getDeclarationVariable_Nom();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.DeclarationVariable#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.DeclarationVariable#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @return the meta object for the containment reference '<em>Type</em>'.
 	 * @see robot.DeclarationVariable#getType()
 	 * @see #getDeclarationVariable()
 	 * @generated
@@ -2051,10 +2051,10 @@ public interface RobotPackage extends EPackage {
 	EReference getDeclarationVariable_Type();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.DeclarationVariable#getExpressionbase <em>Expressionbase</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.DeclarationVariable#getExpressionbase <em>Expressionbase</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Expressionbase</em>'.
+	 * @return the meta object for the containment reference '<em>Expressionbase</em>'.
 	 * @see robot.DeclarationVariable#getExpressionbase()
 	 * @see #getDeclarationVariable()
 	 * @generated
@@ -2164,10 +2164,10 @@ public interface RobotPackage extends EPackage {
 	EClass getAffectation();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.Affectation#getCallvariable <em>Callvariable</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.Affectation#getCallvariable <em>Callvariable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Callvariable</em>'.
+	 * @return the meta object for the containment reference '<em>Callvariable</em>'.
 	 * @see robot.Affectation#getCallvariable()
 	 * @see #getAffectation()
 	 * @generated
@@ -2196,10 +2196,10 @@ public interface RobotPackage extends EPackage {
 	EClass getPrimaryExprBool();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.PrimaryExprBool#getCall <em>Call</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.PrimaryExprBool#getCall <em>Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Call</em>'.
+	 * @return the meta object for the containment reference '<em>Call</em>'.
 	 * @see robot.PrimaryExprBool#getCall()
 	 * @see #getPrimaryExprBool()
 	 * @generated
@@ -2228,10 +2228,10 @@ public interface RobotPackage extends EPackage {
 	EClass getSecondaryExpBool();
 
 	/**
-	 * Returns the meta object for the reference '{@link robot.SecondaryExpBool#getLeft <em>Left</em>}'.
+	 * Returns the meta object for the containment reference '{@link robot.SecondaryExpBool#getLeft <em>Left</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Left</em>'.
+	 * @return the meta object for the containment reference '<em>Left</em>'.
 	 * @see robot.SecondaryExpBool#getLeft()
 	 * @see #getSecondaryExpBool()
 	 * @generated
@@ -2419,7 +2419,7 @@ public interface RobotPackage extends EPackage {
 		EReference FUNCTION__PARAMETERS = eINSTANCE.getFunction_Parameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Return</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Return</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2475,7 +2475,7 @@ public interface RobotPackage extends EPackage {
 		EClass DIRECTION_COMMAND = eINSTANCE.getDirectionCommand();
 
 		/**
-		 * The meta object literal for the '<em><b>Distance</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Distance</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2659,7 +2659,7 @@ public interface RobotPackage extends EPackage {
 		EClass PRIMARY_EXPR_ARI = eINSTANCE.getPrimaryExprAri();
 
 		/**
-		 * The meta object literal for the '<em><b>Call</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Call</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2693,12 +2693,12 @@ public interface RobotPackage extends EPackage {
 		EReference SECONDARY_EXP_ARI__RIGHT = eINSTANCE.getSecondaryExpAri_Right();
 
 		/**
-		 * The meta object literal for the '<em><b>Arithmetiqueexp</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SECONDARY_EXP_ARI__ARITHMETIQUEEXP = eINSTANCE.getSecondaryExpAri_Arithmetiqueexp();
+		EReference SECONDARY_EXP_ARI__LEFT = eINSTANCE.getSecondaryExpAri_Left();
 
 		/**
 		 * The meta object literal for the '{@link robot.impl.DeclarationVariableImpl <em>Declaration Variable</em>}' class.
@@ -2719,7 +2719,7 @@ public interface RobotPackage extends EPackage {
 		EAttribute DECLARATION_VARIABLE__NOM = eINSTANCE.getDeclarationVariable_Nom();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2727,7 +2727,7 @@ public interface RobotPackage extends EPackage {
 		EReference DECLARATION_VARIABLE__TYPE = eINSTANCE.getDeclarationVariable_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Expressionbase</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Expressionbase</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2831,7 +2831,7 @@ public interface RobotPackage extends EPackage {
 		EClass AFFECTATION = eINSTANCE.getAffectation();
 
 		/**
-		 * The meta object literal for the '<em><b>Callvariable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Callvariable</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2857,7 +2857,7 @@ public interface RobotPackage extends EPackage {
 		EClass PRIMARY_EXPR_BOOL = eINSTANCE.getPrimaryExprBool();
 
 		/**
-		 * The meta object literal for the '<em><b>Call</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Call</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2883,7 +2883,7 @@ public interface RobotPackage extends EPackage {
 		EClass SECONDARY_EXP_BOOL = eINSTANCE.getSecondaryExpBool();
 
 		/**
-		 * The meta object literal for the '<em><b>Left</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

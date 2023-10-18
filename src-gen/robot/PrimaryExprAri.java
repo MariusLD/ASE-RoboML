@@ -11,8 +11,8 @@ package robot;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link robot.PrimaryExprAri#getCall <em>Call</em>}</li>
  *   <li>{@link robot.PrimaryExprAri#getType <em>Type</em>}</li>
+ *   <li>{@link robot.PrimaryExprAri#getCall <em>Call</em>}</li>
  * </ul>
  *
  * @see robot.RobotPackage#getPrimaryExprAri()
@@ -21,22 +21,22 @@ package robot;
  */
 public interface PrimaryExprAri extends ArithmetiqueExp {
 	/**
-	 * Returns the value of the '<em><b>Call</b></em>' reference.
+	 * Returns the value of the '<em><b>Call</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Call</em>' reference.
+	 * @return the value of the '<em>Call</em>' containment reference.
 	 * @see #setCall(Call)
 	 * @see robot.RobotPackage#getPrimaryExprAri_Call()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Call getCall();
 
 	/**
-	 * Sets the value of the '{@link robot.PrimaryExprAri#getCall <em>Call</em>}' reference.
+	 * Sets the value of the '{@link robot.PrimaryExprAri#getCall <em>Call</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Call</em>' reference.
+	 * @param value the new value of the '<em>Call</em>' containment reference.
 	 * @see #getCall()
 	 * @generated
 	 */

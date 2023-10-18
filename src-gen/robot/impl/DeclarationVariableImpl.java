@@ -4,6 +4,7 @@ package robot.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -23,8 +24,8 @@ import robot.Type;
  * </p>
  * <ul>
  *   <li>{@link robot.impl.DeclarationVariableImpl#getNom <em>Nom</em>}</li>
- *   <li>{@link robot.impl.DeclarationVariableImpl#getType <em>Type</em>}</li>
  *   <li>{@link robot.impl.DeclarationVariableImpl#getExpressionbase <em>Expressionbase</em>}</li>
+ *   <li>{@link robot.impl.DeclarationVariableImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -51,17 +52,7 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	protected String nom = NOM_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type type;
-
-	/**
-	 * The cached value of the '{@link #getExpressionbase() <em>Expressionbase</em>}' reference.
+	 * The cached value of the '{@link #getExpressionbase() <em>Expressionbase</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getExpressionbase()
@@ -69,6 +60,16 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * @ordered
 	 */
 	protected ExpressionBase expressionbase;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,15 +120,6 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 */
 	@Override
 	public Type getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject) type;
-			type = (Type) eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RobotPackage.DECLARATION_VARIABLE__TYPE,
-							oldType, type));
-			}
-		}
 		return type;
 	}
 
@@ -136,8 +128,18 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type basicGetType() {
-		return type;
+	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.DECLARATION_VARIABLE__TYPE, oldType, newType);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -147,11 +149,36 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 */
 	@Override
 	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.DECLARATION_VARIABLE__TYPE, oldType,
-					type));
+		if (newType != type) {
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject) type).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.DECLARATION_VARIABLE__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject) newType).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.DECLARATION_VARIABLE__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.DECLARATION_VARIABLE__TYPE, newType,
+					newType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE:
+			return basicSetExpressionbase(null, msgs);
+		case RobotPackage.DECLARATION_VARIABLE__TYPE:
+			return basicSetType(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -161,15 +188,6 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 */
 	@Override
 	public ExpressionBase getExpressionbase() {
-		if (expressionbase != null && expressionbase.eIsProxy()) {
-			InternalEObject oldExpressionbase = (InternalEObject) expressionbase;
-			expressionbase = (ExpressionBase) eResolveProxy(oldExpressionbase);
-			if (expressionbase != oldExpressionbase) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE, oldExpressionbase, expressionbase));
-			}
-		}
 		return expressionbase;
 	}
 
@@ -178,8 +196,18 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionBase basicGetExpressionbase() {
-		return expressionbase;
+	public NotificationChain basicSetExpressionbase(ExpressionBase newExpressionbase, NotificationChain msgs) {
+		ExpressionBase oldExpressionbase = expressionbase;
+		expressionbase = newExpressionbase;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE, oldExpressionbase, newExpressionbase);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -189,11 +217,20 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 	 */
 	@Override
 	public void setExpressionbase(ExpressionBase newExpressionbase) {
-		ExpressionBase oldExpressionbase = expressionbase;
-		expressionbase = newExpressionbase;
-		if (eNotificationRequired())
+		if (newExpressionbase != expressionbase) {
+			NotificationChain msgs = null;
+			if (expressionbase != null)
+				msgs = ((InternalEObject) expressionbase).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE, null, msgs);
+			if (newExpressionbase != null)
+				msgs = ((InternalEObject) newExpressionbase).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE, null, msgs);
+			msgs = basicSetExpressionbase(newExpressionbase, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE,
-					oldExpressionbase, expressionbase));
+					newExpressionbase, newExpressionbase));
 	}
 
 	/**
@@ -206,14 +243,10 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 		switch (featureID) {
 		case RobotPackage.DECLARATION_VARIABLE__NOM:
 			return getNom();
-		case RobotPackage.DECLARATION_VARIABLE__TYPE:
-			if (resolve)
-				return getType();
-			return basicGetType();
 		case RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE:
-			if (resolve)
-				return getExpressionbase();
-			return basicGetExpressionbase();
+			return getExpressionbase();
+		case RobotPackage.DECLARATION_VARIABLE__TYPE:
+			return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,11 +262,11 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 		case RobotPackage.DECLARATION_VARIABLE__NOM:
 			setNom((String) newValue);
 			return;
-		case RobotPackage.DECLARATION_VARIABLE__TYPE:
-			setType((Type) newValue);
-			return;
 		case RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE:
 			setExpressionbase((ExpressionBase) newValue);
+			return;
+		case RobotPackage.DECLARATION_VARIABLE__TYPE:
+			setType((Type) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -250,11 +283,11 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 		case RobotPackage.DECLARATION_VARIABLE__NOM:
 			setNom(NOM_EDEFAULT);
 			return;
-		case RobotPackage.DECLARATION_VARIABLE__TYPE:
-			setType((Type) null);
-			return;
 		case RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE:
 			setExpressionbase((ExpressionBase) null);
+			return;
+		case RobotPackage.DECLARATION_VARIABLE__TYPE:
+			setType((Type) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -270,10 +303,10 @@ public class DeclarationVariableImpl extends InstructionImpl implements Declarat
 		switch (featureID) {
 		case RobotPackage.DECLARATION_VARIABLE__NOM:
 			return NOM_EDEFAULT == null ? nom != null : !NOM_EDEFAULT.equals(nom);
-		case RobotPackage.DECLARATION_VARIABLE__TYPE:
-			return type != null;
 		case RobotPackage.DECLARATION_VARIABLE__EXPRESSIONBASE:
 			return expressionbase != null;
+		case RobotPackage.DECLARATION_VARIABLE__TYPE:
+			return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

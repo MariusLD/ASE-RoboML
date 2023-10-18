@@ -29,23 +29,13 @@ import robot.SecondaryExpBool;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robot.impl.SecondaryExpBoolImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link robot.impl.SecondaryExpBoolImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link robot.impl.SecondaryExpBoolImpl#getLeft <em>Left</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExpBool {
-	/**
-	 * The cached value of the '{@link #getLeft() <em>Left</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLeft()
-	 * @generated
-	 * @ordered
-	 */
-	protected BooleanExp left;
-
 	/**
 	 * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -55,6 +45,16 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	 * @ordered
 	 */
 	protected EList<BooleanExp> right;
+
+	/**
+	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeft()
+	 * @generated
+	 * @ordered
+	 */
+	protected BooleanExp left;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,15 +82,6 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	 */
 	@Override
 	public BooleanExp getLeft() {
-		if (left != null && left.eIsProxy()) {
-			InternalEObject oldLeft = (InternalEObject) left;
-			left = (BooleanExp) eResolveProxy(oldLeft);
-			if (left != oldLeft) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RobotPackage.SECONDARY_EXP_BOOL__LEFT,
-							oldLeft, left));
-			}
-		}
 		return left;
 	}
 
@@ -99,8 +90,18 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BooleanExp basicGetLeft() {
-		return left;
+	public NotificationChain basicSetLeft(BooleanExp newLeft, NotificationChain msgs) {
+		BooleanExp oldLeft = left;
+		left = newLeft;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.SECONDARY_EXP_BOOL__LEFT, oldLeft, newLeft);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -110,11 +111,20 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	 */
 	@Override
 	public void setLeft(BooleanExp newLeft) {
-		BooleanExp oldLeft = left;
-		left = newLeft;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.SECONDARY_EXP_BOOL__LEFT, oldLeft,
-					left));
+		if (newLeft != left) {
+			NotificationChain msgs = null;
+			if (left != null)
+				msgs = ((InternalEObject) left).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.SECONDARY_EXP_BOOL__LEFT, null, msgs);
+			if (newLeft != null)
+				msgs = ((InternalEObject) newLeft).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.SECONDARY_EXP_BOOL__LEFT, null, msgs);
+			msgs = basicSetLeft(newLeft, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.SECONDARY_EXP_BOOL__LEFT, newLeft,
+					newLeft));
 	}
 
 	/**
@@ -141,6 +151,8 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 		switch (featureID) {
 		case RobotPackage.SECONDARY_EXP_BOOL__RIGHT:
 			return ((InternalEList<?>) getRight()).basicRemove(otherEnd, msgs);
+		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
+			return basicSetLeft(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -153,12 +165,10 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
-			if (resolve)
-				return getLeft();
-			return basicGetLeft();
 		case RobotPackage.SECONDARY_EXP_BOOL__RIGHT:
 			return getRight();
+		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
+			return getLeft();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -172,12 +182,12 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
-			setLeft((BooleanExp) newValue);
-			return;
 		case RobotPackage.SECONDARY_EXP_BOOL__RIGHT:
 			getRight().clear();
 			getRight().addAll((Collection<? extends BooleanExp>) newValue);
+			return;
+		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
+			setLeft((BooleanExp) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -191,11 +201,11 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
-			setLeft((BooleanExp) null);
-			return;
 		case RobotPackage.SECONDARY_EXP_BOOL__RIGHT:
 			getRight().clear();
+			return;
+		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
+			setLeft((BooleanExp) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -209,10 +219,10 @@ public class SecondaryExpBoolImpl extends BooleanExpImpl implements SecondaryExp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
-			return left != null;
 		case RobotPackage.SECONDARY_EXP_BOOL__RIGHT:
 			return right != null && !right.isEmpty();
+		case RobotPackage.SECONDARY_EXP_BOOL__LEFT:
+			return left != null;
 		}
 		return super.eIsSet(featureID);
 	}

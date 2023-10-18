@@ -20,22 +20,22 @@ package robot;
  */
 public interface DirectionCommand extends Command {
 	/**
-	 * Returns the value of the '<em><b>Distance</b></em>' reference.
+	 * Returns the value of the '<em><b>Distance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Distance</em>' reference.
+	 * @return the value of the '<em>Distance</em>' containment reference.
 	 * @see #setDistance(Distance)
 	 * @see robot.RobotPackage#getDirectionCommand_Distance()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Distance getDistance();
 
 	/**
-	 * Sets the value of the '{@link robot.DirectionCommand#getDistance <em>Distance</em>}' reference.
+	 * Sets the value of the '{@link robot.DirectionCommand#getDistance <em>Distance</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Distance</em>' reference.
+	 * @param value the new value of the '<em>Distance</em>' containment reference.
 	 * @see #getDistance()
 	 * @generated
 	 */

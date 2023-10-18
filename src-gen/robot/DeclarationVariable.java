@@ -12,8 +12,8 @@ package robot;
  * </p>
  * <ul>
  *   <li>{@link robot.DeclarationVariable#getNom <em>Nom</em>}</li>
- *   <li>{@link robot.DeclarationVariable#getType <em>Type</em>}</li>
  *   <li>{@link robot.DeclarationVariable#getExpressionbase <em>Expressionbase</em>}</li>
+ *   <li>{@link robot.DeclarationVariable#getType <em>Type</em>}</li>
  * </ul>
  *
  * @see robot.RobotPackage#getDeclarationVariable()
@@ -44,44 +44,44 @@ public interface DeclarationVariable extends Instruction {
 	void setNom(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
+	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(Type)
 	 * @see robot.RobotPackage#getDeclarationVariable_Type()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Type getType();
 
 	/**
-	 * Sets the value of the '{@link robot.DeclarationVariable#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link robot.DeclarationVariable#getType <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @param value the new value of the '<em>Type</em>' containment reference.
 	 * @see #getType()
 	 * @generated
 	 */
 	void setType(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Expressionbase</b></em>' reference.
+	 * Returns the value of the '<em><b>Expressionbase</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expressionbase</em>' reference.
+	 * @return the value of the '<em>Expressionbase</em>' containment reference.
 	 * @see #setExpressionbase(ExpressionBase)
 	 * @see robot.RobotPackage#getDeclarationVariable_Expressionbase()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	ExpressionBase getExpressionbase();
 
 	/**
-	 * Sets the value of the '{@link robot.DeclarationVariable#getExpressionbase <em>Expressionbase</em>}' reference.
+	 * Sets the value of the '{@link robot.DeclarationVariable#getExpressionbase <em>Expressionbase</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expressionbase</em>' reference.
+	 * @param value the new value of the '<em>Expressionbase</em>' containment reference.
 	 * @see #getExpressionbase()
 	 * @generated
 	 */

@@ -60,7 +60,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	protected EList<Type> parameters;
 
 	/**
-	 * The cached value of the '{@link #getReturn() <em>Return</em>}' reference.
+	 * The cached value of the '{@link #getReturn() <em>Return</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReturn()
@@ -122,15 +122,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 */
 	@Override
 	public Type getReturn() {
-		if (return_ != null && return_.eIsProxy()) {
-			InternalEObject oldReturn = (InternalEObject) return_;
-			return_ = (Type) eResolveProxy(oldReturn);
-			if (return_ != oldReturn) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RobotPackage.FUNCTION__RETURN, oldReturn,
-							return_));
-			}
-		}
 		return return_;
 	}
 
@@ -139,8 +130,18 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type basicGetReturn() {
-		return return_;
+	public NotificationChain basicSetReturn(Type newReturn, NotificationChain msgs) {
+		Type oldReturn = return_;
+		return_ = newReturn;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.FUNCTION__RETURN, oldReturn, newReturn);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -150,10 +151,19 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 */
 	@Override
 	public void setReturn(Type newReturn) {
-		Type oldReturn = return_;
-		return_ = newReturn;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.FUNCTION__RETURN, oldReturn, return_));
+		if (newReturn != return_) {
+			NotificationChain msgs = null;
+			if (return_ != null)
+				msgs = ((InternalEObject) return_).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.FUNCTION__RETURN, null, msgs);
+			if (newReturn != null)
+				msgs = ((InternalEObject) newReturn).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.FUNCTION__RETURN, null, msgs);
+			msgs = basicSetReturn(newReturn, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.FUNCTION__RETURN, newReturn, newReturn));
 	}
 
 	/**
@@ -168,6 +178,8 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 			return ((InternalEList<?>) getInstruction()).basicRemove(otherEnd, msgs);
 		case RobotPackage.FUNCTION__PARAMETERS:
 			return ((InternalEList<?>) getParameters()).basicRemove(otherEnd, msgs);
+		case RobotPackage.FUNCTION__RETURN:
+			return basicSetReturn(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -185,9 +197,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 		case RobotPackage.FUNCTION__PARAMETERS:
 			return getParameters();
 		case RobotPackage.FUNCTION__RETURN:
-			if (resolve)
-				return getReturn();
-			return basicGetReturn();
+			return getReturn();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

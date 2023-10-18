@@ -13,8 +13,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link robot.SecondaryExpBool#getLeft <em>Left</em>}</li>
  *   <li>{@link robot.SecondaryExpBool#getRight <em>Right</em>}</li>
+ *   <li>{@link robot.SecondaryExpBool#getLeft <em>Left</em>}</li>
  * </ul>
  *
  * @see robot.RobotPackage#getSecondaryExpBool()
@@ -23,22 +23,22 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface SecondaryExpBool extends BooleanExp {
 	/**
-	 * Returns the value of the '<em><b>Left</b></em>' reference.
+	 * Returns the value of the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Left</em>' reference.
+	 * @return the value of the '<em>Left</em>' containment reference.
 	 * @see #setLeft(BooleanExp)
 	 * @see robot.RobotPackage#getSecondaryExpBool_Left()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	BooleanExp getLeft();
 
 	/**
-	 * Sets the value of the '{@link robot.SecondaryExpBool#getLeft <em>Left</em>}' reference.
+	 * Sets the value of the '{@link robot.SecondaryExpBool#getLeft <em>Left</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Left</em>' reference.
+	 * @param value the new value of the '<em>Left</em>' containment reference.
 	 * @see #getLeft()
 	 * @generated
 	 */

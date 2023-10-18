@@ -4,6 +4,7 @@ package robot.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -28,7 +29,7 @@ import robot.RobotPackage;
  */
 public class DirectionCommandImpl extends CommandImpl implements DirectionCommand {
 	/**
-	 * The cached value of the '{@link #getDistance() <em>Distance</em>}' reference.
+	 * The cached value of the '{@link #getDistance() <em>Distance</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDistance()
@@ -63,15 +64,6 @@ public class DirectionCommandImpl extends CommandImpl implements DirectionComman
 	 */
 	@Override
 	public Distance getDistance() {
-		if (distance != null && distance.eIsProxy()) {
-			InternalEObject oldDistance = (InternalEObject) distance;
-			distance = (Distance) eResolveProxy(oldDistance);
-			if (distance != oldDistance) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RobotPackage.DIRECTION_COMMAND__DISTANCE,
-							oldDistance, distance));
-			}
-		}
 		return distance;
 	}
 
@@ -80,8 +72,18 @@ public class DirectionCommandImpl extends CommandImpl implements DirectionComman
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Distance basicGetDistance() {
-		return distance;
+	public NotificationChain basicSetDistance(Distance newDistance, NotificationChain msgs) {
+		Distance oldDistance = distance;
+		distance = newDistance;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.DIRECTION_COMMAND__DISTANCE, oldDistance, newDistance);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -91,11 +93,34 @@ public class DirectionCommandImpl extends CommandImpl implements DirectionComman
 	 */
 	@Override
 	public void setDistance(Distance newDistance) {
-		Distance oldDistance = distance;
-		distance = newDistance;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.DIRECTION_COMMAND__DISTANCE, oldDistance,
-					distance));
+		if (newDistance != distance) {
+			NotificationChain msgs = null;
+			if (distance != null)
+				msgs = ((InternalEObject) distance).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.DIRECTION_COMMAND__DISTANCE, null, msgs);
+			if (newDistance != null)
+				msgs = ((InternalEObject) newDistance).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.DIRECTION_COMMAND__DISTANCE, null, msgs);
+			msgs = basicSetDistance(newDistance, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.DIRECTION_COMMAND__DISTANCE, newDistance,
+					newDistance));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case RobotPackage.DIRECTION_COMMAND__DISTANCE:
+			return basicSetDistance(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -107,9 +132,7 @@ public class DirectionCommandImpl extends CommandImpl implements DirectionComman
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case RobotPackage.DIRECTION_COMMAND__DISTANCE:
-			if (resolve)
-				return getDistance();
-			return basicGetDistance();
+			return getDistance();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

@@ -13,8 +13,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link robot.Affectation#getCallvariable <em>Callvariable</em>}</li>
  *   <li>{@link robot.Affectation#getExpressionbase <em>Expressionbase</em>}</li>
+ *   <li>{@link robot.Affectation#getCallvariable <em>Callvariable</em>}</li>
  * </ul>
  *
  * @see robot.RobotPackage#getAffectation()
@@ -23,22 +23,22 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Affectation extends ExpressionBase {
 	/**
-	 * Returns the value of the '<em><b>Callvariable</b></em>' reference.
+	 * Returns the value of the '<em><b>Callvariable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Callvariable</em>' reference.
+	 * @return the value of the '<em>Callvariable</em>' containment reference.
 	 * @see #setCallvariable(CallVariable)
 	 * @see robot.RobotPackage#getAffectation_Callvariable()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	CallVariable getCallvariable();
 
 	/**
-	 * Sets the value of the '{@link robot.Affectation#getCallvariable <em>Callvariable</em>}' reference.
+	 * Sets the value of the '{@link robot.Affectation#getCallvariable <em>Callvariable</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Callvariable</em>' reference.
+	 * @param value the new value of the '<em>Callvariable</em>' containment reference.
 	 * @see #getCallvariable()
 	 * @generated
 	 */

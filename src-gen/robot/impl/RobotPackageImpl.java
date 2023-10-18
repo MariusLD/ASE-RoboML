@@ -721,7 +721,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getPrimaryExprAri_Call() {
-		return (EReference) primaryExprAriEClass.getEStructuralFeatures().get(0);
+		return (EReference) primaryExprAriEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -731,7 +731,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getPrimaryExprAri_Type() {
-		return (EReference) primaryExprAriEClass.getEStructuralFeatures().get(1);
+		return (EReference) primaryExprAriEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -760,7 +760,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getSecondaryExpAri_Arithmetiqueexp() {
+	public EReference getSecondaryExpAri_Left() {
 		return (EReference) secondaryExpAriEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -791,7 +791,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getDeclarationVariable_Type() {
-		return (EReference) declarationVariableEClass.getEStructuralFeatures().get(1);
+		return (EReference) declarationVariableEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -801,7 +801,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getDeclarationVariable_Expressionbase() {
-		return (EReference) declarationVariableEClass.getEStructuralFeatures().get(2);
+		return (EReference) declarationVariableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -911,7 +911,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getAffectation_Callvariable() {
-		return (EReference) affectationEClass.getEStructuralFeatures().get(0);
+		return (EReference) affectationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -921,7 +921,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getAffectation_Expressionbase() {
-		return (EReference) affectationEClass.getEStructuralFeatures().get(1);
+		return (EReference) affectationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -941,7 +941,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getPrimaryExprBool_Call() {
-		return (EReference) primaryExprBoolEClass.getEStructuralFeatures().get(0);
+		return (EReference) primaryExprBoolEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -951,7 +951,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getPrimaryExprBool_Type() {
-		return (EReference) primaryExprBoolEClass.getEStructuralFeatures().get(1);
+		return (EReference) primaryExprBoolEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -971,7 +971,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getSecondaryExpBool_Left() {
-		return (EReference) secondaryExpBoolEClass.getEStructuralFeatures().get(0);
+		return (EReference) secondaryExpBoolEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -981,7 +981,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 	 */
 	@Override
 	public EReference getSecondaryExpBool_Right() {
-		return (EReference) secondaryExpBoolEClass.getEStructuralFeatures().get(1);
+		return (EReference) secondaryExpBoolEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1165,17 +1165,17 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		divEClass = createEClass(DIV);
 
 		primaryExprAriEClass = createEClass(PRIMARY_EXPR_ARI);
-		createEReference(primaryExprAriEClass, PRIMARY_EXPR_ARI__CALL);
 		createEReference(primaryExprAriEClass, PRIMARY_EXPR_ARI__TYPE);
+		createEReference(primaryExprAriEClass, PRIMARY_EXPR_ARI__CALL);
 
 		secondaryExpAriEClass = createEClass(SECONDARY_EXP_ARI);
 		createEReference(secondaryExpAriEClass, SECONDARY_EXP_ARI__RIGHT);
-		createEReference(secondaryExpAriEClass, SECONDARY_EXP_ARI__ARITHMETIQUEEXP);
+		createEReference(secondaryExpAriEClass, SECONDARY_EXP_ARI__LEFT);
 
 		declarationVariableEClass = createEClass(DECLARATION_VARIABLE);
 		createEAttribute(declarationVariableEClass, DECLARATION_VARIABLE__NOM);
-		createEReference(declarationVariableEClass, DECLARATION_VARIABLE__TYPE);
 		createEReference(declarationVariableEClass, DECLARATION_VARIABLE__EXPRESSIONBASE);
+		createEReference(declarationVariableEClass, DECLARATION_VARIABLE__TYPE);
 
 		blockEClass = createEClass(BLOCK);
 		createEReference(blockEClass, BLOCK__INSTRUCTION);
@@ -1194,16 +1194,16 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		expressionBaseEClass = createEClass(EXPRESSION_BASE);
 
 		affectationEClass = createEClass(AFFECTATION);
-		createEReference(affectationEClass, AFFECTATION__CALLVARIABLE);
 		createEReference(affectationEClass, AFFECTATION__EXPRESSIONBASE);
+		createEReference(affectationEClass, AFFECTATION__CALLVARIABLE);
 
 		primaryExprBoolEClass = createEClass(PRIMARY_EXPR_BOOL);
-		createEReference(primaryExprBoolEClass, PRIMARY_EXPR_BOOL__CALL);
 		createEReference(primaryExprBoolEClass, PRIMARY_EXPR_BOOL__TYPE);
+		createEReference(primaryExprBoolEClass, PRIMARY_EXPR_BOOL__CALL);
 
 		secondaryExpBoolEClass = createEClass(SECONDARY_EXP_BOOL);
-		createEReference(secondaryExpBoolEClass, SECONDARY_EXP_BOOL__LEFT);
 		createEReference(secondaryExpBoolEClass, SECONDARY_EXP_BOOL__RIGHT);
+		createEReference(secondaryExpBoolEClass, SECONDARY_EXP_BOOL__LEFT);
 
 		andEClass = createEClass(AND);
 
@@ -1307,7 +1307,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_Return(), this.getType(), null, "return", null, 0, 1, Function.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
 		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1323,7 +1323,7 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		initEClass(directionCommandEClass, DirectionCommand.class, "DirectionCommand", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCommand_Distance(), this.getDistance(), null, "distance", null, 1, 1,
-				DirectionCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				DirectionCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(speedCommandEClass, SpeedCommand.class, "SpeedCommand", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1369,10 +1369,10 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 
 		initEClass(primaryExprAriEClass, PrimaryExprAri.class, "PrimaryExprAri", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimaryExprAri_Call(), this.getCall(), null, "call", null, 0, 1, PrimaryExprAri.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrimaryExprAri_Type(), this.getType(), null, "type", null, 0, 1, PrimaryExprAri.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPrimaryExprAri_Call(), this.getCall(), null, "call", null, 0, 1, PrimaryExprAri.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1381,21 +1381,21 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 		initEReference(getSecondaryExpAri_Right(), this.getArithmetiqueExp(), null, "right", null, 1, -1,
 				SecondaryExpAri.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSecondaryExpAri_Arithmetiqueexp(), this.getArithmetiqueExp(), null, "arithmetiqueexp", null,
-				1, 1, SecondaryExpAri.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryExpAri_Left(), this.getArithmetiqueExp(), null, "left", null, 1, 1,
+				SecondaryExpAri.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(declarationVariableEClass, DeclarationVariable.class, "DeclarationVariable", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeclarationVariable_Nom(), ecorePackage.getEString(), "nom", null, 0, 1,
 				DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeclarationVariable_Type(), this.getType(), null, "type", null, 1, 1,
-				DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeclarationVariable_Expressionbase(), this.getExpressionBase(), null, "expressionbase", null,
-				0, 1, DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				0, 1, DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeclarationVariable_Type(), this.getType(), null, "type", null, 1, 1,
+				DeclarationVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(blockEClass, Block.class, "Block", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBlock_Instruction(), this.getInstruction(), null, "instruction", null, 0, -1, Block.class,
@@ -1422,28 +1422,28 @@ public class RobotPackageImpl extends EPackageImpl implements RobotPackage {
 
 		initEClass(affectationEClass, Affectation.class, "Affectation", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAffectation_Callvariable(), this.getCallVariable(), null, "callvariable", null, 0, 1,
-				Affectation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAffectation_Expressionbase(), this.getExpressionBase(), null, "expressionbase", null, 1, -1,
+				Affectation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAffectation_Callvariable(), this.getCallVariable(), null, "callvariable", null, 0, 1,
 				Affectation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primaryExprBoolEClass, PrimaryExprBool.class, "PrimaryExprBool", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimaryExprBool_Call(), this.getCall(), null, "call", null, 0, 1, PrimaryExprBool.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrimaryExprBool_Type(), this.getType(), null, "type", null, 0, 1, PrimaryExprBool.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPrimaryExprBool_Call(), this.getCall(), null, "call", null, 0, 1, PrimaryExprBool.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(secondaryExpBoolEClass, SecondaryExpBool.class, "SecondaryExpBool", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSecondaryExpBool_Left(), this.getBooleanExp(), null, "left", null, 1, 1,
-				SecondaryExpBool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSecondaryExpBool_Right(), this.getBooleanExp(), null, "right", null, 1, -1,
+				SecondaryExpBool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryExpBool_Left(), this.getBooleanExp(), null, "left", null, 1, 1,
 				SecondaryExpBool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link robot.SecondaryExpAri#getRight <em>Right</em>}</li>
- *   <li>{@link robot.SecondaryExpAri#getArithmetiqueexp <em>Arithmetiqueexp</em>}</li>
+ *   <li>{@link robot.SecondaryExpAri#getLeft <em>Left</em>}</li>
  * </ul>
  *
  * @see robot.RobotPackage#getSecondaryExpAri()
@@ -35,25 +35,25 @@ public interface SecondaryExpAri extends ArithmetiqueExp {
 	EList<ArithmetiqueExp> getRight();
 
 	/**
-	 * Returns the value of the '<em><b>Arithmetiqueexp</b></em>' reference.
+	 * Returns the value of the '<em><b>Left</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arithmetiqueexp</em>' reference.
-	 * @see #setArithmetiqueexp(ArithmetiqueExp)
-	 * @see robot.RobotPackage#getSecondaryExpAri_Arithmetiqueexp()
-	 * @model required="true"
+	 * @return the value of the '<em>Left</em>' containment reference.
+	 * @see #setLeft(ArithmetiqueExp)
+	 * @see robot.RobotPackage#getSecondaryExpAri_Left()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ArithmetiqueExp getArithmetiqueexp();
+	ArithmetiqueExp getLeft();
 
 	/**
-	 * Sets the value of the '{@link robot.SecondaryExpAri#getArithmetiqueexp <em>Arithmetiqueexp</em>}' reference.
+	 * Sets the value of the '{@link robot.SecondaryExpAri#getLeft <em>Left</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Arithmetiqueexp</em>' reference.
-	 * @see #getArithmetiqueexp()
+	 * @param value the new value of the '<em>Left</em>' containment reference.
+	 * @see #getLeft()
 	 * @generated
 	 */
-	void setArithmetiqueexp(ArithmetiqueExp value);
+	void setLeft(ArithmetiqueExp value);
 
 } // SecondaryExpAri

@@ -23,23 +23,13 @@ import robot.Type;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robot.impl.PrimaryExprAriImpl#getCall <em>Call</em>}</li>
  *   <li>{@link robot.impl.PrimaryExprAriImpl#getType <em>Type</em>}</li>
+ *   <li>{@link robot.impl.PrimaryExprAriImpl#getCall <em>Call</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryExprAri {
-	/**
-	 * The cached value of the '{@link #getCall() <em>Call</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCall()
-	 * @generated
-	 * @ordered
-	 */
-	protected Call call;
-
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -49,6 +39,16 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 * @ordered
 	 */
 	protected Type type;
+
+	/**
+	 * The cached value of the '{@link #getCall() <em>Call</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected Call call;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,15 +76,6 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 */
 	@Override
 	public Call getCall() {
-		if (call != null && call.eIsProxy()) {
-			InternalEObject oldCall = (InternalEObject) call;
-			call = (Call) eResolveProxy(oldCall);
-			if (call != oldCall) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RobotPackage.PRIMARY_EXPR_ARI__CALL,
-							oldCall, call));
-			}
-		}
 		return call;
 	}
 
@@ -93,8 +84,18 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Call basicGetCall() {
-		return call;
+	public NotificationChain basicSetCall(Call newCall, NotificationChain msgs) {
+		Call oldCall = call;
+		call = newCall;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotPackage.PRIMARY_EXPR_ARI__CALL, oldCall, newCall);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -104,10 +105,20 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 */
 	@Override
 	public void setCall(Call newCall) {
-		Call oldCall = call;
-		call = newCall;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.PRIMARY_EXPR_ARI__CALL, oldCall, call));
+		if (newCall != call) {
+			NotificationChain msgs = null;
+			if (call != null)
+				msgs = ((InternalEObject) call).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.PRIMARY_EXPR_ARI__CALL, null, msgs);
+			if (newCall != null)
+				msgs = ((InternalEObject) newCall).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotPackage.PRIMARY_EXPR_ARI__CALL, null, msgs);
+			msgs = basicSetCall(newCall, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotPackage.PRIMARY_EXPR_ARI__CALL, newCall,
+					newCall));
 	}
 
 	/**
@@ -172,6 +183,8 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 		switch (featureID) {
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
 			return basicSetType(null, msgs);
+		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
+			return basicSetCall(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,12 +197,10 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
-			if (resolve)
-				return getCall();
-			return basicGetCall();
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
 			return getType();
+		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
+			return getCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,11 +213,11 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
-			setCall((Call) newValue);
-			return;
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
 			setType((Type) newValue);
+			return;
+		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
+			setCall((Call) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,11 +231,11 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
-			setCall((Call) null);
-			return;
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
 			setType((Type) null);
+			return;
+		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
+			setCall((Call) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -238,10 +249,10 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
-			return call != null;
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
 			return type != null;
+		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
+			return call != null;
 		}
 		return super.eIsSet(featureID);
 	}

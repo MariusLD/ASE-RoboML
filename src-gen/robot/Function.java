@@ -50,22 +50,22 @@ public interface Function extends EObject {
 	EList<Type> getParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Return</b></em>' reference.
+	 * Returns the value of the '<em><b>Return</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Return</em>' reference.
+	 * @return the value of the '<em>Return</em>' containment reference.
 	 * @see #setReturn(Type)
 	 * @see robot.RobotPackage#getFunction_Return()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Type getReturn();
 
 	/**
-	 * Sets the value of the '{@link robot.Function#getReturn <em>Return</em>}' reference.
+	 * Sets the value of the '{@link robot.Function#getReturn <em>Return</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Return</em>' reference.
+	 * @param value the new value of the '<em>Return</em>' containment reference.
 	 * @see #getReturn()
 	 * @generated
 	 */

@@ -1,32 +1,73 @@
 grammar Robot
 import 'Terminals'
 import 'robot-types'
-entry Affectation returns Affectation:
-    'Affectation' '{' 'expressionbase' '{' expressionbase+=ExpressionBase  ("," expressionbase+=ExpressionBase  )* '}' ('callvariable' callvariable=CallVariable  )? '}'  
+
+entry Robot returns Robot:
+    {Robot} 'Robot' '{' ('function' '{' function+=Function  ("," function+=Function  )* '}' )? '}'  
 ;
 
-ExpressionBase returns ExpressionBase:
-    ArithmetiqueExp_Impl | BooleanExp_Impl | Plus | Minus | Mult | Div | PrimaryExprAri | SecondaryExpAri_Impl | CallVariable | CallFunction | Affectation | PrimaryExprBool | SecondaryExpBool_Impl | And | Or | Not | Equals 
-;
-
-ArithmetiqueExp returns ArithmetiqueExp:
-    ArithmetiqueExp_Impl | Plus | Minus | Mult | Div | PrimaryExprAri | SecondaryExpAri_Impl 
+Instruction returns Instruction:
+    Instruction_Impl | RotateCommand | DirectionCommand | SpeedCommand | ReadSensorCommand_Impl | DistanceSensorCommand | TimeSensorCommand | ArithmetiqueExp_Impl | BooleanExp_Impl | Plus | Minus | Mult | Div | PrimaryExprAri | SecondaryExpAri_Impl | DeclarationVariable | LOOP | IF | CallVariable | CallFunction | Affectation | PrimaryExprBool | SecondaryExpBool_Impl | And | Or | Not | Equals | ELSE 
 ;
 
 TypeClass returns TypeClass:
     CM | mm | BooleanType | NumberType 
 ;
 
+Distance returns Distance:
+    CM | mm 
+;
+
+ArithmetiqueExp returns ArithmetiqueExp:
+    ArithmetiqueExp_Impl | Plus | Minus | Mult | Div | PrimaryExprAri | SecondaryExpAri_Impl 
+;
+
 Call returns Call:
     CallVariable | CallFunction 
+;
+
+ExpressionBase returns ExpressionBase:
+    ArithmetiqueExp_Impl | BooleanExp_Impl | Plus | Minus | Mult | Div | PrimaryExprAri | SecondaryExpAri_Impl | CallVariable | CallFunction | Affectation | PrimaryExprBool | SecondaryExpBool_Impl | And | Or | Not | Equals 
+;
+
+Expression returns Expression:
+    ArithmetiqueExp_Impl | BooleanExp_Impl | Plus | Minus | Mult | Div | PrimaryExprAri | SecondaryExpAri_Impl | PrimaryExprBool | SecondaryExpBool_Impl | And | Or | Not | Equals 
 ;
 
 BooleanExp returns BooleanExp:
     BooleanExp_Impl | PrimaryExprBool | SecondaryExpBool_Impl | And | Or | Not | Equals 
 ;
 
-CallVariable returns CallVariable:
-    {CallVariable} 'CallVariable'  
+Function returns Function:
+    {Function} 'Function' '{' ('instruction' '{' instruction+=Instruction  ("," instruction+=Instruction  )* '}' )? ('parameters' '{' parameters+=TypeClass  ("," parameters+=TypeClass  )* '}' )? ('return' return=TypeClass  )? '}'  
+;
+
+Instruction_Impl returns Instruction:
+    {Instruction} 'Instruction'  
+;
+
+RotateCommand returns RotateCommand:
+    {RotateCommand} 'RotateCommand' '{' ('angle' angle=EDouble  )? '}'  
+;
+
+DirectionCommand returns DirectionCommand:
+    'DirectionCommand' '{' 'distance' distance=Distance  '}'  
+;
+
+SpeedCommand returns SpeedCommand:
+    {SpeedCommand} 'SpeedCommand' '{' ('speed' speed=EDouble  )? '}'  
+;
+
+ReadSensorCommand_Impl returns ReadSensorCommand:
+    {ReadSensorCommand} 'ReadSensorCommand'  
+;
+
+DistanceSensorCommand returns DistanceSensorCommand:
+    {DistanceSensorCommand} 'DistanceSensorCommand'  
+;
+
+TimeSensorCommand returns TimeSensorCommand:
+    {TimeSensorCommand} 'TimeSensorCommand'  
 ;
 
 ArithmetiqueExp_Impl returns ArithmetiqueExp:
@@ -61,8 +102,28 @@ SecondaryExpAri_Impl returns SecondaryExpAri:
     'SecondaryExpAri' '{' 'right' '{' right+=ArithmetiqueExp  ("," right+=ArithmetiqueExp  )* '}' 'left' left=ArithmetiqueExp  '}'  
 ;
 
+DeclarationVariable returns DeclarationVariable:
+    'DeclarationVariable' '{' ('nom' nom=EString  )? ('expressionbase' expressionbase=ExpressionBase  )? 'type' ^type=TypeClass  '}'  
+;
+
+LOOP returns LOOP:
+    'LOOP' '{' ('instruction' '{' instruction+=Instruction  ("," instruction+=Instruction  )* '}' )? 'expression' expression=Expression  '}'  
+;
+
+IF returns IF:
+    'IF' '{' ('instruction' '{' instruction+=Instruction  ("," instruction+=Instruction  )* '}' )? 'expression' expression=Expression  '}'  
+;
+
+CallVariable returns CallVariable:
+    {CallVariable} 'CallVariable'  
+;
+
 CallFunction returns CallFunction:
     {CallFunction} 'CallFunction'  
+;
+
+Affectation returns Affectation:
+    'Affectation' '{' 'expressionbase' '{' expressionbase+=ExpressionBase  ("," expressionbase+=ExpressionBase  )* '}' ('callvariable' callvariable=CallVariable  )? '}'  
 ;
 
 PrimaryExprBool returns PrimaryExprBool:
@@ -89,6 +150,14 @@ Equals returns Equals:
     'Equals' '{' 'right' '{' right+=BooleanExp  ("," right+=BooleanExp  )* '}' 'left' left=BooleanExp  '}'  
 ;
 
+ELSE returns ELSE:
+    'ELSE' '{' ('instruction' '{' instruction+=Instruction  ("," instruction+=Instruction  )* '}' )? 'expression' expression=Expression  '}'  
+;
+
+EDouble returns number:
+    '-'? INT? '.' INT (('E' | 'e' )'-'? INT )?  
+;
+
 CM returns CM:
     {CM} 'CM' '{' ('distance' distance=EDouble  )? '}'  
 ;
@@ -97,16 +166,16 @@ mm returns mm:
     {mm} 'mm' '{' ('distance' distance=EDouble  )? '}'  
 ;
 
+EString returns string:
+    STRING | ID 
+;
+
 BooleanType returns BooleanType:
     {BooleanType} (value?='value' )? 'BooleanType'  
 ;
 
 NumberType returns NumberType:
     {NumberType} 'NumberType' '{' ('value' value=EDouble  )? '}'  
-;
-
-EDouble returns number:
-    '-'? INT? '.' INT (('E' | 'e' )'-'? INT )?  
 ;
 
 EBoolean returns boolean:

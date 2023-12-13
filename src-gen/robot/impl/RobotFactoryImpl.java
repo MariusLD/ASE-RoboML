@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import robot.*;
 import robot.Affectation;
 import robot.And;
 import robot.ArithmetiqueExp;
@@ -153,10 +152,10 @@ public class RobotFactoryImpl extends EFactoryImpl implements RobotFactory {
 			return createNot();
 		case RobotPackage.EQUALS:
 			return createEquals();
-		case RobotPackage.BOOLEAN_TYPE:
-			return createBooleanType();
-		case RobotPackage.NUMBER_TYPE:
-			return createNumberType();
+		case RobotPackage.BOOLEAN:
+			return createBoolean();
+		case RobotPackage.NUMBER:
+			return createNumber();
 		case RobotPackage.ELSE:
 			return createELSE();
 		default:
@@ -541,9 +540,9 @@ public class RobotFactoryImpl extends EFactoryImpl implements RobotFactory {
 	 * @generated
 	 */
 	@Override
-	public BooleanType createBooleanType() {
-		BooleanTypeImpl booleanType = new BooleanTypeImpl();
-		return booleanType;
+	public robot.Boolean createBoolean() {
+		BooleanImpl boolean_ = new BooleanImpl();
+		return boolean_;
 	}
 
 	/**
@@ -552,9 +551,9 @@ public class RobotFactoryImpl extends EFactoryImpl implements RobotFactory {
 	 * @generated
 	 */
 	@Override
-	public NumberType createNumberType() {
-		NumberTypeImpl numberType = new NumberTypeImpl();
-		return numberType;
+	public robot.Number createNumber() {
+		NumberImpl number = new NumberImpl();
+		return number;
 	}
 
 	/**

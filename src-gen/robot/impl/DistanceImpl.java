@@ -24,7 +24,7 @@ import robot.RobotPackage;
  *
  * @generated
  */
-public abstract class DistanceImpl extends TypeClassImpl implements Distance {
+public abstract class DistanceImpl extends TypeImpl implements Distance {
 	/**
 	 * The default value of the '{@link #getDistance() <em>Distance</em>}' attribute.
 	 * <!-- begin-user-doc -->

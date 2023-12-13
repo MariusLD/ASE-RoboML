@@ -47,12 +47,12 @@ public interface PrimaryExprAri extends ArithmetiqueExp {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypeClass)
+	 * @see #setType(Type)
 	 * @see robot.RobotPackage#getPrimaryExprAri_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TypeClass getType();
+	Type getType();
 
 	/**
 	 * Sets the value of the '{@link robot.PrimaryExprAri#getType <em>Type</em>}' containment reference.
@@ -62,6 +62,6 @@ public interface PrimaryExprAri extends ArithmetiqueExp {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(TypeClass value);
+	void setType(Type value);
 
 } // PrimaryExprAri

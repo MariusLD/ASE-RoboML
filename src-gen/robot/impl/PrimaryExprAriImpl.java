@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import robot.Call;
 import robot.PrimaryExprAri;
 import robot.RobotPackage;
-import robot.TypeClass;
+import robot.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeClass type;
+	protected Type type;
 
 	/**
 	 * The cached value of the '{@link #getCall() <em>Call</em>}' containment reference.
@@ -127,7 +127,7 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 * @generated
 	 */
 	@Override
-	public TypeClass getType() {
+	public Type getType() {
 		return type;
 	}
 
@@ -136,8 +136,8 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypeClass newType, NotificationChain msgs) {
-		TypeClass oldType = type;
+	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
+		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -156,7 +156,7 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	 * @generated
 	 */
 	@Override
-	public void setType(TypeClass newType) {
+	public void setType(Type newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -214,7 +214,7 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
-			setType((TypeClass) newValue);
+			setType((Type) newValue);
 			return;
 		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
 			setCall((Call) newValue);
@@ -232,7 +232,7 @@ public class PrimaryExprAriImpl extends ArithmetiqueExpImpl implements PrimaryEx
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case RobotPackage.PRIMARY_EXPR_ARI__TYPE:
-			setType((TypeClass) null);
+			setType((Type) null);
 			return;
 		case RobotPackage.PRIMARY_EXPR_ARI__CALL:
 			setCall((Call) null);

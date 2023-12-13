@@ -1,12 +1,19 @@
 
 interface Robot {
-	function: Function[]
+	function: FunctionN[]
 }
 
-interface Function {
+interface FunctionN {
+	name: string
 	instruction: Instruction[]
-	parameters: TypeClass[]
+	parameters: Parameter[]
 	return?: TypeClass
+	returnedValue?: ExpressionBase
+}
+
+interface Parameter {
+	name: string
+	^type: TypeClass
 }
 
 interface Instruction {
@@ -16,10 +23,37 @@ interface TypeClass {
 }
 
 interface Distance extends TypeClass {
-	distance?: number
 }
 
-interface ArithmetiqueExp extends Expression {
+interface Time extends TypeClass {
+}
+
+interface DistanceExpression {
+	number: NumberType
+	unit: Distance
+}
+
+interface TimeExpression {
+	number: NumberType
+	unit: Time
+}
+
+interface PlusMinus extends Expression {
+}
+
+interface MultDiv extends Expression {
+}
+
+interface PlusMinusDistance extends Expression {
+}
+
+interface MultDivDistance extends Expression {
+}
+
+interface PlusMinusTime extends Expression {
+}
+
+interface MultDivTime extends Expression {
 }
 
 interface Expression extends ExpressionBase {
@@ -42,11 +76,11 @@ interface Command extends Instruction {
 }
 
 interface DirectionCommand extends Command {
-	distance: Distance
+	distance: DistanceExpression
 }
 
 interface SpeedCommand extends Command {
-	speed?: number
+	speed?: DistanceExpression
 }
 
 interface ReadSensorCommand extends Command {
@@ -58,24 +92,12 @@ interface DistanceSensorCommand extends ReadSensorCommand {
 interface TimeSensorCommand extends ReadSensorCommand {
 }
 
-interface Plus extends SecondaryExpAri {
+interface PrimaryExprAri extends Expression {
+	^type?: TypeClass
+	call?: Call
 }
 
-interface SecondaryExpAri extends ArithmetiqueExp {
-	right: ArithmetiqueExp[]
-	left: ArithmetiqueExp
-}
-
-interface Minus extends SecondaryExpAri {
-}
-
-interface Mult extends SecondaryExpAri {
-}
-
-interface Div extends SecondaryExpAri {
-}
-
-interface PrimaryExprAri extends ArithmetiqueExp {
+interface PrimaryExprDistance extends Expression {
 	^type?: TypeClass
 	call?: Call
 }
@@ -98,9 +120,12 @@ interface IF extends Block {
 }
 
 interface CallVariable extends Call {
+	nom: string
 }
 
 interface CallFunction extends Call {
+	nom: string
+	parameters: ExpressionBase[]
 }
 
 interface Affectation extends ExpressionBase {
@@ -113,21 +138,16 @@ interface PrimaryExprBool extends BooleanExp {
 	call?: Call
 }
 
-interface SecondaryExpBool extends BooleanExp {
-	right: BooleanExp[]
-	left: BooleanExp
+interface And extends Expression {
 }
 
-interface And extends SecondaryExpBool {
+interface Or extends Expression {
 }
 
-interface Or extends SecondaryExpBool {
+interface Not extends Expression {
 }
 
-interface Not extends SecondaryExpBool {
-}
-
-interface Equals extends SecondaryExpBool {
+interface Equals extends Expression {
 }
 
 interface ELSE extends Block {
@@ -136,7 +156,7 @@ interface ELSE extends Block {
 interface CM extends Distance {
 }
 
-interface mm extends Distance {
+interface Mm extends Distance {
 }
 
 interface BooleanType extends TypeClass {
@@ -144,6 +164,6 @@ interface BooleanType extends TypeClass {
 }
 
 interface NumberType extends TypeClass {
-	value?: number
+	value: number
 }
 

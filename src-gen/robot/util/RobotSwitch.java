@@ -7,7 +7,46 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import robot.*;
+import robot.Affectation;
+import robot.And;
+import robot.ArithmetiqueExp;
+import robot.Block;
+import robot.BooleanExp;
+import robot.CM;
+import robot.Call;
+import robot.CallFunction;
+import robot.CallVariable;
+import robot.Command;
+import robot.DeclarationVariable;
+import robot.DirectionCommand;
+import robot.Distance;
+import robot.DistanceSensorCommand;
+import robot.Div;
+import robot.ELSE;
+import robot.Equals;
+import robot.Expression;
+import robot.ExpressionBase;
+import robot.Function;
+import robot.IF;
+import robot.Instruction;
+import robot.LOOP;
+import robot.Minus;
+import robot.Mult;
+import robot.Not;
+import robot.Or;
+import robot.Plus;
+import robot.PrimaryExprAri;
+import robot.PrimaryExprBool;
+import robot.ReadSensorCommand;
+import robot.Robot;
+import robot.RobotPackage;
+import robot.RotateCommand;
+import robot.SecondaryExpAri;
+import robot.SecondaryExpBool;
+import robot.SpeedCommand;
+import robot.TimeSensorCommand;
+import robot.Type;
+import robot.mm;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,9 +168,9 @@ public class RobotSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotPackage.TYPE_CLASS: {
-			TypeClass typeClass = (TypeClass) theEObject;
-			T result = caseTypeClass(typeClass);
+		case RobotPackage.TYPE: {
+			Type type = (Type) theEObject;
+			T result = caseType(type);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -140,7 +179,7 @@ public class RobotSwitch<T> extends Switch<T> {
 			Distance distance = (Distance) theEObject;
 			T result = caseDistance(distance);
 			if (result == null)
-				result = caseTypeClass(distance);
+				result = caseType(distance);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -151,7 +190,7 @@ public class RobotSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseDistance(cm);
 			if (result == null)
-				result = caseTypeClass(cm);
+				result = caseType(cm);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -162,7 +201,7 @@ public class RobotSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseDistance(mm);
 			if (result == null)
-				result = caseTypeClass(mm);
+				result = caseType(mm);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -534,20 +573,20 @@ public class RobotSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotPackage.BOOLEAN_TYPE: {
-			BooleanType booleanType = (BooleanType) theEObject;
-			T result = caseBooleanType(booleanType);
+		case RobotPackage.BOOLEAN: {
+			robot.Boolean boolean_ = (robot.Boolean) theEObject;
+			T result = caseBoolean(boolean_);
 			if (result == null)
-				result = caseTypeClass(booleanType);
+				result = caseType(boolean_);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotPackage.NUMBER_TYPE: {
-			NumberType numberType = (NumberType) theEObject;
-			T result = caseNumberType(numberType);
+		case RobotPackage.NUMBER: {
+			robot.Number number = (robot.Number) theEObject;
+			T result = caseNumber(number);
 			if (result == null)
-				result = caseTypeClass(numberType);
+				result = caseType(number);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -674,17 +713,17 @@ public class RobotSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Class</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Class</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeClass(TypeClass object) {
+	public T caseType(Type object) {
 		return null;
 	}
 
@@ -1139,32 +1178,32 @@ public class RobotSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBooleanType(BooleanType object) {
+	public T caseBoolean(robot.Boolean object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Number Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Number</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Number Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Number</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNumberType(NumberType object) {
+	public T caseNumber(robot.Number object) {
 		return null;
 	}
 

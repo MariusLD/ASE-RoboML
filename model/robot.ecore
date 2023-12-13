@@ -9,8 +9,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instruction" upperBound="-1"
         eType="#//Instruction" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//TypeClass" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="return" eType="#//TypeClass"
+        eType="#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="return" eType="#//Type"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instruction"/>
@@ -26,8 +26,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Direction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeClass" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Distance" abstract="true" eSuperTypes="#//TypeClass">
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Distance" abstract="true" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CM" eSuperTypes="#//Distance"/>
@@ -43,8 +43,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="#//SecondaryExpAri"/>
   <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//SecondaryExpAri"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimaryExprAri" eSuperTypes="#//ArithmetiqueExp">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeClass"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="call" eType="#//Call" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecondaryExpAri" eSuperTypes="#//ArithmetiqueExp">
@@ -57,7 +56,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressionbase" eType="#//ExpressionBase"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//TypeClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Type"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Block" abstract="true" eSuperTypes="#//Instruction">
@@ -79,8 +78,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimaryExprBool" eSuperTypes="#//BooleanExp">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeClass"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="call" eType="#//Call" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecondaryExpBool" eSuperTypes="#//BooleanExp">
@@ -93,10 +91,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//SecondaryExpBool"/>
   <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//SecondaryExpBool"/>
   <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="#//SecondaryExpBool"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//TypeClass">
+  <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NumberType" eSuperTypes="#//TypeClass">
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELSE" eSuperTypes="#//Block"/>

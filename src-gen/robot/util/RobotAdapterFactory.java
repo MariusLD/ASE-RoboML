@@ -9,7 +9,46 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import robot.*;
+import robot.Affectation;
+import robot.And;
+import robot.ArithmetiqueExp;
+import robot.Block;
+import robot.BooleanExp;
+import robot.CM;
+import robot.Call;
+import robot.CallFunction;
+import robot.CallVariable;
+import robot.Command;
+import robot.DeclarationVariable;
+import robot.DirectionCommand;
+import robot.Distance;
+import robot.DistanceSensorCommand;
+import robot.Div;
+import robot.ELSE;
+import robot.Equals;
+import robot.Expression;
+import robot.ExpressionBase;
+import robot.Function;
+import robot.IF;
+import robot.Instruction;
+import robot.LOOP;
+import robot.Minus;
+import robot.Mult;
+import robot.Not;
+import robot.Or;
+import robot.Plus;
+import robot.PrimaryExprAri;
+import robot.PrimaryExprBool;
+import robot.ReadSensorCommand;
+import robot.Robot;
+import robot.RobotPackage;
+import robot.RotateCommand;
+import robot.SecondaryExpAri;
+import robot.SecondaryExpBool;
+import robot.SpeedCommand;
+import robot.TimeSensorCommand;
+import robot.Type;
+import robot.mm;
 
 /**
  * <!-- begin-user-doc -->
@@ -102,8 +141,8 @@ public class RobotAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseTypeClass(TypeClass object) {
-			return createTypeClassAdapter();
+		public Adapter caseType(Type object) {
+			return createTypeAdapter();
 		}
 
 		@Override
@@ -257,13 +296,13 @@ public class RobotAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseBooleanType(BooleanType object) {
-			return createBooleanTypeAdapter();
+		public Adapter caseBoolean(robot.Boolean object) {
+			return createBooleanAdapter();
 		}
 
 		@Override
-		public Adapter caseNumberType(NumberType object) {
-			return createNumberTypeAdapter();
+		public Adapter caseNumber(robot.Number object) {
+			return createNumberAdapter();
 		}
 
 		@Override
@@ -389,16 +428,16 @@ public class RobotAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robot.TypeClass <em>Type Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link robot.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robot.TypeClass
+	 * @see robot.Type
 	 * @generated
 	 */
-	public Adapter createTypeClassAdapter() {
+	public Adapter createTypeAdapter() {
 		return null;
 	}
 
@@ -823,30 +862,30 @@ public class RobotAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robot.BooleanType <em>Boolean Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link robot.Boolean <em>Boolean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robot.BooleanType
+	 * @see robot.Boolean
 	 * @generated
 	 */
-	public Adapter createBooleanTypeAdapter() {
+	public Adapter createBooleanAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robot.NumberType <em>Number Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link robot.Number <em>Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robot.NumberType
+	 * @see robot.Number
 	 * @generated
 	 */
-	public Adapter createNumberTypeAdapter() {
+	public Adapter createNumberAdapter() {
 		return null;
 	}
 

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import robot.Function;
 import robot.Instruction;
 import robot.RobotPackage;
-import robot.TypeClass;
+import robot.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeClass> parameters;
+	protected EList<Type> parameters;
 
 	/**
 	 * The cached value of the '{@link #getReturn() <em>Return</em>}' containment reference.
@@ -67,7 +67,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeClass return_;
+	protected Type return_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,10 +108,9 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * @generated
 	 */
 	@Override
-	public EList<TypeClass> getParameters() {
+	public EList<Type> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<TypeClass>(TypeClass.class, this,
-					RobotPackage.FUNCTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<Type>(Type.class, this, RobotPackage.FUNCTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -122,7 +121,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * @generated
 	 */
 	@Override
-	public TypeClass getReturn() {
+	public Type getReturn() {
 		return return_;
 	}
 
@@ -131,8 +130,8 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetReturn(TypeClass newReturn, NotificationChain msgs) {
-		TypeClass oldReturn = return_;
+	public NotificationChain basicSetReturn(Type newReturn, NotificationChain msgs) {
+		Type oldReturn = return_;
 		return_ = newReturn;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -151,7 +150,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * @generated
 	 */
 	@Override
-	public void setReturn(TypeClass newReturn) {
+	public void setReturn(Type newReturn) {
 		if (newReturn != return_) {
 			NotificationChain msgs = null;
 			if (return_ != null)
@@ -218,10 +217,10 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 			return;
 		case RobotPackage.FUNCTION__PARAMETERS:
 			getParameters().clear();
-			getParameters().addAll((Collection<? extends TypeClass>) newValue);
+			getParameters().addAll((Collection<? extends Type>) newValue);
 			return;
 		case RobotPackage.FUNCTION__RETURN:
-			setReturn((TypeClass) newValue);
+			setReturn((Type) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -242,7 +241,7 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 			getParameters().clear();
 			return;
 		case RobotPackage.FUNCTION__RETURN:
-			setReturn((TypeClass) null);
+			setReturn((Type) null);
 			return;
 		}
 		super.eUnset(featureID);

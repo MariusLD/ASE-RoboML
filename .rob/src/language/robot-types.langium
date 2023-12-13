@@ -1,6 +1,6 @@
 
 interface Robot {
-	function: FunctionN[]
+	functions: FunctionN[]
 }
 
 interface FunctionN {
@@ -9,11 +9,6 @@ interface FunctionN {
 	parameters: Parameter[]
 	return?: TypeClass
 	returnedValue?: ExpressionBase
-}
-
-interface Parameter {
-	name: string
-	^type: TypeClass
 }
 
 interface Instruction {
@@ -26,6 +21,11 @@ interface Distance extends TypeClass {
 }
 
 interface Time extends TypeClass {
+}
+
+interface Parameter {
+	type: TypeClass
+	nom: string
 }
 
 interface DistanceExpression {
@@ -60,6 +60,7 @@ interface Expression extends ExpressionBase {
 }
 
 interface ExpressionBase extends Instruction {
+	className: TypeClass
 }
 
 interface Call extends ExpressionBase {
@@ -103,8 +104,8 @@ interface PrimaryExprDistance extends Expression {
 }
 
 interface DeclarationVariable extends Instruction {
-	nom?: string
-	expressionbase?: ExpressionBase
+	nom: string
+	expressionbase: ExpressionBase
 	^type: TypeClass
 }
 
@@ -148,9 +149,6 @@ interface Not extends Expression {
 }
 
 interface Equals extends Expression {
-}
-
-interface ELSE extends Block {
 }
 
 interface CM extends Distance {

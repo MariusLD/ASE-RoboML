@@ -1,15 +1,16 @@
 
-/*import chalk from 'chalk';
+import chalk from 'chalk';
 import { Command } from 'commander';
 import { RobotLanguageMetaData } from '../language/generated/module.js';
 import { createRobotServices } from '../language/robot-module.js';
 import { extractAstNode } from './cli-util.js';
 import { generateJavaScript } from './generator.js';
 import { NodeFileSystem } from 'langium/node';
+import { Robot } from '../language/generated/ast.js';
 
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
     const services = createRobotServices(NodeFileSystem).Robot;
-    const model = await extractAstNode<Model>(fileName, services);
+    const model = await extractAstNode<Robot>(fileName, services);
     const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
     console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
 };
@@ -34,4 +35,4 @@ export default function(): void {
         .action(generateAction);
 
     program.parse(process.argv);
-}*/
+}

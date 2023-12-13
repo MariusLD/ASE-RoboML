@@ -3,7 +3,7 @@ import 'Terminals'
 import 'robot-types'
 
 entry Robot returns Robot:
-    {Robot} 'Robot' '{' ( function+=FunctionN ( function+=FunctionN )* )? '}'
+    {Robot} 'Robot' '{' ( functions+=FunctionN ( functions+=FunctionN )* )? '}'
 ;
 
 Instruction returns Instruction:
@@ -11,19 +11,19 @@ Instruction returns Instruction:
 ;
 
 Block returns Block:
-    LOOP | IF | ELSE
+    LOOP | IF
 ;
 
 TypeClass returns TypeClass:
-    {TypeClass} 'boolean' | 'distance' | 'time' | 'number' | 'void' 
+    {TypeClass} 'boolean' | 'distance' | 'time' | 'number' | 'void'
 ;
 
 Distance returns Distance:
-    {TypeClass} 'cm' | 'mm'
+    {Distance} 'cm' | 'mm'
 ;
 
 Time returns Time:
-    {TypeClass} 's'
+    {Time} 's'
 ;
 
 Call returns Call:
@@ -31,7 +31,7 @@ Call returns Call:
 ;
 
 ExpressionBase returns ExpressionBase:
-    Expression | Call | Affectation | DistanceExpression | TimeExpression | BooleanType | NumberType | ReadSensorCommand
+    className=TypeClass (Expression | Call | Affectation | DistanceExpression | TimeExpression | BooleanType | NumberType | ReadSensorCommand)
 ;
 
 Expression returns Expression:
@@ -47,7 +47,7 @@ FunctionN returns FunctionN:
 ;
 
 Parameter returns Parameter:
-    {Parameter} ^type=TypeClass name=EString 
+    {Parameter} type=TypeClass nom=EString
 ;
 
 RotateCommand returns RotateCommand:
@@ -107,7 +107,7 @@ LOOP returns LOOP:
 ;
 
 IF returns IF:
-    'IF' '(' expression=Expression ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}' 
+    'IF' '(' expression=Expression ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}' ('ELSE' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}')?
 ;
 
 CallVariable returns CallVariable:
@@ -140,10 +140,6 @@ Not returns Not:
 
 Equals returns Equals:
     '(' Or ')' ('==' | '!=') '(' Or ')'
-;
-
-ELSE returns ELSE:
-    IF 'ELSE' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}'
 ;
 
 EDouble returns number:

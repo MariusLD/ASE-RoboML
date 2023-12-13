@@ -1,4 +1,4 @@
-/*import type { AstNode, LangiumDocument, LangiumServices } from 'langium';
+import type { AstNode, LangiumDocument, LangiumServices } from 'langium';
 import chalk from 'chalk';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
@@ -48,4 +48,4 @@ export function extractDestinationAndName(filePath: string, destination: string 
         destination: destination ?? path.join(path.dirname(filePath), 'generated'),
         name: path.basename(filePath)
     };
-}*/
+}

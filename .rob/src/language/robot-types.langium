@@ -57,10 +57,11 @@ interface MultDivTime extends Expression {
 }
 
 interface Expression extends ExpressionBase {
+	expr1: Expression
+	expr2: Expression
 }
 
 interface ExpressionBase extends Instruction {
-	className: TypeClass
 }
 
 interface Call extends ExpressionBase {
@@ -95,12 +96,17 @@ interface TimeSensorCommand extends ReadSensorCommand {
 
 interface PrimaryExprAri extends Expression {
 	^type?: TypeClass
-	call?: Call
+	expr: NumberType | CallVariable | CallFunction
 }
 
 interface PrimaryExprDistance extends Expression {
 	^type?: TypeClass
-	call?: Call
+	expr: DistanceExpression | CallVariable | CallFunction
+}
+
+interface PrimaryExprTime extends Expression {
+	^type?: TypeClass
+	expr: TimeExpression | CallVariable | CallFunction
 }
 
 interface DeclarationVariable extends Instruction {
@@ -130,13 +136,13 @@ interface CallFunction extends Call {
 }
 
 interface Affectation extends ExpressionBase {
-	expressionbase: ExpressionBase[]
-	callvariable?: CallVariable
+	expressionbase: ExpressionBase
+	callvariable: CallVariable
 }
 
-interface PrimaryExprBool extends BooleanExp {
+interface PrimaryExprBool extends Expression {
 	^type?: TypeClass
-	call?: Call
+	expr: BooleanType | CallVariable | CallFunction
 }
 
 interface And extends Expression {

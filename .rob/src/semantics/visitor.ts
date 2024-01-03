@@ -65,7 +65,9 @@ export class LOOP implements ASTInterfaces.LOOP {
 export class Equals implements ASTInterfaces.Equals {
     readonly $type: 'Equals' = 'Equals';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitEquals(this);
@@ -75,7 +77,9 @@ export class Equals implements ASTInterfaces.Equals {
 export class Not implements ASTInterfaces.Not {
     readonly $type: 'Not' = 'Not';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitNot(this);
@@ -84,9 +88,15 @@ export class Not implements ASTInterfaces.Not {
 
 export class Or implements ASTInterfaces.Or {
     readonly $type: 'Or' = 'Or';
+    $container!: ASTInterfaces.Not;
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
+    setContainer(container: ASTInterfaces.Not): void {
+        this.$container = container;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitOr(this);
     }
@@ -94,9 +104,15 @@ export class Or implements ASTInterfaces.Or {
 
 export class And implements ASTInterfaces.And {
     readonly $type: 'And' = 'And';
+    $container!: ASTInterfaces.Not;
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
+    setContainer(container: ASTInterfaces.Not): void {
+        this.$container = container;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitAnd(this);
     }
@@ -117,8 +133,10 @@ export class PrimaryExprAri implements ASTInterfaces.PrimaryExprAri {
     readonly $type: 'PrimaryExprAri' = 'PrimaryExprAri';
     constructor(
         public className: ASTInterfaces.TypeClass,
-        public type?: ASTInterfaces.TypeClass,
-        public call?: ASTInterfaces.Call
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public expr: ASTInterfaces.NumberType | ASTInterfaces.CallVariable | ASTInterfaces.CallFunction,
+        public type?: ASTInterfaces.TypeClass
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitPrimaryExprAri(this);
@@ -127,11 +145,18 @@ export class PrimaryExprAri implements ASTInterfaces.PrimaryExprAri {
 
 export class PrimaryExprBool implements ASTInterfaces.PrimaryExprBool {
     readonly $type: 'PrimaryExprBool' = 'PrimaryExprBool';
+    $container!: ASTInterfaces.Not;
     constructor(
         public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public expr: ASTInterfaces.BooleanType | ASTInterfaces.CallVariable | ASTInterfaces.CallFunction,
         public type?: ASTInterfaces.TypeClass,
         public call?: ASTInterfaces.Call
     ) {}
+    setContainer(container: ASTInterfaces.Not): void {
+        this.$container = container;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitPrimaryExprBool(this);
     }
@@ -141,8 +166,11 @@ export class PrimaryExprDistance implements ASTInterfaces.PrimaryExprDistance {
     readonly $type: 'PrimaryExprDistance' = 'PrimaryExprDistance';
     constructor(
         public className: ASTInterfaces.TypeClass,
+        public expr: ASTInterfaces.DistanceExpression | ASTInterfaces.CallVariable | ASTInterfaces.CallFunction,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
         public type?: ASTInterfaces.TypeClass,
-        public call?: ASTInterfaces.Call
+        public call?: ASTInterfaces.Call,
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitPrimaryExprDistance(this);
@@ -174,7 +202,9 @@ export class RotateCommand implements ASTInterfaces.RotateCommand {
 export class PlusMinusTime implements ASTInterfaces.PlusMinusTime {
     readonly $type: 'PlusMinusTime' = 'PlusMinusTime';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitPlusMinusTime(this);
@@ -184,7 +214,9 @@ export class PlusMinusTime implements ASTInterfaces.PlusMinusTime {
 export class MultDivTime implements ASTInterfaces.MultDivTime {
     readonly $type: 'MultDivTime' = 'MultDivTime';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitMultDivTime(this);
@@ -194,7 +226,9 @@ export class MultDivTime implements ASTInterfaces.MultDivTime {
 export class MultDivDistance implements ASTInterfaces.MultDivDistance {
     readonly $type: 'MultDivDistance' = 'MultDivDistance';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitMultDivDistance(this);
@@ -204,7 +238,9 @@ export class MultDivDistance implements ASTInterfaces.MultDivDistance {
 export class PlusMinusDistance implements ASTInterfaces.PlusMinusDistance {
     readonly $type: 'PlusMinusDistance' = 'PlusMinusDistance';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitPlusMinusDistance(this);
@@ -214,7 +250,9 @@ export class PlusMinusDistance implements ASTInterfaces.PlusMinusDistance {
 export class PlusMinus implements ASTInterfaces.PlusMinus {
     readonly $type: 'PlusMinus' = 'PlusMinus';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitPlusMinus(this);
@@ -224,7 +262,9 @@ export class PlusMinus implements ASTInterfaces.PlusMinus {
 export class MultDiv implements ASTInterfaces.MultDiv {
     readonly $type: 'MultDiv' = 'MultDiv';
     constructor(
-        public className: ASTInterfaces.TypeClass
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitMultDiv(this);
@@ -247,9 +287,13 @@ export class NumberType implements ASTInterfaces.NumberType {
 
 export class BooleanType implements ASTInterfaces.BooleanType {
     readonly $type: 'BooleanType' = 'BooleanType';
+    $container!: ASTInterfaces.PrimaryExprBool;
     constructor(
         public value: ASTInterfaces.EBoolean
     ) {}
+    setContainer(container: ASTInterfaces.PrimaryExprBool): void {
+        this.$container = container;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitBooleanType(this);
     }
@@ -258,8 +302,8 @@ export class BooleanType implements ASTInterfaces.BooleanType {
 export class Affectation implements ASTInterfaces.Affectation {
     readonly $type: 'Affectation' = 'Affectation';
     constructor(
-        public callVariable: ASTInterfaces.CallVariable,
-        public expressionbase: ASTInterfaces.ExpressionBase[],
+        public callvariable: ASTInterfaces.CallVariable,
+        public expressionbase: ASTInterfaces.ExpressionBase,
         public className: ASTInterfaces.TypeClass
     ) {}
     accept(visitor: RoboMLVisitor): any {
@@ -269,6 +313,7 @@ export class Affectation implements ASTInterfaces.Affectation {
 
 export class CallFunction implements ASTInterfaces.CallFunction {
     readonly $type: 'CallFunction' = 'CallFunction';
+    $container!: ASTInterfaces.PrimaryExprAri;
     constructor(
         public nom: string,
         public parameters: ASTInterfaces.ExpressionBase[],
@@ -371,10 +416,14 @@ export class DistanceExpression implements ASTInterfaces.DistanceExpression {
 
 export class TimeExpression implements ASTInterfaces.TimeExpression {
     readonly $type: 'TimeExpression' = 'TimeExpression';
+    $container!: ASTInterfaces.PrimaryExprTime;
     constructor(
         public number: ASTInterfaces.NumberType,
         public unit: ASTInterfaces.Time
     ) {}
+    setContainer(container: ASTInterfaces.PrimaryExprTime): void {
+        this.$container = container;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitTimeExpression(this);
     }

@@ -31,15 +31,11 @@ Call returns Call:
 ;
 
 ExpressionBase returns ExpressionBase:
-    className=TypeClass (Expression | Call | Affectation | DistanceExpression | TimeExpression | BooleanType | NumberType | ReadSensorCommand)
+    ( CallVariable | CallFunction | Affectation | DistanceExpression | TimeExpression | BooleanType | NumberType | ReadSensorCommand | Expression )
 ;
 
 Expression returns Expression:
-    PlusMinus | BooleanExp | PlusMinusDistance | PlusMinusTime
-;
-
-BooleanExp returns BooleanExp:
-    Or | Equals 
+    PlusMinus | Or | Equals | PlusMinusDistance | PlusMinusTime
 ;
 
 FunctionN returns FunctionN:
@@ -74,28 +70,28 @@ TimeSensorCommand returns TimeSensorCommand:
     {TimeSensorCommand} 'READ_TIME'
 ;
 
-PlusMinus returns PlusMinus:
-    MultDiv (('+'|'-') MultDiv)*
+PlusMinus returns Expression:
+    MultDiv ({Expression.expr1=current} ('+'|'-') expr2=MultDiv)*
 ;
 
-MultDiv returns MultDiv:
-    PrimaryExprAri (('*'|'/') PrimaryExprAri)*
+MultDiv returns Expression:
+    PrimaryExprAri ({Expression.expr1=current} ('*'|'/') expr2=PrimaryExprAri)*
 ;
 
-PlusMinusDistance returns PlusMinus:
-    MultDivDistance (('+'|'-') MultDivDistance)*
+PlusMinusDistance returns Expression:
+    MultDivDistance ({Expression.expr1=current} ('+'|'-') expr2=MultDivDistance)*
 ;
 
-MultDivDistance returns MultDiv:
-    PrimaryExprDistance (('*'|'/') (PrimaryExprDistance | NumberType))*
+MultDivDistance returns Expression:
+    PrimaryExprDistance ({Expression.expr1=current} ('*'|'/') expr2=PrimaryExprDistance)*
 ;
 
 PrimaryExprAri returns PrimaryExprAri:
-    ( NumberType ) | ( call=Call )
+    expr=( NumberType | CallVariable | CallFunction )
 ;
 
 PrimaryExprDistance returns PrimaryExprDistance:
-    DistanceExpression | ( call=Call ) | ( NumberType '*' DistanceExpression )
+    expr=( DistanceExpression | CallVariable | CallFunction )
 ;
 
 DeclarationVariable returns DeclarationVariable:
@@ -119,27 +115,27 @@ CallFunction returns CallFunction:
 ;
 
 Affectation returns Affectation:
-    callvariable=CallVariable '=' expressionbase+=ExpressionBase
+    callvariable=CallVariable '=' expressionbase=ExpressionBase
 ;
 
 PrimaryExprBool returns PrimaryExprBool:
-    BooleanType | ( call=Call )
+    expr=(BooleanType | CallFunction | CallVariable)
 ;
 
-And returns And:
-    Not ('AND' Not)*
+And returns Expression:
+    Not ({Expression.expr1=current} 'AND' expr2=Not)*
 ;
 
-Or returns Or:
-    And ('OR' And)*
+Or returns Expression:
+    And ({Expression.expr1=current} 'OR' expr2=And)*
 ;
 
-Not returns Not:
-    ('NOT' (Not | '(' Or ')')) | PrimaryExprBool 
+Not returns Expression:
+    ('NOT' (Not | Or )) | PrimaryExprBool
 ;
 
-Equals returns Equals:
-    '(' Or ')' ('==' | '!=') '(' Or ')'
+Equals returns Expression:
+    '(' expr1=Or ')' ('==' | '!=') '(' expr2=Or ')'
 ;
 
 EDouble returns number:
@@ -158,16 +154,16 @@ TimeExpression returns TimeExpression:
     number=NumberType unit=Time
 ;
 
-PlusMinusTime returns PlusMinusTime:
-    MultDivTime (('+'|'-') MultDivTime)*
+PlusMinusTime returns Expression:
+    MultDivTime ({Expression.expr1=current} ('+'|'-') expr2=MultDivTime)*
 ;
 
-MultDivTime returns MultDivTime:
-    PrimaryExprTime (('*'|'/') PrimaryExprTime)*
+MultDivTime returns Expression:
+    PrimaryExprTime ({Expression.expr1=current} ('*'|'/') expr2=PrimaryExprTime)*
 ;
 
-PrimaryExprTime returns PrimaryExprDistance:
-    TimeExpression | ( call=Call ) | ( TimeExpression ('/' | '*') NumberType) | ( NumberType '*' TimeExpression )
+PrimaryExprTime returns PrimaryExprTime:
+    expr=( TimeExpression | CallVariable | CallFunction )
 ;
 
 BooleanType returns BooleanType:

@@ -31,10 +31,10 @@ export class RobotValidator {
     checkDeclarationVariable(declarationVariable: ASTGen.DeclarationVariable, accept: ValidationAcceptor): void {
         const allowedTypes = ['boolean', 'distance', 'time', 'number', 'void'];
         for (const type of allowedTypes) {
-            if (isTypeClassOfType(declarationVariable.type, type)) {
-                if (!(declarationVariable.expressionbase.className, type)) {
+            if (isTypeClassOfType(declarationVariable.typeV, type)) {
+                /*if (!(declarationVariable.expressionbase.className, type)) {
                     accept('error', 'The expression must be of type ${type}', { node: declarationVariable, property: 'expressionbase' });
-                }
+                }*/
             }
         }
         if (declaredVariables.includes(declarationVariable.nom)) {
@@ -45,18 +45,18 @@ export class RobotValidator {
     checkFunctionReturnType(functionN: ASTGen.FunctionN, accept: ValidationAcceptor){
         if (declaredFunctions.includes(functionN.name)){
             accept('error', 'Function ${functionN.name} already declared', { node: functionN, property: 'name' });
-        } else if (functionN.return && !isTypeClassOfType(functionN.return, 'void')){
-            const returnType = functionN.return.$type;
-            if (functionN.returnedValue && isTypeClassOfType(functionN.returnedValue.className, returnType)) {
+        } else if (functionN.returnType && !isTypeClassOfType(functionN.returnType, 'void')){
+           // const returnType = functionN.returnType.$type;
+            /*if (functionN.returnedValue && isTypeClassOfType(functionN.returnedValue.className, returnType)) {
                     accept('error', 'The return must be of type ${returnType}', { node: functionN, property: 'instruction' });
-            }
-        } else if (functionN.return && isTypeClassOfType(functionN.return, 'void') && functionN.returnedValue){
+            }*/
+        } else if (functionN.returnType && isTypeClassOfType(functionN.returnType, 'void') && functionN.returnedValue){
             accept('error', 'You should not have a return', { node: functionN, property: 'instruction' });
         }
         declaredFunctions.push(functionN.name);
         const paramTypes: string[] = [];
         functionN.parameters.forEach(param => {
-            paramTypes.push(param.type.$type);
+            paramTypes.push(param.typeP.$type);
         });
         declaredParams[functionN.name] = paramTypes;
     }
@@ -72,21 +72,21 @@ export class RobotValidator {
             accept('error', 'Function ${callFunction.name} has ${declaredParams[callFunction.nom].length} parameters', { node: callFunction, property: 'nom' });
         } else if (callFunction.parameters.length > 0){
             for (let i = 0; i < callFunction.parameters.length; i++){
-                if (!isTypeClassOfType(callFunction.parameters[i].className, declaredParams[callFunction.nom][i])){
+               /* if (!isTypeClassOfType(callFunction.parameters[i].className, declaredParams[callFunction.nom][i])){
                     accept('error', 'Function ${callFunction.name} has ${declaredParams[callFunction.nom][i]} as parameter', { node: callFunction, property: 'nom' });
-                }
+                }*/
             }
         }
     }
     checkWhileLoop(loop: ASTGen.LOOP, accept: ValidationAcceptor){
-        if (isTypeClassOfType(loop.expression.className, 'boolean')){
+        /*if (isTypeClassOfType(loop.expression.className, 'boolean')){
             accept('error', 'The expression must be of type boolean', { node: loop, property: 'expression' });
-        }
+        }*/
     }
     checkIfLoop(ifLoop: ASTGen.IF, accept: ValidationAcceptor){
-        if (isTypeClassOfType(ifLoop.expression.className, 'boolean')){
+        /*if (isTypeClassOfType(ifLoop.expression.className, 'boolean')){
             accept('error', 'The expression must be of type boolean', { node: ifLoop, property: 'expression' });
-        }
+        }*/
     }
 }
 

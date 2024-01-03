@@ -15,11 +15,11 @@ Block returns Block:
 ;
 
 TypeClass returns TypeClass:
-    {TypeClass} 'boolean' | 'distance' | 'time' | 'number' | 'void'
+     typeT=('boolean' | 'distance' | 'time' | 'number' | 'void')
 ;
 
 Distance returns Distance:
-    {Distance} 'cm' | 'mm'
+    {Distance} typeD=('cm' | 'mm')
 ;
 
 Time returns Time:
@@ -31,7 +31,7 @@ Call returns Call:
 ;
 
 ExpressionBase returns ExpressionBase:
-    className=TypeClass (Expression | Call | Affectation | DistanceExpression | TimeExpression | BooleanType | NumberType | ReadSensorCommand)
+   (Expression | Call | Affectation | DistanceExpression | TimeExpression | BooleanType | NumberType | ReadSensorCommand)
 ;
 
 Expression returns Expression:
@@ -43,11 +43,11 @@ BooleanExp returns BooleanExp:
 ;
 
 FunctionN returns FunctionN:
-    {FunctionN} 'let' ( return=TypeClass )? name=EString '(' (parameters+=Parameter("," parameters+=Parameter )* )? ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? ( 'return' returnedValue=ExpressionBase ';')? '}'
+    {FunctionN} 'let' ( returnType=TypeClass )? name=EString '(' (parameters+=Parameter("," parameters+=Parameter )* )? ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? ( 'return' returnedValue=ExpressionBase ';')? '}'
 ;
 
 Parameter returns Parameter:
-    {Parameter} type=TypeClass nom=EString
+    {Parameter} typeP=TypeClass nom=EString
 ;
 
 RotateCommand returns RotateCommand:
@@ -55,7 +55,7 @@ RotateCommand returns RotateCommand:
 ;
 
 DirectionCommand returns DirectionCommand:
-    ( 'FORWARD' | 'BACKWARD' | 'LEFT' | 'RIGHT' ) distance=DistanceExpression
+    operateur=( 'FORWARD' | 'BACKWARD' | 'LEFT' | 'RIGHT' ) distance=DistanceExpression
 ;
 
 SpeedCommand returns SpeedCommand:
@@ -75,31 +75,31 @@ TimeSensorCommand returns TimeSensorCommand:
 ;
 
 PlusMinus returns PlusMinus:
-    MultDiv (('+'|'-') MultDiv)*
+    left=MultDiv (operateur+=('+'|'-') right+=MultDiv)*
 ;
 
 MultDiv returns MultDiv:
-    PrimaryExprAri (('*'|'/') PrimaryExprAri)*
+    left=PrimaryExprAri (operateur+=('*'|'/') right+=PrimaryExprAri)*
 ;
 
-PlusMinusDistance returns PlusMinus:
-    MultDivDistance (('+'|'-') MultDivDistance)*
+PlusMinusDistance returns PlusMinusDistance:
+    left=MultDivDistance (operateur+=('+'|'-') right+=MultDivDistance)*
 ;
 
-MultDivDistance returns MultDiv:
-    PrimaryExprDistance (('*'|'/') (PrimaryExprDistance | NumberType))*
+MultDivDistance returns MultDivDistance:
+    left=PrimaryExprDistance (operateur+=('*'|'/') (right+=PrimaryExprDistance | right+=NumberType))*
 ;
 
 PrimaryExprAri returns PrimaryExprAri:
-    ( NumberType ) | ( call=Call )
+    ( num=NumberType ) | ( call=Call )
 ;
 
 PrimaryExprDistance returns PrimaryExprDistance:
-    DistanceExpression | ( call=Call ) | ( NumberType '*' DistanceExpression )
+    dist=DistanceExpression | ( call=Call ) | ( num=NumberType '*' dist=DistanceExpression )
 ;
 
 DeclarationVariable returns DeclarationVariable:
-    'var' ^type=TypeClass nom=EString '=' expressionbase=ExpressionBase
+    'var' typeV=TypeClass nom=EString '=' expressionbase=ExpressionBase
 ;
 
 LOOP returns LOOP:
@@ -115,31 +115,31 @@ CallVariable returns CallVariable:
 ;
 
 CallFunction returns CallFunction:
-    {CallFunction} nom=EString '(' (parameters+=ExpressionBase ("," parameters+=ExpressionBase )* )? ')' 
+    {CallFunction} nom=EString  '(' (parameters+=ExpressionBase ("," parameters+=ExpressionBase )* )? ')' 
 ;
 
 Affectation returns Affectation:
-    callvariable=CallVariable '=' expressionbase+=ExpressionBase
+    callVariable=CallVariable '=' expressionbase=ExpressionBase
 ;
 
 PrimaryExprBool returns PrimaryExprBool:
-    BooleanType | ( call=Call )
+    value=BooleanType | ( call=Call )
 ;
 
 And returns And:
-    Not ('AND' Not)*
+    left=Not ('AND' right+=Not)*
 ;
 
 Or returns Or:
-    And ('OR' And)*
+    left=And ('OR' right+=And)*
 ;
 
 Not returns Not:
-    ('NOT' (Not | '(' Or ')')) | PrimaryExprBool 
+    ('NOT' (not=Not | '(' or=Or ')')) | exp=PrimaryExprBool 
 ;
 
 Equals returns Equals:
-    '(' Or ')' ('==' | '!=') '(' Or ')'
+    '(' left=Or ')' operateur=('==' | '!=') '(' right=Or ')'
 ;
 
 EDouble returns number:
@@ -159,15 +159,15 @@ TimeExpression returns TimeExpression:
 ;
 
 PlusMinusTime returns PlusMinusTime:
-    MultDivTime (('+'|'-') MultDivTime)*
+    left=MultDivTime (operateur+=('+'|'-') right+=MultDivTime)*
 ;
 
 MultDivTime returns MultDivTime:
-    PrimaryExprTime (('*'|'/') PrimaryExprTime)*
+    left=PrimaryExprTime (operateur+=('*'|'/') right+=PrimaryExprTime)*
 ;
 
-PrimaryExprTime returns PrimaryExprDistance:
-    TimeExpression | ( call=Call ) | ( TimeExpression ('/' | '*') NumberType) | ( NumberType '*' TimeExpression )
+PrimaryExprTime returns PrimaryExprTime:
+    time=TimeExpression | ( call=Call ) | ( time=TimeExpression operateur=('/' | '*') num=NumberType) | ( num=NumberType '*' time=TimeExpression )
 ;
 
 BooleanType returns BooleanType:

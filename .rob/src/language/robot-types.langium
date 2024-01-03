@@ -7,24 +7,29 @@ interface FunctionN {
 	name: string
 	instruction: Instruction[]
 	parameters: Parameter[]
-	return?: TypeClass
+	returnType?: TypeClass
 	returnedValue?: ExpressionBase
 }
 
 interface Instruction {
 }
 
+interface Type {
+
+}
 interface TypeClass {
+	typeT : string
 }
 
-interface Distance extends TypeClass {
+interface Distance extends Type {
+	typeD: string
 }
 
-interface Time extends TypeClass {
+interface Time extends Type {
 }
 
 interface Parameter {
-	type: TypeClass
+	typeP: TypeClass
 	nom: string
 }
 
@@ -39,28 +44,53 @@ interface TimeExpression {
 }
 
 interface PlusMinus extends Expression {
+	left : MultDiv
+	right : MultDiv[]
+	operateur : string[]
 }
 
 interface MultDiv extends Expression {
+	left : PrimaryExprAri
+	right : PrimaryExprAri[]
+	operateur : string[]
 }
 
 interface PlusMinusDistance extends Expression {
+	left: MultDivDistance
+	right: MultDivDistance[]
+	operateur : string[]
 }
 
 interface MultDivDistance extends Expression {
+	left:PrimaryExprDistance
+	operateur: string []
+	right : PrimaryExprDistance[] | NumberType[]
 }
 
 interface PlusMinusTime extends Expression {
+	left : MultDivTime
+	right : MultDivTime[]
+	operateur : string[]
 }
 
 interface MultDivTime extends Expression {
+	left:PrimaryExprTime
+	right:PrimaryExprTime[]
+	operateur:string[]
+}
+
+interface PrimaryExprTime extends Expression{
+	call ? : Call
+	time : TimeExpression
+	operateur? :string
+	num:NumberType
+
 }
 
 interface Expression extends ExpressionBase {
 }
 
 interface ExpressionBase extends Instruction {
-	className: TypeClass
 }
 
 interface Call extends ExpressionBase {
@@ -78,6 +108,7 @@ interface Command extends Instruction {
 
 interface DirectionCommand extends Command {
 	distance: DistanceExpression
+	operateur : string
 }
 
 interface SpeedCommand extends Command {
@@ -96,17 +127,20 @@ interface TimeSensorCommand extends ReadSensorCommand {
 interface PrimaryExprAri extends Expression {
 	^type?: TypeClass
 	call?: Call
+	num ? : NumberType
 }
 
 interface PrimaryExprDistance extends Expression {
 	^type?: TypeClass
 	call?: Call
+	num ? : NumberType
+	dist :DistanceExpression
 }
 
 interface DeclarationVariable extends Instruction {
 	nom: string
 	expressionbase: ExpressionBase
-	^type: TypeClass
+	typeV: TypeClass
 }
 
 interface LOOP extends Block {
@@ -130,38 +164,42 @@ interface CallFunction extends Call {
 }
 
 interface Affectation extends ExpressionBase {
-	expressionbase: ExpressionBase[]
-	callvariable?: CallVariable
+	expressionbase: ExpressionBase
+	callVariable: CallVariable
 }
 
 interface PrimaryExprBool extends BooleanExp {
-	^type?: TypeClass
 	call?: Call
+	value?: BooleanType
 }
 
 interface And extends Expression {
+	left: Not
+	right: Not[]
 }
 
 interface Or extends Expression {
+	left: And
+	right: And[]
 }
 
 interface Not extends Expression {
+	not : Not
+	or : Or
+	exp :PrimaryExprBool
 }
 
 interface Equals extends Expression {
+	right: Or
+	left: Or
+	operateur: string
 }
 
-interface CM extends Distance {
-}
-
-interface Mm extends Distance {
-}
-
-interface BooleanType extends TypeClass {
+interface BooleanType extends Type {
 	value: boolean
 }
 
-interface NumberType extends TypeClass {
+interface NumberType extends Type {
 	value: number
 }
 

@@ -10,9 +10,9 @@ import type { RobotServices } from '../language/robot-module.js';
  * TODO : Call this function in the language module.ts file (see registerValidationChecks(...);)
  */
 export function weaveAcceptMethods(services: RobotServices) {
-    //const registry = services.validation.ValidationRegistry;
-    //const weaver = services.validation.RoboMlAcceptWeaver
-    //registry.register(weaver.checks, weaver);
+    const registry = services.validation.ValidationRegistry;
+    const weaver = services.validation.RoboMlAcceptWeaver
+    registry.register(weaver.checks, weaver);
 }
 
 /**

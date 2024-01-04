@@ -15,11 +15,11 @@ Block returns Block:
 ;
 
 TypeClass returns TypeClass:
-    {TypeClass} 'boolean' | 'distance' | 'time' | 'number' | 'void'
+    {TypeClass} typeT=('boolean' | 'distance' | 'time' | 'number' | 'void')
 ;
 
 Distance returns Distance:
-    {Distance} 'cm' | 'mm'
+    {Distance} typeD=('cm' | 'mm')
 ;
 
 Time returns Time:
@@ -43,7 +43,7 @@ FunctionN returns FunctionN:
 ;
 
 Parameter returns Parameter:
-    {Parameter} type=TypeClass nom=EString
+    {Parameter} typeP=TypeClass nom=EString
 ;
 
 RotateCommand returns RotateCommand:
@@ -51,7 +51,7 @@ RotateCommand returns RotateCommand:
 ;
 
 DirectionCommand returns DirectionCommand:
-    ( 'FORWARD' | 'BACKWARD' | 'LEFT' | 'RIGHT' ) distance=DistanceExpression
+    operateur=( 'FORWARD' | 'BACKWARD' | 'LEFT' | 'RIGHT' ) distance=DistanceExpression
 ;
 
 SpeedCommand returns SpeedCommand:
@@ -70,20 +70,20 @@ TimeSensorCommand returns TimeSensorCommand:
     {TimeSensorCommand} 'READ_TIME'
 ;
 
-PlusMinus returns Expression:
-    MultDiv ({Expression.expr1=current} ('+'|'-') expr2=MultDiv)*
+PlusMinus returns PlusMinus:
+    MultDiv ({Expression.expr1=current} operateur=('+'|'-') expr2=MultDiv)*
 ;
 
-MultDiv returns Expression:
-    PrimaryExprAri ({Expression.expr1=current} ('*'|'/') expr2=PrimaryExprAri)*
+MultDiv returns MultDiv:
+    PrimaryExprAri ({Expression.expr1=current} operateur=('*'|'/') expr2=PrimaryExprAri)*
 ;
 
-PlusMinusDistance returns Expression:
-    MultDivDistance ({Expression.expr1=current} ('+'|'-') expr2=MultDivDistance)*
+PlusMinusDistance returns PlusMinusDistance:
+    MultDivDistance ({Expression.expr1=current} operateur=('+'|'-') expr2=MultDivDistance)*
 ;
 
-MultDivDistance returns Expression:
-    PrimaryExprDistance ({Expression.expr1=current} ('*'|'/') expr2=PrimaryExprDistance)*
+MultDivDistance returns MultDivDistance:
+    PrimaryExprDistance ({Expression.expr1=current} operateur=('*'|'/') expr2=PrimaryExprDistance)*
 ;
 
 PrimaryExprAri returns PrimaryExprAri:
@@ -134,8 +134,8 @@ Not returns Expression:
     ('NOT' (Not | Or )) | PrimaryExprBool
 ;
 
-Equals returns Expression:
-    '(' expr1=Or ')' ('==' | '!=') '(' expr2=Or ')'
+Equals returns Equals:
+    '(' expr1=Or ')' operateur=('==' | '!=') '(' expr2=Or ')'
 ;
 
 EDouble returns number:
@@ -154,12 +154,12 @@ TimeExpression returns TimeExpression:
     number=NumberType unit=Time
 ;
 
-PlusMinusTime returns Expression:
-    MultDivTime ({Expression.expr1=current} ('+'|'-') expr2=MultDivTime)*
+PlusMinusTime returns PlusMinusTime:
+    MultDivTime ({Expression.expr1=current} operateur=('+'|'-') expr2=MultDivTime)*
 ;
 
-MultDivTime returns Expression:
-    PrimaryExprTime ({Expression.expr1=current} ('*'|'/') expr2=PrimaryExprTime)*
+MultDivTime returns MultDivTime:
+    PrimaryExprTime ({Expression.expr1=current} operateur=('*'|'/') expr2=PrimaryExprTime)*
 ;
 
 PrimaryExprTime returns PrimaryExprTime:

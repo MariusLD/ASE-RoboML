@@ -15,16 +15,21 @@ interface Instruction {
 }
 
 interface TypeClass {
+	typeT : string
 }
 
-interface Distance extends TypeClass {
+interface Type {
+
+}
+interface Distance extends Type {
+	typeD : string
 }
 
-interface Time extends TypeClass {
+interface Time extends Type {
 }
 
 interface Parameter {
-	type: TypeClass
+	typeP: TypeClass
 	nom: string
 }
 
@@ -39,15 +44,19 @@ interface TimeExpression {
 }
 
 interface PlusMinus extends Expression {
+
 }
 
 interface MultDiv extends Expression {
+
 }
 
 interface PlusMinusDistance extends Expression {
+
 }
 
 interface MultDivDistance extends Expression {
+
 }
 
 interface PlusMinusTime extends Expression {
@@ -59,6 +68,7 @@ interface MultDivTime extends Expression {
 interface Expression extends ExpressionBase {
 	expr1: Expression
 	expr2: Expression
+	operateur : string
 }
 
 interface ExpressionBase extends Instruction {
@@ -71,7 +81,7 @@ interface BooleanExp extends Expression {
 }
 
 interface RotateCommand extends Command {
-	angle?: number
+	angle: number
 }
 
 interface Command extends Instruction {
@@ -79,6 +89,7 @@ interface Command extends Instruction {
 
 interface DirectionCommand extends Command {
 	distance: DistanceExpression
+	operateur : string
 }
 
 interface SpeedCommand extends Command {
@@ -163,11 +174,11 @@ interface CM extends Distance {
 interface Mm extends Distance {
 }
 
-interface BooleanType extends TypeClass {
+interface BooleanType extends Type {
 	value: boolean
 }
 
-interface NumberType extends TypeClass {
+interface NumberType extends Type{
 	value: number
 }
 

@@ -1,4 +1,4 @@
-import { MonacoEditorLanguageClientWrapper } from './monaco-editor-wrapper/index.js';
+import { MonacoEditorLanguageClientWrapper, vscode } from './monaco-editor-wrapper/index.js';
 import { buildWorkerDefinition } from "./monaco-editor-workers/index.js";
 import monarchSyntax from "./syntaxes/robot.monarch.js";
 
@@ -8,22 +8,120 @@ MonacoEditorLanguageClientWrapper.addMonacoStyles('monaco-editor-styles');
 
 const client = new MonacoEditorLanguageClientWrapper();
 const editorConfig = client.getEditorConfig();
-editorConfig.setMainLanguageId('robot');
+editorConfig.setMainLanguageId('robot');       // WARNING Dependent of your project
 
 editorConfig.setMonarchTokensProvider(monarchSyntax);
 
-editorConfig.setMainCode(`// robot is running in the web!`);
+let code = `Robot{
+    let main(){
+        FORWARD 1000.0 mm;
+        CLOCK 144.0;
+        BACKWARD 2000.0 mm;
+        LEFT 1000.0 mm;
+        RIGHT 2000.0 mm;
+    }
+   }`
+
+editorConfig.setMainCode(code);
 
 editorConfig.theme = 'vs-dark';
 editorConfig.useLanguageClient = true;
 editorConfig.useWebSocket = false;
 
-const workerURL = new URL('./robot-server-worker.js', import.meta.url);
+const typecheck = (async () => {
+    console.info('typechecking current code...');
+
+    // To implement (Bonus)
+    
+    if(errors.length > 0){
+        const modal = document.getElementById("errorModal");
+        modal.style.display = "block";
+    } else {
+        const modal = document.getElementById("validModal");
+        modal.style.display = "block";
+    }
+});
+
+const parseAndValidate = (async () => {
+    console.info('validating current code...');
+
+    const scene = await vscode.commands.executeCommand('parseAndGenerate', code);
+    //setupSimulator(scene);
+
+});
+window.parseAndValidate = parseAndValidate;
+
+const execute = (async () => {
+    const code = client.editor.getValue();
+    const simulator = document.querySelector('.simulator');
+    const scene = await vscode.commands.executeCommand('parseAndGenerate', [code, simulator.clientWidth, simulator.clientHeight]);
+    window.setupSimulator=setupSimulator(scene);
+});
+
+const setupSimulator = (scene) => {
+    const simulator = document.querySelector('.simulator');
+    const wideSide = max(scene.size.x, scene.size.y);
+    //let factor = 1000 / wideSide;
+    let factor=simulator.clientWidth / wideSide;
+    window.scene = scene;
+
+    scene.entities.forEach((entity) => {
+        if (entity.type === "Wall") {
+            window.entities.push(new Wall(
+                (entity.pos.x)*factor,
+                (entity.pos.y)*factor,
+                (entity.size.x)*factor,
+                (entity.size.y)*factor
+                ));
+        }
+        if (entity.type === "Block") {
+            window.entities.push(new Wall(
+                (entity.pos.x)*factor,
+                (entity.pos.y)*factor,
+                (entity.size.x)*factor,
+                (entity.size.y)*factor
+                ));
+        }
+    });
+
+    window.p5robot = new Robot(
+        factor,
+        scene.robot.pos.x,
+        scene.robot.pos.y,
+        scene.robot.size.x * factor,
+        scene.robot.size.y * factor,
+        scene.robot.rad
+    );
+}
+
+window.execute = execute;
+window.typecheck = typecheck;
+
+var errorModal = document.getElementById("errorModal");
+var validModal = document.getElementById("validModal");
+var closeError = document.querySelector("#errorModal .close");
+var closeValid = document.querySelector("#validModal .close");
+closeError.onclick = function() {
+    errorModal.style.display = "none";
+}
+closeValid.onclick = function() {
+    validModal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == validModal) {
+        validModal.style.display = "none";
+    }
+    if (event.target == errorModal) {
+        errorModal.style.display = "none";
+    }
+  } 
+
+const workerURL = new URL('./robot-server-worker.js', import.meta.url); // WARNING Dependent of your project
 console.log(workerURL.href);
 
 const lsWorker = new Worker(workerURL.href, {
     type: 'classic',
-    name: 'Robot Language Server'
+    name: 'RoboMl Language Server'
 });
 client.setWorker(lsWorker);
 

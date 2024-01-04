@@ -1,10 +1,10 @@
-import { AstNode, LangiumServices } from "langium";
+import { AstNode, LangiumServices, LangiumDocument } from "langium";
 import { URI } from "vscode-uri";
 import { EmptyFileSystem } from "langium";
 import { createRobotServices } from '../language/robot-module.js';
 import { Robot } from "../semantics/visitor.js";
 import { generateCommands } from '../generator/generator.js';
-
+import chalk from "chalk";
 /**
  * Extracts an AST node from a virtual document, represented as a string
  * @param content Content to create virtual document from
@@ -21,6 +21,26 @@ import { generateCommands } from '../generator/generator.js';
 }
 
 
+
+async function extractDocument(code: string, services: LangiumServices): Promise<LangiumDocument> {
+    const doc = services.shared.workspace.LangiumDocumentFactory.fromString(code, URI.parse('memory://minilogo.document'));
+    await services.shared.workspace.DocumentBuilder.build([doc], { validation: true });
+
+    const validationErrors = (doc.diagnostics ?? []).filter(e => e.severity === 1);
+    if (validationErrors.length > 0) {
+        const errors = validationErrors.map(validationError =>
+            `line ${validationError.range.start.line + 1}: ${validationError.message} [${doc.textDocument.getText(validationError.range)}]`
+        );
+
+        console.error(chalk.red('There are validation errors:'));
+        errors.forEach(error => console.error(chalk.red(error)));
+
+        throw new Error(errors.join('\n'));
+    }
+
+    return doc;
+}
+
 /**
  * Parses a MiniLogo program & generates output as a list of Objects
  * @param miniLogoProgram MiniLogo program to parse
@@ -36,4 +56,34 @@ export async function parseAndGenerate (value: any): Promise<Object[]> {
     // generate mini logo drawing commands from the model
     const cmds = generateCommands(model,sceneWidth,sceneHeight);
     return Promise.resolve(cmds);
+}
+
+export async function parseAndValidate(code:string) : Promise<string[]>{
+    const services = createRobotServices(EmptyFileSystem).Robot;
+    const document = await extractDocument(code, services);
+    const parseResult = document.parseResult;
+    if (parseResult.lexerErrors.length === 0 && 
+        parseResult.parserErrors.length === 0
+    ) {
+        console.log(chalk.green(`validated successfully`));
+        return [];
+        //return Promise.resolve(["Parsed and validated successfully!"]);
+    } else {
+        let errors: string[] = [];
+        if(parseResult.lexerErrors.length > 0) {
+            const lexerMessage = parseResult.lexerErrors.map(lexerError =>
+                `${(lexerError.line) ? "line " + lexerError.line + 1 : ""}: ${lexerError.message}`
+            );
+            errors = errors.concat(lexerMessage);
+        }
+        if(parseResult.parserErrors.length > 0) {
+            const parserMessage = parseResult.parserErrors.map(parserError =>
+                `${parserError.message}`
+            );
+            errors = errors.concat(parserMessage);
+        }
+        console.log(chalk.red(`Failed to parse and validate!`));
+        return errors;
+    }
+       // return Promise.resolve(["Failed to parse and validate!"]);
 }

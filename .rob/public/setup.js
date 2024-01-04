@@ -44,11 +44,23 @@ const typecheck = (async () => {
 
 const parseAndValidate = (async () => {
     console.info('validating current code...');
-
-    const scene = await vscode.commands.executeCommand('parseAndGenerate', code);
-    //setupSimulator(scene);
-
+    const code = client.editor.getValue();
+    const errors = await vscode.commands.executeCommand('parseAndValidate', code);
+    if(errors.length > 0){
+        const modal = document.getElementById("errorModal");
+        modal.style.display = "block";
+        errors.forEach((error) => {
+            const errorDiv = document.createElement("div");
+            errorDiv.innerHTML = error;
+            modal.getElementsByClassName("modal-body")[0].appendChild(errorDiv);
+        });
+    }else{
+        const modal = document.getElementById("validModal");
+        modal.style.display = "block";
+    }
 });
+
+
 window.parseAndValidate = parseAndValidate;
 
 const execute = (async () => {

@@ -31,8 +31,8 @@ export class Robot implements Entities{
 
     turn(angle:number) : void {
         this.rad += angle * Math.PI / 180;
-        const timeElapsed = angle / this.speed * 250;
-        this.scene.time += timeElapsed;
+        const time = angle / this.speed * 250;
+        this.scene.time += time;
         this.scene.timestamps.push(new Timestamp(this.scene.time, this));
     }
 
@@ -43,9 +43,10 @@ export class Robot implements Entities{
         this.pos.x += dx;
         this.pos.y += dy;
 
-        // Mise à jour du temps dans la scène en fonction de la vitesse de déplacement
-        const timeElapsed = dist / this.speed * 250;
-        this.scene.time += timeElapsed;
+//this.pos = this.pos.plus(Vector.fromAngle(this.rad, dist));
+        
+        const time = dist / this.speed * 250;
+        this.scene.time += time;
         this.scene.timestamps.push(new Timestamp(this.scene.time, this));
     }
 
@@ -58,9 +59,10 @@ export class Robot implements Entities{
         this.pos.x += dx;
         this.pos.y += dy;
 
-        // Mise à jour du temps dans la scène en fonction de la vitesse de déplacement
-        const timeElapsed = dist / this.speed * 250;
-        this.scene.time += timeElapsed;
+//this.pos = this.pos.plus(Vector.fromAngle(this.rad + Math.PI / 2, dist));
+       
+        const time = dist / this.speed * 250;
+        this.scene.time += time;
         this.scene.timestamps.push(new Timestamp(this.scene.time, this));
     }
 

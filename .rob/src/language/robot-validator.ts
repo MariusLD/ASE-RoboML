@@ -116,7 +116,7 @@ export class RobotValidator {
 
     checkReturn(ast: ASTGen.Robot, accept: ValidationAcceptor) {
         ast.functions.forEach((functionN) => {
-            const hasReturn = functionN.return !== undefined;
+            const hasReturn = functionN.returnType !== undefined;
             const hasReturnedValue = functionN.returnedValue !== undefined;
             if (hasReturn !== hasReturnedValue){
                 if (hasReturn){

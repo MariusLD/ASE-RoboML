@@ -7,7 +7,7 @@ interface FunctionN {
 	name: string
 	instruction: Instruction[]
 	parameters: Parameter[]
-	return?: TypeClass
+	returnType?: TypeClass
 	returnedValue?: ExpressionBase
 }
 

@@ -4,7 +4,7 @@ import { Robot as RobotE } from "../web/simulator/entities.js";
 import { RoboMLVisitor,acceptNode } from './visitor.js';
 import { BaseScene, Scene } from "../web/simulator/scene.js";
 import { Vector } from "../web/simulator/utils.js";
-import { Parameter, TypeClass } from '../language/generated/ast.js';
+import { BooleanExp, Expression, Parameter, PrimaryExprTime, TypeClass } from '../language/generated/ast.js';
 
 interface VariableDefinition {
     name: string;
@@ -38,6 +38,7 @@ export class MyVisitor implements RoboMLVisitor {
         this.variables = Array<Map<string,VariableDefinition>>();
         this.wait = false;
         this.niveau = 0;
+        this.variables[this.niveau]=new Map<string,VariableDefinition>();
         this.functions = Array<FunctionInfo>();
     }
 
@@ -45,8 +46,8 @@ export class MyVisitor implements RoboMLVisitor {
     visitRobot(node: Robot) {
         let start=undefined;
         for (let f of node.functions) {
-            if(f.return){
-                this.functions.push({name: f.name,func:(f as FunctionN), parameters: f.parameters, returnType: acceptNode(f.return,this)});
+            if(f.returnType){        
+                this.functions.push({name: f.name,func:(f as FunctionN), parameters: f.parameters, returnType: acceptNode(f.returnType,this)});
             }else{
                 this.functions.push({name: f.name,func:(f as FunctionN), parameters: f.parameters, returnType: undefined});
             }
@@ -58,16 +59,40 @@ export class MyVisitor implements RoboMLVisitor {
         return this.scene;
     }
 
-
+    visitExpression(node: Expression) : number | boolean | undefined{
+        if(node.operateur === "+"){
+            return Number(acceptNode(node.expr1,this))+Number(acceptNode(node.expr2,this));
+        }else if(node.operateur === "-"){
+            return Number(acceptNode(node.expr1,this))-Number(acceptNode(node.expr2,this));
+        }else if(node.operateur === "*"){
+            return Number(acceptNode(node.expr1,this))*Number(acceptNode(node.expr2,this));
+        }else if(node.operateur === "/"){
+            return Number(acceptNode(node.expr1,this))/Number(acceptNode(node.expr2,this));
+        }else if(node.operateur === "AND"){
+            return Boolean(acceptNode(node.expr1,this)) && Boolean(acceptNode(node.expr2,this));
+        }else if(node.operateur === "OR"){
+            return Boolean(acceptNode(node.expr1,this)) || Boolean(acceptNode(node.expr2,this));
+        }else if(node.operateur === "NOT"){
+            return !Boolean(acceptNode(node.expr1,this));
+        }else if (node.operateur === "=="){
+            return Number(acceptNode(node.expr1,this)) === Number(acceptNode(node.expr2,this));
+        }else if (node.operateur === "!="){
+            return Number(acceptNode(node.expr1,this)) !== Number(acceptNode(node.expr2,this));
+        }
+        return undefined
+    }
     visitInstruction(node: Instruction) {
-        acceptNode(node,this);
+      acceptNode(node,this);
     }
 
-        visitFunctionN(node: FunctionN): number |boolean |undefined {
-        this.niveau++;
+    visitFunctionN(node: FunctionN): number |boolean |undefined {
+        //this.niveau++;
+        //this.variables[this.niveau]=new Map<string,VariableDefinition>();
         for (let i of node.instruction) {
             acceptNode(i,this);
         }
+        console.log(node.returnType);
+        console.log(node.returnedValue);
         if(node.returnType && node.returnedValue){
             return acceptNode(node.returnedValue,this);
         }
@@ -75,8 +100,13 @@ export class MyVisitor implements RoboMLVisitor {
     }
 
 
-    visitExpressionBase(node: ExpressionBase) {
-        acceptNode(node,this);
+    visitExpressionBase(node: ExpressionBase) : number | boolean | undefined {
+        console.log("EXPRESSIONBASE")
+        let newNode=(node as unknown as Expression);
+        if(newNode.$type === "Expression"){
+            return this.visitExpression(newNode);
+        }
+        return undefined;
     }
 
 
@@ -157,26 +187,26 @@ export class MyVisitor implements RoboMLVisitor {
     }
 
 
-     visitCallFunction(node: CallFunction) {
+     visitCallFunction(node: CallFunction) : number | boolean | undefined{
         let name=node.nom;
         let functionInfo=this.functions.find((f)=>f.name===name);
         this.niveau++;
+        this.variables[this.niveau]=new Map<string,VariableDefinition>();
+        let returN=undefined;
         if(functionInfo && functionInfo.parameters && functionInfo.parameters.length>0){
             let idx=0;
-            this.variables[this.niveau]=new Map<string,VariableDefinition>();
             for(let i of functionInfo.parameters){
                 this.variables[this.niveau].set(i.nom, {name: i.nom, type: acceptNode(i.typeP,this), value: acceptNode(node.parameters[idx],this), niveau: this.niveau});
+                
                 idx++;
             }
         }
         if(functionInfo){
-            acceptNode(functionInfo.func,this);
+            returN=acceptNode(functionInfo.func,this);
         }
-        if(functionInfo && functionInfo.parameters && functionInfo.parameters.length>0){
-            this.variables[this.niveau].clear(); 
-
-        }
+        this.variables[this.niveau].clear();
         this.niveau--;
+        return returN;
     }
 
 
@@ -197,11 +227,15 @@ export class MyVisitor implements RoboMLVisitor {
 
    
     visitBooleanType(node: BooleanType) : boolean {
-        return node.value;
+        if((node.value as unknown) === "true"){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     visitNumberType(node: NumberType) : number {
-        return node.value;
+        return Number(node.value);
     }
 
     visitPlusMinus(node: PlusMinus) {
@@ -227,11 +261,11 @@ export class MyVisitor implements RoboMLVisitor {
         this.variables[this.niveau].set(node.nom, {name: node.nom, type: acceptNode(node.type,this), value: acceptNode(node.expressionbase,this), niveau: this.niveau});
     }
 
-    visitPrimaryExprAri(node: PrimaryExprAri) {
-        throw new Error('Method not implemented.');
+    visitPrimaryExprAri(node: PrimaryExprAri) : number {
+        return acceptNode(node.expr,this);
     }
     visitPrimaryExprBool(node: PrimaryExprBool) {
-        throw new Error('Method not implemented.');
+        return acceptNode(node.expr,this);
     }
     visitPrimaryExprDistance(node: PrimaryExprDistance) {
         throw new Error('Method not implemented.');
@@ -265,5 +299,13 @@ export class MyVisitor implements RoboMLVisitor {
      }
      visitTypeClass(node: TypeClass) {
          return node.typeT;
+     }
+
+     visitBooleanExp(node: BooleanExp) {
+        throw new Error('Method not implemented.');
+     }
+
+     visitPrimaryExprTime(node: PrimaryExprTime) {
+        throw new Error('Method not implemented.');
      }
 }

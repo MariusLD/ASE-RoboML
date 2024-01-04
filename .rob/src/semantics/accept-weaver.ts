@@ -161,8 +161,28 @@ export class RoboMlAcceptWeaver {
         (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitEquals(node as unknown as ClassAST.Equals);}
     }
 
+    weaveExpression(node : InterfaceAST.Expression, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitExpression(node as unknown as ClassAST.Expression);}
+    }
+
+    weaveTypeClass(node : InterfaceAST.TypeClass, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitTypeClass(node as unknown as ClassAST.TypeClass);}
+    }
+
+    weaveBooleanExp(node : InterfaceAST.BooleanExp, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitBooleanExp(node as unknown as ClassAST.BooleanExp);}
+    }
+
+    weavePrimaryExprTime(node : InterfaceAST.PrimaryExprTime, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitPrimaryExprTime(node as unknown as ClassAST.PrimaryExprTime);}
+    }
+
     checks: ValidationChecks<RobotAstType> = {
-        Robot: this.weaveRobot
+        Robot: this.weaveRobot,
+        PrimaryExprTime: this.weavePrimaryExprTime,
+        BooleanExp: this.weaveBooleanExp
+        ,TypeClass: this.weaveTypeClass
+        ,Expression: this.weaveExpression
         ,Instruction: this.weaveInstruction
         ,FunctionN: this.weaveFunctionN
         ,ExpressionBase: this.weaveExpressionBase

@@ -35,11 +35,11 @@ ExpressionBase returns ExpressionBase:
 ;
 
 Expression returns Expression:
-    PlusMinus | Or | Equals | PlusMinusDistance | PlusMinusTime
+    (PlusMinus | Or | Equals | PlusMinusDistance | PlusMinusTime)
 ;
 
 FunctionN returns FunctionN:
-    {FunctionN} 'let' ( return=TypeClass )? name=EString '(' (parameters+=Parameter("," parameters+=Parameter )* )? ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? ( 'return' returnedValue=ExpressionBase ';')? '}'
+    {FunctionN} 'let' ( returnType=TypeClass )? name=EString '(' (parameters+=Parameter("," parameters+=Parameter )* )? ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? ( 'return' returnedValue=ExpressionBase ';')? '}'
 ;
 
 Parameter returns Parameter:
@@ -70,19 +70,19 @@ TimeSensorCommand returns TimeSensorCommand:
     {TimeSensorCommand} 'READ_TIME'
 ;
 
-PlusMinus returns PlusMinus:
+PlusMinus returns Expression:
     MultDiv ({Expression.expr1=current} operateur=('+'|'-') expr2=MultDiv)*
 ;
 
-MultDiv returns MultDiv:
+MultDiv returns Expression:
     PrimaryExprAri ({Expression.expr1=current} operateur=('*'|'/') expr2=PrimaryExprAri)*
 ;
 
-PlusMinusDistance returns PlusMinusDistance:
+PlusMinusDistance returns Expression:
     MultDivDistance ({Expression.expr1=current} operateur=('+'|'-') expr2=MultDivDistance)*
 ;
 
-MultDivDistance returns MultDivDistance:
+MultDivDistance returns Expression:
     PrimaryExprDistance ({Expression.expr1=current} operateur=('*'|'/') expr2=PrimaryExprDistance)*
 ;
 
@@ -123,18 +123,18 @@ PrimaryExprBool returns PrimaryExprBool:
 ;
 
 And returns Expression:
-    Not ({Expression.expr1=current} 'AND' expr2=Not)*
+    Not ({Expression.expr1=current} operateur='AND' expr2=Not)*
 ;
 
 Or returns Expression:
-    And ({Expression.expr1=current} 'OR' expr2=And)*
+    And ({Expression.expr1=current} operateur='OR' expr2=And)*
 ;
 
 Not returns Expression:
-    ('NOT' (Not | Or )) | PrimaryExprBool
+    (operateur=('NOT') (Not | Or )) | PrimaryExprBool
 ;
 
-Equals returns Equals:
+Equals returns Expression:
     '(' expr1=Or ')' operateur=('==' | '!=') '(' expr2=Or ')'
 ;
 
@@ -154,11 +154,11 @@ TimeExpression returns TimeExpression:
     number=NumberType unit=Time
 ;
 
-PlusMinusTime returns PlusMinusTime:
+PlusMinusTime returns Expression:
     MultDivTime ({Expression.expr1=current} operateur=('+'|'-') expr2=MultDivTime)*
 ;
 
-MultDivTime returns MultDivTime:
+MultDivTime returns Expression:
     PrimaryExprTime ({Expression.expr1=current} operateur=('*'|'/') expr2=PrimaryExprTime)*
 ;
 

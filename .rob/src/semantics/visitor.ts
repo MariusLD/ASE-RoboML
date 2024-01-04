@@ -41,6 +41,9 @@ export interface RoboMLVisitor{
     visitEquals(node: ASTInterfaces.Equals): any;
     visitTypeClass(node: ASTInterfaces.TypeClass): any;
     visitParameter(node: ASTInterfaces.Parameter): any;
+    visitExpression(node: ASTInterfaces.Expression): any;
+    visitPrimaryExprTime(node: ASTInterfaces.PrimaryExprTime): any;
+    visitBooleanExp(node: ASTInterfaces.BooleanExp): any;
 }
 
 export class IF implements ASTInterfaces.IF {
@@ -79,6 +82,26 @@ export class LOOP implements ASTInterfaces.LOOP {
     ) {}
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitLOOP(this);
+    }
+}
+
+export class PrimaryExprTime implements ASTInterfaces.PrimaryExprTime {
+    readonly $type: 'PrimaryExprTime' = 'PrimaryExprTime';
+    constructor(
+        public className: ASTInterfaces.TypeClass,
+        public expr: ASTInterfaces.TimeExpression | ASTInterfaces.CallVariable | ASTInterfaces.CallFunction,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public operateur: string,
+        public type?: ASTInterfaces.TypeClass,
+        public call?: ASTInterfaces.Call
+    ) {
+        this.type=type;
+        this.operateur=operateur;
+        this.call=call;
+    }
+    accept(visitor: RoboMLVisitor): any {
+        return visitor.visitPrimaryExprTime(this);
     }
 }
 
@@ -361,7 +384,7 @@ export class BooleanType implements ASTInterfaces.BooleanType {
     readonly $type: 'BooleanType' = 'BooleanType';
     $container!: ASTInterfaces.PrimaryExprBool;
     constructor(
-        public value: ASTInterfaces.EBoolean
+        public value: boolean
     ) {
         this.value=value;
     }
@@ -553,6 +576,7 @@ export class ExpressionBase implements ASTInterfaces.ExpressionBase {
         public className: ASTInterfaces.TypeClass
     ) {}
     accept(visitor: RoboMLVisitor): any {
+        console.log("WTF");
         return visitor.visitExpressionBase(this);
     }
 }
@@ -597,6 +621,43 @@ export class Parameter implements ASTInterfaces.Parameter {
         return visitor.visitParameter(this);
     }
 }
+
+
+export class Expression implements ASTInterfaces.Expression {
+    readonly $type: 'Expression' = 'Expression';
+    constructor(
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public operateur: string
+    ) {
+        this.expr1=expr1;
+        this.expr2=expr2;
+        this.operateur=operateur;
+    }
+    accept(visitor: RoboMLVisitor): any {
+        console.log("MOURIR");
+        return visitor.visitExpression(this);
+    }
+}
+
+export class BooleanExp implements ASTInterfaces.BooleanExp {
+    readonly $type: 'BooleanExp' = 'BooleanExp';
+    constructor(
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public operateur: string
+    ) {
+        this.expr1=expr1;
+        this.expr2=expr2;
+        this.operateur=operateur;
+    }
+    accept(visitor: RoboMLVisitor): any {
+        return visitor.visitBooleanExp(this);
+    }
+}
+
 
 export function acceptNode(node: AstNode, visitor: RoboMLVisitor): any {
     switch (node.$type) {
@@ -704,7 +765,17 @@ export function acceptNode(node: AstNode, visitor: RoboMLVisitor): any {
         case 'TypeClass':
             console.log("typeClass");
             return (node as TypeClass).accept(visitor);
+        case 'ExpressionBase':
+            console.log("expressionBase");
+            return (node as ExpressionBase).accept(visitor);
+        case 'Expression':
+            //console.log((node as Expression).expr1);
+            console.log("expression");
+           // 
+           //let newNode = node as Expression;
+            //return newNode.accept(visitor);
+            return (node as Expression).accept(visitor);
         default:
-            throw new Error(`Unknown node type ${node.$type}`);
+            throw new Error(`Unknown node typee ${node.$type}`);
     }
 }

@@ -4,7 +4,7 @@ import { Robot as RobotE } from "../web/simulator/entities.js";
 import { RoboMLVisitor,acceptNode } from './visitor.js';
 import { BaseScene, Scene } from "../web/simulator/scene.js";
 import { Vector } from "../web/simulator/utils.js";
-import { BooleanExp, Expression, Parameter, PrimaryExprTime, TypeClass } from '../language/generated/ast.js';
+import { BooleanExp, ComparaisonAri, ComparaisonDistance, ComparaisonTime, Expression, Parameter, PrimaryExprTime, TypeClass } from '../language/generated/ast.js';
 
 interface VariableDefinition {
     name: string;
@@ -42,6 +42,15 @@ export class MyVisitor implements RoboMLVisitor {
         this.functions = Array<FunctionInfo>();
     }
 
+    visitComparaisonAri(node: ComparaisonAri) {
+        throw new Error('Method not implemented.');
+    }
+    visitComparaisonDistance(node: ComparaisonDistance) {
+        throw new Error('Method not implemented.');
+    }
+    visitComparaisonTime(node: ComparaisonTime) {
+        throw new Error('Method not implemented.');
+    }
 
     visitRobot(node: Robot) {
         let start=undefined;

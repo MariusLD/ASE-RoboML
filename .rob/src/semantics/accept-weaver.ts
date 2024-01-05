@@ -177,6 +177,18 @@ export class RoboMlAcceptWeaver {
         (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitPrimaryExprTime(node as unknown as ClassAST.PrimaryExprTime);}
     }
 
+    weaveComparaisonAri(node : InterfaceAST.ComparaisonAri, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitComparaisonAri(node as unknown as ClassAST.ComparaisonAri);}
+    }
+
+    weaveComparaisonTime(node : InterfaceAST.ComparaisonTime, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitComparaisonTime(node as unknown as ClassAST.ComparaisonTime);}
+    }
+
+    weaveComparaisonDistance(node : InterfaceAST.ComparaisonDistance, accept : ValidationAcceptor) : void{
+        (<any> node).accept = (visitor: RoboMLVisitor) => {return visitor.visitComparaisonDistance(node as unknown as ClassAST.ComparaisonDistance);}
+    }
+
     checks: ValidationChecks<RobotAstType> = {
         Robot: this.weaveRobot,
         PrimaryExprTime: this.weavePrimaryExprTime,
@@ -217,5 +229,8 @@ export class RoboMlAcceptWeaver {
         ,Or: this.weaveOr
         ,Not: this.weaveNot
         ,Equals: this.weaveEquals
+        ,ComparaisonAri: this.weaveComparaisonAri
+        ,ComparaisonTime: this.weaveComparaisonTime
+        ,ComparaisonDistance: this.weaveComparaisonDistance
     };
 }

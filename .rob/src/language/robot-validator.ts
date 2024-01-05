@@ -204,6 +204,21 @@ export class RobotValidator {
                 this.checkExpression(equals.expr1, functionVariables, accept);
                 this.checkExpression(equals.expr2, functionVariables, accept);
                 break;
+            case 'ComparaisonAri':
+                const comparaisonAri = ast as ASTGen.ComparaisonAri;
+                this.checkExpression(comparaisonAri.expr1, functionVariables, accept);
+                this.checkExpression(comparaisonAri.expr2, functionVariables, accept);
+                break;
+            case 'ComparaisonDistance':
+                const comparaisonDistance = ast as ASTGen.ComparaisonDistance;
+                this.checkExpression(comparaisonDistance.expr1, functionVariables, accept);
+                this.checkExpression(comparaisonDistance.expr2, functionVariables, accept);
+                break;
+            case 'ComparaisonTime':
+                const comparaisonTime = ast as ASTGen.ComparaisonTime;
+                this.checkExpression(comparaisonTime.expr1, functionVariables, accept);
+                this.checkExpression(comparaisonTime.expr2, functionVariables, accept);
+                break;
             case 'PrimaryExprBool':
                 const primaryExprBool = ast as ASTGen.PrimaryExprBool;
                 switch(primaryExprBool.expr.$type){

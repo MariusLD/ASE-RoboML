@@ -168,6 +168,15 @@ interface Not extends Expression {
 interface Equals extends Expression {
 }
 
+interface ComparaisonAri extends Expression {
+}
+
+interface ComparaisonDistance extends Expression {
+}
+
+interface ComparaisonTime extends Expression {
+}
+
 interface CM extends Distance {
 }
 

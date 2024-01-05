@@ -44,6 +44,60 @@ export interface RoboMLVisitor{
     visitExpression(node: ASTInterfaces.Expression): any;
     visitPrimaryExprTime(node: ASTInterfaces.PrimaryExprTime): any;
     visitBooleanExp(node: ASTInterfaces.BooleanExp): any;
+    visitComparaisonAri(node: ASTInterfaces.ComparaisonAri): any;
+    visitComparaisonDistance(node: ASTInterfaces.ComparaisonDistance): any;
+    visitComparaisonTime(node: ASTInterfaces.ComparaisonTime): any;
+}
+
+export class ComparaisonAri implements ASTInterfaces.ComparaisonAri {
+    readonly $type: 'ComparaisonAri' = 'ComparaisonAri';
+    constructor(
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public operateur: string,
+        public type?: ASTInterfaces.TypeClass
+    ) {
+        this.type=type;
+        this.operateur=operateur;
+    }
+    accept(visitor: RoboMLVisitor): any {
+        return visitor.visitComparaisonAri(this);
+    }
+}
+
+export class ComparaisonDistance implements ASTInterfaces.ComparaisonDistance {
+    readonly $type: 'ComparaisonDistance' = 'ComparaisonDistance';
+    constructor(
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public operateur: string,
+        public type?: ASTInterfaces.TypeClass
+    ) {
+        this.type=type;
+        this.operateur=operateur;
+    }
+    accept(visitor: RoboMLVisitor): any {
+        return visitor.visitComparaisonDistance(this);
+    }
+}
+
+export class ComparaisonTime implements ASTInterfaces.ComparaisonTime {
+    readonly $type: 'ComparaisonTime' = 'ComparaisonTime';
+    constructor(
+        public className: ASTInterfaces.TypeClass,
+        public expr1: ASTInterfaces.Expression,
+        public expr2: ASTInterfaces.Expression,
+        public operateur: string,
+        public type?: ASTInterfaces.TypeClass
+    ) {
+        this.type=type;
+        this.operateur=operateur;
+    }
+    accept(visitor: RoboMLVisitor): any {
+        return visitor.visitComparaisonTime(this);
+    }
 }
 
 export class IF implements ASTInterfaces.IF {

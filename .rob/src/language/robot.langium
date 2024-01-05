@@ -35,7 +35,7 @@ ExpressionBase returns ExpressionBase:
 ;
 
 Expression returns Expression:
-    (PlusMinus | Or | Equals | PlusMinusDistance | PlusMinusTime)
+    (PlusMinus | Or | Equals | PlusMinusDistance | PlusMinusTime | ComparaisonAri | ComparaisonDistance | ComparaisonTime)
 ;
 
 FunctionN returns FunctionN:
@@ -136,6 +136,18 @@ Not returns Expression:
 
 Equals returns Expression:
     '(' expr1=Or ')' operateur=('==' | '!=') '(' expr2=Or ')'
+;
+
+ComparaisonAri returns Expression:
+    '(' expr1=PlusMinus ')' operateur=('<' | '>' | '<=' | '>=') '(' expr2=PlusMinus ')'
+;
+
+ComparaisonDistance returns Expression:
+    '(' expr1=PlusMinusDistance ')' operateur=('<' | '>' | '<=' | '>=') '(' expr2=PlusMinusDistance ')'
+;
+
+ComparaisonTime returns Expression:
+    '(' expr1=PlusMinusTime ')' operateur=('<' | '>' | '<=' | '>=') '(' expr2=PlusMinusTime ')'
 ;
 
 EDouble returns number:

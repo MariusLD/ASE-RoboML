@@ -15,7 +15,7 @@ editorConfig.setMonarchTokensProvider(monarchSyntax);
 let code = `Robot{
     let main(){
         SPEED 100.0 mm;
-        var boolean bool=false;
+        var boolean bool=true;
         var number i=0.0;
         var number p=0.0;
         LOOP ((bool) ==(true)){
@@ -23,7 +23,7 @@ let code = `Robot{
             inverseSquare(p);
             i=i+1.0;
             IF ((i) >= (2.0)){
-                bool=true;
+                bool=false;
             };
         };
        
@@ -31,7 +31,7 @@ let code = `Robot{
 
     let number square(number p){
         var number a=0.0;
-        LOOP ((a)==(4.0)){
+        LOOP ((a)<(4.0)){
             IF((p)==(1.0)){
                 LEFT 500.0mm;
             }ELSE{
@@ -45,7 +45,7 @@ let code = `Robot{
 
     let inverseSquare(number p){
         var number a=0.0;
-        LOOP ((a)==(4.0)){
+        LOOP ((a)!=(4.0)){
         IF((p)==(1.0)){
             RIGHT 500.0mm;
         }ELSE{

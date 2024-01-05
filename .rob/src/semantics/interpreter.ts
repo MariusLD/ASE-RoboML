@@ -326,10 +326,8 @@ export class MyVisitor implements RoboMLVisitor {
     visitLOOP(node: LOOP) {
         this.niveau++;
         this.variables[this.niveau]=new Map<string,VariableDefinition>();
-        while(!acceptNode(node.expression,this)){
-            console.log("LOOP");
+        while(acceptNode(node.expression,this)){
             for(let i of node.instruction){
-                console.log("instruction");
                 acceptNode(i,this);
             }
         }

@@ -646,7 +646,6 @@ export class ExpressionBase implements ASTInterfaces.ExpressionBase {
         public className: ASTInterfaces.TypeClass
     ) {}
     accept(visitor: RoboMLVisitor): any {
-        console.log("WTF");
         return visitor.visitExpressionBase(this);
     }
 }
@@ -706,7 +705,6 @@ export class Expression implements ASTInterfaces.Expression {
         this.operateur=operateur;
     }
     accept(visitor: RoboMLVisitor): any {
-        console.log("MOURIR");
         return visitor.visitExpression(this);
     }
 }
@@ -734,116 +732,76 @@ export function acceptNode(node: AstNode, visitor: RoboMLVisitor): any {
         case 'FunctionN':
             return (node as FunctionN).accept(visitor);
         case 'Instruction':
-            console.log("instruction");
             return (node as Instruction).accept(visitor);
         case 'DirectionCommand':
-            console.log("direction");
             return (node as DirectionCommand).accept(visitor);
         case 'DistanceExpression':
-            console.log("distanceEXP");
             return (node as DistanceExpression).accept(visitor);
         case 'Distance':
-            console.log("distance");
             return (node as Distance).accept(visitor);
         case 'NumberType':
-            console.log("number");
             return (node as NumberType).accept(visitor);
         case 'RotateCommand':
-            console.log("rotate");
             return (node as RotateCommand).accept(visitor);
         case 'SpeedCommand':
-            console.log("speed");
             return (node as SpeedCommand).accept(visitor);
         case 'Time':
-            console.log("time");
             return (node as Time).accept(visitor);
         case 'TimeExpression':
-            console.log("timeEXP");
             return (node as TimeExpression).accept(visitor);
         case 'DistanceSensorCommand':
-            console.log("distSensor");
             return (node as DistanceSensorCommand).accept(visitor);
         case 'TimeSensorCommand':
-            console.log("timeSensor");
             return (node as TimeSensorCommand).accept(visitor);
         case 'CallFunction':
-            console.log("callFunction");
             return (node as CallFunction).accept(visitor);
         case 'CallVariable':
-            console.log("callVariable");
             return (node as CallVariable).accept(visitor);
         case 'Affectation':
-            console.log("affectation");
             return (node as Affectation).accept(visitor);
         case 'PrimaryExprBool':
-            console.log("primaryExprBool");
             return (node as PrimaryExprBool).accept(visitor);
         case 'PrimaryExprAri':
-            console.log("primaryExprAri");
             return (node as PrimaryExprAri).accept(visitor);
         case 'PrimaryExprDistance':
-            console.log("primaryExprDistance");
             return (node as PrimaryExprDistance).accept(visitor);
         case 'MultDiv':
-            console.log("multDiv");
             return (node as MultDiv).accept(visitor);
         case 'PlusMinus':
-            console.log("plusMinus");
             return (node as PlusMinus).accept(visitor);
         case 'MultDivDistance':
-            console.log("multDivDistance");
             return (node as MultDivDistance).accept(visitor);
         case 'PlusMinusDistance':
-            console.log("plusMinusDistance");
             return (node as PlusMinusDistance).accept(visitor);
         case 'MultDivTime':
-            console.log("multDivTime");
             return (node as MultDivTime).accept(visitor);
         case 'PlusMinusTime':
-            console.log("plusMinusTime");
             return (node as PlusMinusTime).accept(visitor);
         case 'Equals':
-            console.log("equals");
             return (node as Equals).accept(visitor);
         case 'Or':
-            console.log("or");
             return (node as Or).accept(visitor);
         case 'And':
-            console.log("and");
             return (node as And).accept(visitor);
         case 'Not':
-            console.log("not");
             return (node as Not).accept(visitor);
         case 'Block':
-            console.log("block");
             return (node as Block).accept(visitor);
         case 'DeclarationVariable':
-            console.log("declarationVariable");
             return (node as DeclarationVariable).accept(visitor);
         case 'IF':
-            console.log("if");
             return (node as IF).accept(visitor);
         case 'LOOP':
-            console.log("loop");
             return (node as LOOP).accept(visitor);
         case 'Parameter':
-            console.log("parameter");
             return (node as Parameter).accept(visitor);
         case 'BooleanType':
-            console.log("booleanType");
             return (node as BooleanType).accept(visitor);
         case 'TypeClass':
-            console.log("typeClass");
             return (node as TypeClass).accept(visitor);
         case 'ExpressionBase':
-            console.log("expressionBase");
             return (node as ExpressionBase).accept(visitor);
         case 'Expression':
-            //console.log((node as Expression).expr1);
-            console.log("expression");
-           // 
-           //let newNode = node as Expression;
-            //return newNode.accept(visitor);
             return (node as Expression).accept(visitor);
         default:
             throw new Error(`Unknown node typee ${node.$type}`);

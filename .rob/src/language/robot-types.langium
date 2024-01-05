@@ -132,6 +132,7 @@ interface LOOP extends Block {
 interface Block extends Instruction {
 	instruction: Instruction[]
 	expression: Expression
+	instructionElse ? : Instruction[]
 }
 
 interface IF extends Block {

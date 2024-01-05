@@ -1,11 +1,11 @@
 import { Robot, Instruction, FunctionN, ExpressionBase, DistanceExpression, TimeExpression, Distance, Time, DirectionCommand, SpeedCommand, DistanceSensorCommand, TimeSensorCommand, RotateCommand, CallVariable, CallFunction, Affectation, BooleanType, NumberType, PlusMinus, MultDiv, PlusMinusDistance, MultDivDistance, PlusMinusTime, MultDivTime, DeclarationVariable, PrimaryExprAri, PrimaryExprBool, PrimaryExprDistance, Block, IF, LOOP, And, Or, Not, Equals } from './visitor.js';
-//import * as ASTClasses from './visitor.js';
 import { Robot as RobotE } from "../web/simulator/entities.js";
 import { RoboMLVisitor,acceptNode } from './visitor.js';
 import { BaseScene, Scene } from "../web/simulator/scene.js";
 import { Vector } from "../web/simulator/utils.js";
 import { BooleanExp, ComparaisonAri, ComparaisonDistance, ComparaisonTime, Expression, Parameter, PrimaryExprTime, TypeClass } from '../language/generated/ast.js';
 
+//to give information about the variable like the type and the value
 interface VariableDefinition {
     name: string;
     type: string;
@@ -13,6 +13,7 @@ interface VariableDefinition {
     niveau : number;
 }
 
+//to give information about the function like the name, the parameters, the return type and the function
 interface FunctionInfo{
     name : string;
     func : FunctionN;
@@ -22,21 +23,24 @@ interface FunctionInfo{
 }
 
 export class MyVisitor implements RoboMLVisitor {
+    //the level of block of code to search the variable
     private niveau: number;
+    //the scene to draw the robot
     private scene: Scene;
+    //the robot to move
     private robot: RobotE;
-    //private variables: Map<string,Expression>;
-    public wait: boolean;
+
+    //store the variable, the key is the name of the variable and the value is the information about the variable
+    //a new level = a new map
     private variables:Array<Map<string,VariableDefinition>>;
+
+    //store all the function information
     private functions: Array<FunctionInfo>;
 
     constructor(sceneWidth: number, sceneHeight: number) {
         this.scene = new BaseScene(new Vector(sceneWidth*10, sceneHeight*10));
-        //this.scene = new BaseScene();
         this.robot = this.scene.robot;
-        //this.robot = new Robot(new Vector(100, 100), new Vector(20, 20), 0, 0, new BaseScene());
         this.variables = Array<Map<string,VariableDefinition>>();
-        this.wait = false;
         this.niveau = 0;
         this.variables[this.niveau]=new Map<string,VariableDefinition>();
         this.functions = Array<FunctionInfo>();
@@ -52,6 +56,7 @@ export class MyVisitor implements RoboMLVisitor {
         throw new Error('Method not implemented.');
     }
 
+    //visit the robot and store all the function information, we start with the function name main (the entry point)
     visitRobot(node: Robot) {
         let start=undefined;
         for (let f of node.functions) {
@@ -68,6 +73,7 @@ export class MyVisitor implements RoboMLVisitor {
         return this.scene;
     }
 
+    //visit the expression and return the result of the expression, it's here that we do the calculation
     visitExpression(node: Expression) : number | boolean | undefined{
         if(node.operateur === "+"){
             return Number(acceptNode(node.expr1,this))+Number(acceptNode(node.expr2,this));
@@ -84,24 +90,31 @@ export class MyVisitor implements RoboMLVisitor {
         }else if(node.operateur === "NOT"){
             return !Boolean(acceptNode(node.expr1,this));
         }else if (node.operateur === "=="){
-            return Number(acceptNode(node.expr1,this)) === Number(acceptNode(node.expr2,this));
+            return (acceptNode(node.expr1,this)) === (acceptNode(node.expr2,this));
         }else if (node.operateur === "!="){
-            return Number(acceptNode(node.expr1,this)) !== Number(acceptNode(node.expr2,this));
+            return (acceptNode(node.expr1,this)) !== (acceptNode(node.expr2,this));
+        }else if(node.operateur === "<"){
+            return Number(acceptNode(node.expr1,this)) < Number(acceptNode(node.expr2,this));
+        }else if(node.operateur === ">"){
+            return Number(acceptNode(node.expr1,this)) > Number(acceptNode(node.expr2,this));
+        }else if(node.operateur === "<="){
+            return Number(acceptNode(node.expr1,this)) <= Number(acceptNode(node.expr2,this));
+        }
+        else if(node.operateur === ">="){
+            return Number(acceptNode(node.expr1,this)) >= Number(acceptNode(node.expr2,this));
         }
         return undefined
     }
+
     visitInstruction(node: Instruction) {
       acceptNode(node,this);
     }
 
+    //visit the function and return the result of the function
     visitFunctionN(node: FunctionN): number |boolean |undefined {
-        //this.niveau++;
-        //this.variables[this.niveau]=new Map<string,VariableDefinition>();
         for (let i of node.instruction) {
             acceptNode(i,this);
         }
-        console.log(node.returnType);
-        console.log(node.returnedValue);
         if(node.returnType && node.returnedValue){
             return acceptNode(node.returnedValue,this);
         }
@@ -110,7 +123,6 @@ export class MyVisitor implements RoboMLVisitor {
 
 
     visitExpressionBase(node: ExpressionBase) : number | boolean | undefined {
-        console.log("EXPRESSIONBASE")
         let newNode=(node as unknown as Expression);
         if(newNode.$type === "Expression"){
             return this.visitExpression(newNode);
@@ -118,7 +130,7 @@ export class MyVisitor implements RoboMLVisitor {
         return undefined;
     }
 
-
+    //visit the distance expression and return the value of the distance, if type is cm, we convert it to mm
     visitDistanceExpression(node: DistanceExpression) :number {
         const typeD= acceptNode(node.unit,this);
         let valueD= acceptNode(node.number,this);
@@ -141,7 +153,7 @@ export class MyVisitor implements RoboMLVisitor {
     visitTime(node: Time) {
     }
 
-
+    //visit the direction command and move the robot
      visitDirectionCommand(node: DirectionCommand) {
         if(node.operateur === "FORWARD"){
             const distance = acceptNode(node.distance,this);
@@ -149,20 +161,20 @@ export class MyVisitor implements RoboMLVisitor {
         }else if(node.operateur === "BACKWARD"){
             this.robot.move(-acceptNode(node.distance,this));
         }else if(node.operateur === "LEFT"){
-            this.robot.side(-acceptNode(node.distance,this));
+            this.robot.side(acceptNode(node.distance,this));
         }
         else if(node.operateur === "RIGHT"){
-            this.robot.side(acceptNode(node.distance,this));
+            this.robot.side(-acceptNode(node.distance,this));
         }
     }
 
-
+    //visit the speed command and change the speed of the robot
    visitSpeedCommand(node: SpeedCommand) {
         const distance=acceptNode(node.speed,this);
         this.robot.speed = distance;
     }
 
-
+    //visit the distance sensor command and return the distance between the robot and the wall
     visitDistanceSensorCommand(node: DistanceSensorCommand) : number {
         const pos = this.robot.getRay().intersect(this.scene.entities);
         if (pos) {
@@ -171,16 +183,19 @@ export class MyVisitor implements RoboMLVisitor {
         }
         return -1;
     }
-
+    
+    //visit the time sensor command and return the time
     visitTimeSensorCommand(node: TimeSensorCommand) : number{
         return this.scene.time;
     }
 
+    //visit the rotate command and change the angle of the robot
     visitRotateCommand(node: RotateCommand) {
         this.robot.turn(node.angle);
     }
 
 
+    //seach the variable in the map and return the value of the variable, use the level to search the variable
     visitCallVariable(node: CallVariable) : boolean | number | undefined {
         let name = node.nom;
         let niveau = this.niveau;
@@ -195,17 +210,18 @@ export class MyVisitor implements RoboMLVisitor {
         return value;
     }
 
-
+    
+    //visit the call function, we search the function information and we call the function with parameters
      visitCallFunction(node: CallFunction) : number | boolean | undefined{
         let name=node.nom;
         let functionInfo=this.functions.find((f)=>f.name===name);
         this.niveau++;
         this.variables[this.niveau]=new Map<string,VariableDefinition>();
         let returN=undefined;
-        if(functionInfo && functionInfo.parameters && functionInfo.parameters.length>0){
+        if(functionInfo && functionInfo.parameters && functionInfo.parameters.length>0){ //if the function has parameters
             let idx=0;
             for(let i of functionInfo.parameters){
-                this.variables[this.niveau].set(i.nom, {name: i.nom, type: acceptNode(i.typeP,this), value: acceptNode(node.parameters[idx],this), niveau: this.niveau});
+                this.variables[this.niveau].set(i.nom, {name: i.nom, type: acceptNode(i.typeP,this), value: acceptNode(node.parameters[idx],this), niveau: this.niveau}); //set the value of the parameter
                 
                 idx++;
             }
@@ -218,7 +234,7 @@ export class MyVisitor implements RoboMLVisitor {
         return returN;
     }
 
-
+    //visit the affectation, we search the variable and we change the value of the variable
     visitAffectation(node: Affectation) {
         let name = node.callvariable.nom;
         let niveau = this.niveau;
@@ -266,6 +282,7 @@ export class MyVisitor implements RoboMLVisitor {
         throw new Error('Method not implemented.');
     }
 
+    //visit the declaration variable and store the variable in the map
     visitDeclarationVariable(node: DeclarationVariable) {
         this.variables[this.niveau].set(node.nom, {name: node.nom, type: acceptNode(node.type,this), value: acceptNode(node.expressionbase,this), niveau: this.niveau});
     }
@@ -282,12 +299,44 @@ export class MyVisitor implements RoboMLVisitor {
     visitBlock(node: Block) {
         throw new Error('Method not implemented.');
     }
+
+    //visit the if or the else
     visitIF(node: IF) {
-        throw new Error('Method not implemented.');
+        if(acceptNode(node.expression,this)){
+            this.niveau++;
+            this.variables[this.niveau]=new Map<string,VariableDefinition>();
+            for(let i of node.instruction){
+                acceptNode(i,this);
+            }
+        }else{
+            this.niveau++;
+            this.variables[this.niveau]=new Map<string,VariableDefinition>();
+            
+            if(node.instructionElse != undefined && node.instructionElse.length>0){
+                for(let i of node.instructionElse){
+                    acceptNode(i,this);
+                }
+            }
+        }
+        this.variables[this.niveau].clear();
+        this.niveau--;
     }
+
+    //visit the loop and execute the instruction while the condition is false
     visitLOOP(node: LOOP) {
-        throw new Error('Method not implemented.');
+        this.niveau++;
+        this.variables[this.niveau]=new Map<string,VariableDefinition>();
+        while(!acceptNode(node.expression,this)){
+            console.log("LOOP");
+            for(let i of node.instruction){
+                console.log("instruction");
+                acceptNode(i,this);
+            }
+        }
+        this.variables[this.niveau].clear();
+        this.niveau--;
     }
+
     visitAnd(node: And) {
         throw new Error('Method not implemented.');
     }

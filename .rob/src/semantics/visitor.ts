@@ -104,8 +104,13 @@ export class IF implements ASTInterfaces.IF {
     readonly $type: 'IF' = 'IF';
     constructor(
         public expression: ASTInterfaces.Expression,
-        public instruction: ASTInterfaces.Instruction[]
-    ) {}
+        public instruction: ASTInterfaces.Instruction[],
+        public instructionElse: ASTInterfaces.Instruction[]
+    ) {
+        this.instructionElse=instructionElse;
+        this.instruction=instruction;
+        this.expression=expression;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitIF(this);
     }
@@ -132,8 +137,13 @@ export class LOOP implements ASTInterfaces.LOOP {
     readonly $type: 'LOOP' = 'LOOP';
     constructor(
         public expression: ASTInterfaces.Expression,
-        public instruction: ASTInterfaces.Instruction[]
-    ) {}
+        public instruction: ASTInterfaces.Instruction[],
+        public instructionElse: ASTInterfaces.Instruction[]
+    ) {
+        this.instructionElse=instructionElse;
+        this.instruction=instruction;
+        this.expression=expression;
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitLOOP(this);
     }
@@ -230,8 +240,14 @@ export class Block implements ASTInterfaces.Block {
     readonly $type: 'Block' = 'Block';
     constructor(
         public expression: ASTInterfaces.Expression,
-        public instruction: ASTInterfaces.Instruction[]
-    ) {}
+        public instruction: ASTInterfaces.Instruction[],
+        public instructionElse: ASTInterfaces.Instruction[]
+    ) {
+        this.instructionElse=instructionElse;
+        this.instruction=instruction;
+        this.expression=expression;
+
+    }
     accept(visitor: RoboMLVisitor): any {
         return visitor.visitBlock(this);
     }

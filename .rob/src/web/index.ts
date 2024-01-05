@@ -82,7 +82,7 @@ export async function parseAndValidate(code:string) : Promise<string[]>{
             );
             errors = errors.concat(parserMessage);
         }
-        console.log(chalk.red(`Failed to parse and validate!`));
+        console.log(chalk.red(`Failed to validate!`));
         return errors;
     }
        // return Promise.resolve(["Failed to parse and validate!"]);

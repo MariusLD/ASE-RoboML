@@ -99,11 +99,11 @@ DeclarationVariable returns DeclarationVariable:
 ;
 
 LOOP returns LOOP:
-    'LOOP' '(' expression=Expression ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}'
+    'LOOP' '(' expression=(Or | Equals | ComparaisonAri | ComparaisonDistance | ComparaisonTime) ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}'
 ;
 
 IF returns IF:
-    'IF' '(' expression=Expression ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}' ('ELSE' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}')?
+    'IF' '(' expression=(Or | Equals | ComparaisonAri | ComparaisonDistance | ComparaisonTime)  ')' '{' ( instruction+=Instruction ( instruction+=Instruction )* )? '}' ('ELSE' '{' ( instructionElse+=Instruction ( instructionElse+=Instruction )* )? '}')?
 ;
 
 CallVariable returns CallVariable:
@@ -139,15 +139,15 @@ Equals returns Expression:
 ;
 
 ComparaisonAri returns Expression:
-    '(' expr1=PlusMinus ')' operateur=('<' | '>' | '<=' | '>=') '(' expr2=PlusMinus ')'
+    '(' expr1=PlusMinus ')' operateur=('<' | '>' | '<=' | '>=' | '==' | '!=') '(' expr2=PlusMinus ')'
 ;
 
 ComparaisonDistance returns Expression:
-    '(' expr1=PlusMinusDistance ')' operateur=('<' | '>' | '<=' | '>=') '(' expr2=PlusMinusDistance ')'
+    '(' expr1=PlusMinusDistance ')' operateur=('<' | '>' | '<=' | '>=' | '==' | '!=') '(' expr2=PlusMinusDistance ')'
 ;
 
 ComparaisonTime returns Expression:
-    '(' expr1=PlusMinusTime ')' operateur=('<' | '>' | '<=' | '>=') '(' expr2=PlusMinusTime ')'
+    '(' expr1=PlusMinusTime ')' operateur=('<' | '>' | '<=' | '>=' | '==' | '!=') '(' expr2=PlusMinusTime ')'
 ;
 
 EDouble returns number:

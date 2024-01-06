@@ -8,8 +8,11 @@ Ce projet s'inscrit dans le cadre du cours Advanced Software Engineering, et con
 * [Modèle Ecore](modele-eclipse/robot)
 * [Transition Xtext-Langium](langiumFromXtext/langium)
 * [Extension de notre langage et son implémentation](.rob)
+* [Grammaire langium final](.rob/src/language/robot.langium)
 
-## 🔩 La modélisation
+##  🔩 La modélisation
+
+![modele](modele-eclipse/robot/modele/robot.jpg)
 
 Pour ce qui est de la modélisation, notre AST se découpe selon plusieurs concepts. Tout d'abord, les fichiers de notre langage commencent toujours par Robot avec une ouverture d'accolades. 
 Ces fichiers Robot sont uniquement constitués de fonctions, les fonctions commencent par le mot clé *let*, ont besoin d'un type de retour (boolean, distance, time, number ou void/aucun type), elles ont besoin d'un nom puis prennent potentiellement des paramètres, qui sont des noms de variables associés à des types de variables.
@@ -64,7 +67,7 @@ La classe *RobotValidator* est utilisée pour implémenter ces validation pour l
 
 *traverseFunctionDeclarations* permet de passer une première fois à travers le fichier édité pour ajouter les fonctions et leurs paramètres dans la *functionVariableMap* pour définir un premier scope pour chaque de ces fonctions, en s'assurant que les paramètres n'ont pas des noms dupliqués, et tout simplement pour savoir quelles sont les fonctions qui existent, ce qui permettra de valider certains appels de fonctions plus tard.
 
-```
+```ts
 traverseFunctionDeclarations(ast: ASTGen.Robot, accept: ValidationAcceptor) {
         ast.functions.forEach((functionN) => {
             const functionVariables = new Set<string>();
@@ -98,7 +101,7 @@ Pour ce qui est de *LOOP* et *IF* on va une nouvelle fois envoyer le noeud de l'
 
 Puis la dernière méthode appelée dans *checkRobot* est *checkReturn* :
 
-```
+```ts
 checkReturn(ast: ASTGen.Robot, accept: ValidationAcceptor) {
         ast.functions.forEach((functionN) => {
             const hasReturn = functionN.returnType !== undefined;
@@ -128,6 +131,52 @@ La classe *accept-weaver* est donc responsable de modifier la propriété *accep
 
 ## Interpretor
 
+Une fois le visitor mis en place il fallait mettre en place l'interpreteur et ses fonctions visit. Dans un premier temps, j'ai créé des interfaces pour faciliter la manipulation des informations des variables et des fonctions.  
+
+```ts
+interface VariableDefinition {
+    name: string;
+    type: string;
+    value : boolean |number;
+    niveau : number;
+}
+
+interface FunctionInfo{
+    name : string;
+    func : FunctionN;
+    parameters? : Parameter[];
+    returnType : string |undefined;
+
+}
+```
+Pour une variable on sauvegarde son nom, son type, sa valeur ainsi que son niveau. Le niveau représente ici le scope, le niveau dans laquel la variable à été déclarer. Le main c'est le niveau 0, puis si on rentre dans une fonction ou un bloc c'est le niveau 1 etc... 
+
+Pour une fonction on sauvegarde son nom, la liste des paramètres (les nodes directements) le type de retour et le node FunctionN directement aussi. 
+Comme notre langage suporte les scopes ont sauvegarde les variables dans un tableau de map de <nomVariable,VariableDefinition>. Ce qui permet de gérer les niveaux avec une variable this.niveau qui contient le niveau actuel. Pour chercher une fonction on procède alors comme ce-ci : 
+
+```ts
+let name = node.nom;
+        let niveau = this.niveau;
+        let value;
+        while(niveau >= 0){
+            if(this.variables[niveau].has(name)){
+                value = this.variables[niveau].get(name)?.value;
+                break;
+            }
+            niveau--;
+        }
+        return value;
+```
+
+On part du niveau actuel pour chercher et on remonte les niveaux vers la racine.
+
+La fonction d'entrée **visitRobot** à pour rôle d'itentifier toutes les fonctions définis et de les enregistrer dans une liste de **VariableDefinition** mais aussi de reperer la fonction **main** qui est le point d'entrée de notre langage robot.
+
+Pour un soucis de typage tous les calculs des variables se font dans **visitExpression** car dans notre grammaire ils renvoient tous un type Expression. On différentie d'opération en fonction de leur opérateur.
+
+Les intéractions avec le robot sont directement fait avec le robot de la scene envoyé à l'interpréteur (visitSpeed, visitSensor, visitRotate, visitDirection).
+
+Comment on appelle une fonction ? 
 ## ❗ Conclusion
 
 Finalement ce projet nous aura permis de mettre en oeuvre les connaissances acquises lors du module d'ASE, en conceptualisant et en effectuant le design de notre propre DSL, dédié à un exercice très précis qu'est le contrôle de robots. Malgré quelques complications nous avons su respecter la mise en place de chaque étape, de sorte à avoir des interfaces qui nous permettent de communiquer correctement d'une section à l'autre. Le résultat observé sur l'interface Web correspond à l'objectif fixé, mais pour ce qui est de la compilation faute de pouvoir mettre la main sur la documentation permettant d'accéder à l'API des robots, nous n'avons pas été en mesure de concevoir et implémenter cette partie.

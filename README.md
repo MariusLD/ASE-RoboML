@@ -245,7 +245,7 @@ Robot{
    ```
 Voici ce que ça produit : 
 
-![execution](exution.png)
+![execution](execution.png)
 
 ## ❗ Conclusion
 

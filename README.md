@@ -12,7 +12,7 @@ Ce projet s'inscrit dans le cadre du cours Advanced Software Engineering, et con
 
 ##  🔩 La modélisation
 
-![modele](modele-eclipse/robot/modele/robot.jpg)
+![modele](modele-eclipse/robot/model/robot.jpg)
 
 Pour ce qui est de la modélisation, notre AST se découpe selon plusieurs concepts. Tout d'abord, les fichiers de notre langage commencent toujours par Robot avec une ouverture d'accolades. 
 Ces fichiers Robot sont uniquement constitués de fonctions, les fonctions commencent par le mot clé *let*, ont besoin d'un type de retour (boolean, distance, time, number ou void/aucun type), elles ont besoin d'un nom puis prennent potentiellement des paramètres, qui sont des noms de variables associés à des types de variables.
@@ -149,10 +149,9 @@ interface FunctionInfo{
 
 }
 ```
-Pour une variable on sauvegarde son nom, son type, sa valeur ainsi que son niveau. Le niveau représente ici le scope, le niveau dans laquel la variable à été déclarer. Le main c'est le niveau 0, puis si on rentre dans une fonction ou un bloc c'est le niveau 1 etc... 
+Pour une variable on sauvegarde son nom, son type, sa valeur ainsi que son niveau. Le niveau représente ici le scope, le niveau dans lequel la variable a été déclarer. Le main c'est le niveau 0, puis si on rentre dans une fonction ou un bloc c'est le niveau 1 etc...
 
-Pour une fonction on sauvegarde son nom, la liste des paramètres (les nodes directements) le type de retour et le node FunctionN directement aussi. 
-Comme notre langage suporte les scopes ont sauvegarde les variables dans un tableau de map de <nomVariable,VariableDefinition>. Ce qui permet de gérer les niveaux avec une variable this.niveau qui contient le niveau actuel. Pour chercher une fonction on procède alors comme ce-ci : 
+Pour une fonction on sauvegarde son nom, la liste des paramètres (les nodes directement) le type de retour et le node FunctionN directement aussi. Comme notre langage supporte les scopes ont sauvegarde les variables dans un tableau de map de <nomVariable,VariableDefinition>. Ce qui permet de gérer les niveaux avec une variable this.niveau qui contient le niveau actuel. Pour chercher une fonction on procède alors comme ceci :
 
 ```ts
 let name = node.nom;
@@ -170,13 +169,81 @@ let name = node.nom;
 
 On part du niveau actuel pour chercher et on remonte les niveaux vers la racine.
 
-La fonction d'entrée **visitRobot** à pour rôle d'itentifier toutes les fonctions définis et de les enregistrer dans une liste de **VariableDefinition** mais aussi de reperer la fonction **main** qui est le point d'entrée de notre langage robot.
+La fonction d'entrée **visitRobot** a pour rôle d'itentifier toutes les fonctions définis et de les enregistrer dans une liste de **VariableDefinition** mais aussi de repérer la fonction **main** qui est le point d'entrée de notre langage robot.
 
-Pour un soucis de typage tous les calculs des variables se font dans **visitExpression** car dans notre grammaire ils renvoient tous un type Expression. On différentie d'opération en fonction de leur opérateur.
+Pour un souci de typage tous les calculs des variables se font dans **visitExpression** car dans notre grammaire ils renvoient tous un type Expression. On différentie d'opération en fonction de leur opérateur.
 
-Les intéractions avec le robot sont directement fait avec le robot de la scene envoyé à l'interpréteur (visitSpeed, visitSensor, visitRotate, visitDirection).
+Les interactions avec le robot sont directement faites avec le robot de la scène envoyé à l'interpréteur (visitSpeed, visitSensor, visitRotate, visitDirection).
 
-Comment on appelle une fonction ? 
+Comment on appelle une fonction ?
+
+Pour l'appel de fonction on va se retrouver dans la méthode **visitCallFunction**. On va d'abord recherche les informations de la fonction dans le tableau qui créer par la méthode visitRobot. Ensuite on augmente le niveau et on donc on créer une nouvelle map pour sauvegarder les variables qui seront créer dans cette fonction. On regarde si l'interface FunctionInfo possède des paramètres. Si elle en possède, on créer un nouvel élément dans la map. On peut récupérer la valeur des paramètres avec un acceptNode(param) parce que c'est les nodes qu'on a sauvegarder directement. Ensuite on exécute la fonction (de la même manière qu'on a récupérer la valeur des paramètres). Après ça on diminue d'un niveau, on clear la dernière map créer et on return la valeur récupérer ou undefined.
+
+Pour le **IF** on regarde si la conditions du if est satisfaite avec l'acceptNode, si oui alors on créer un niveau puis on boucle sur le tableau d'instruction que contient le node if. Si non et s’il y a un else alors on répète les mêmes instructions que pour le if. 
+
+Pour le node **LOOP** c'est le même principe que pour le if, on créer un niveau, ensuite on fait un while sur la condition et on boucle sur les instructions. Une fois sorti du block on supprime un niveau. 
+
+On a pu rencontrer quelques points bloquants, tout d'abords nous n'avions pas pensé à l'étape de la grammaire langium d'ajouter des attributs à chaque étape pour pouvoir récupérer les informations utiles. Cela à donc nécessiter des modifications de la grammaire. Certain noeud renvoyait le même type (par exemple les Expressions) il était parfois difficile d'exécuter le bon visit(). L'interpréteur est un grand emboitement des méthodes accept et visit il ne faut pas s'y perdre.
+
+
+## Comment lancer le projet 
+
+```sh
+cd ./.rob
+npm i 
+chmod +x ./build_serve.sh
+```
+Puis rendez-vous sur [http://localhost:3000/](http://localhost:3000/)
+
+Voici un exemple de code .rob : 
+
+```
+Robot{
+    let main(){
+        SPEED 100.0 mm;
+        var boolean bool=true;
+        var number i=0.0;
+        var number p=0.0;
+        LOOP ((bool) ==(true)){
+             p=square(i);
+            inverseSquare(p);
+            i=i+1.0;
+            IF ((i) >= (2.0)){
+                bool=false;
+            };
+        };
+       
+    }
+
+    let number square(number p){
+        var number a=0.0;
+        LOOP ((a)<(4.0)){
+            IF((p)==(1.0)){
+                LEFT 500.0mm;
+            }ELSE{
+                FORWARD 500.0mm;
+            };
+            CLOCK 90.0;
+            a = a+1.0;
+        };
+        return p;
+    }
+
+    let inverseSquare(number p){
+        var number a=0.0;
+        LOOP ((a)!=(4.0)){
+        IF((p)==(1.0)){
+            RIGHT 500.0mm;
+        }ELSE{
+            BACKWARD 500.0mm;
+        };
+            CLOCK 90.0;
+            a=a+1.0;
+        };
+    }
+   }
+   ```
+
 ## ❗ Conclusion
 
 Finalement ce projet nous aura permis de mettre en oeuvre les connaissances acquises lors du module d'ASE, en conceptualisant et en effectuant le design de notre propre DSL, dédié à un exercice très précis qu'est le contrôle de robots. Malgré quelques complications nous avons su respecter la mise en place de chaque étape, de sorte à avoir des interfaces qui nous permettent de communiquer correctement d'une section à l'autre. Le résultat observé sur l'interface Web correspond à l'objectif fixé, mais pour ce qui est de la compilation faute de pouvoir mettre la main sur la documentation permettant d'accéder à l'API des robots, nous n'avons pas été en mesure de concevoir et implémenter cette partie.

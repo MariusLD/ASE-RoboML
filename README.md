@@ -243,6 +243,9 @@ Robot{
     }
    }
    ```
+Voici ce que ça produit : 
+
+![execution](exution.png)
 
 ## ❗ Conclusion
 
